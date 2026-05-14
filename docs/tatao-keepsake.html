@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retirement Tributes · Gonzaga SBA · Spring 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:  #002469;
+      --gold:  #C8952A;
+      --cream: #FDFBF7;
+      --light: #F4F1EB;
+      --border:#D6CEBC;
+      --muted: #5A5243;
+      --dark:  #1A1610;
+    }
+    body { font-family: 'Inter', sans-serif; background: #E8E3D8; color: var(--dark); }
+
+    /* PAGE */
+    .page {
+      width: 8.5in; min-height: 11in; margin: .4in auto;
+      background: var(--cream); display: flex; flex-direction: column; overflow: hidden;
+    }
+
+    /* HEADER */
+    .page-header {
+      background: var(--navy); padding: .38in .6in .3in;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .page-header img { height: 46px; width: auto; filter: brightness(0) invert(1); opacity: .9; }
+    .header-right { text-align: right; }
+    .header-name {
+      font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700;
+      color: white; line-height: 1;
+    }
+    .header-label {
+      font-size: .6rem; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; color: rgba(255,255,255,.45); margin-top: .2rem;
+    }
+
+    /* BODY */
+    .page-body { flex: 1; padding: .38in .6in .28in; display: flex; flex-direction: column; gap: .28in; }
+
+    /* NAMEPLATE (cover page only) */
+    .nameplate { text-align: center; padding-bottom: .22in; border-bottom: 1.5px solid var(--border); }
+    .nameplate-eyebrow {
+      font-size: .62rem; font-weight: 600; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: .35rem;
+    }
+    .nameplate h1 {
+      font-family: 'Playfair Display', serif; font-size: 2.5rem;
+      font-weight: 700; color: var(--navy); line-height: 1.1; margin-bottom: .3rem;
+    }
+    .nameplate-sub { font-size: .75rem; color: var(--muted); }
+
+    /* HERO QUOTE */
+    .hero-quote {
+      background: var(--navy); border-radius: 6px;
+      padding: .28in .38in .28in .52in; position: relative;
+    }
+    .hero-quote::before {
+      content: '\201C'; font-family: 'Playfair Display', serif;
+      font-size: 4.5rem; line-height: 1; color: rgba(200,149,42,.3);
+      position: absolute; top: .08in; left: .22in;
+    }
+    .hero-quote p {
+      font-family: 'Playfair Display', serif; font-size: 1rem;
+      font-style: italic; line-height: 1.75; color: white;
+    }
+    .hero-quote cite {
+      display: block; font-family: 'Inter', sans-serif; font-size: .62rem;
+      font-style: normal; font-weight: 600; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--gold); margin-top: .6rem;
+    }
+
+    /* TWO-COL FEATURES */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: .18in; }
+
+    /* STORY / FEATURE CARD */
+    .feature-card {
+      background: var(--light); border-left: 3px solid var(--gold);
+      border-radius: 0 4px 4px 0; padding: .17in .2in;
+    }
+    .feature-card .card-label {
+      font-size: .58rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: .35rem;
+    }
+    .feature-card p {
+      font-size: .74rem; line-height: 1.68; color: var(--dark); font-style: italic;
+    }
+    .feature-card cite {
+      display: block; font-size: .6rem; font-weight: 600;
+      letter-spacing: .07em; text-transform: uppercase;
+      color: var(--muted); margin-top: .32rem; font-style: normal;
+    }
+
+    /* LETTER PANEL */
+    .letter-panel {
+      background: white; border: 1.5px solid var(--border);
+      border-top: 3px solid var(--navy); border-radius: 0 0 5px 5px; padding: .2in .28in;
+    }
+    .letter-label {
+      font-size: .58rem; font-weight: 700; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--navy); margin-bottom: .4rem;
+    }
+    .letter-panel p { font-size: .74rem; line-height: 1.8; color: var(--dark); }
+    .letter-panel cite {
+      display: block; font-size: .64rem; font-weight: 600;
+      color: var(--muted); margin-top: .35rem; font-style: italic;
+    }
+
+    /* ── PAGE 2 STYLES ── */
+    .section-label {
+      font-size: .62rem; font-weight: 700; letter-spacing: .16em;
+      text-transform: uppercase; color: var(--navy);
+      padding-bottom: .1in; border-bottom: 1px solid var(--border);
+      margin-bottom: .14in;
+    }
+    .section-label span { color: var(--gold); }
+
+    /* DENSE MESSAGE GRID */
+    .msg-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .12in; margin-bottom: .18in; }
+    .msg-card {
+      background: var(--light); border-left: 2.5px solid var(--border);
+      border-radius: 0 3px 3px 0; padding: .12in .14in;
+    }
+    .msg-card p { font-size: .69rem; line-height: 1.6; color: var(--dark); font-style: italic; }
+    .msg-card cite {
+      display: block; font-size: .56rem; font-weight: 600;
+      letter-spacing: .07em; text-transform: uppercase;
+      color: var(--muted); margin-top: .22rem; font-style: normal;
+    }
+    .msg-card.gold { border-left-color: var(--gold); }
+
+    /* WIDE MESSAGE (spans 2 cols) */
+    .msg-card.wide { grid-column: span 2; }
+    .msg-card.full { grid-column: span 3; }
+
+    /* COMPACT LETTER */
+    .compact-letter {
+      background: white; border: 1px solid var(--border);
+      border-left: 3px solid var(--navy); border-radius: 0 3px 3px 0;
+      padding: .13in .18in; margin-bottom: .12in;
+    }
+    .compact-letter p { font-size: .69rem; line-height: 1.7; color: var(--dark); }
+    .compact-letter cite {
+      font-size: .58rem; font-weight: 600; color: var(--muted);
+      font-style: italic; display: block; margin-top: .2rem;
+    }
+
+    /* MEMORIES GRID (2 col, slightly larger) */
+    .mem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .12in; margin-bottom: .18in; }
+    .mem-card {
+      background: var(--light); border-left: 2.5px solid var(--gold);
+      border-radius: 0 3px 3px 0; padding: .12in .14in;
+    }
+    .mem-card p { font-size: .69rem; line-height: 1.6; color: var(--dark); font-style: italic; }
+    .mem-card cite {
+      display: block; font-size: .56rem; font-weight: 600;
+      letter-spacing: .07em; text-transform: uppercase;
+      color: var(--muted); margin-top: .22rem; font-style: normal;
+    }
+    .mem-card.wide { grid-column: span 2; }
+
+    /* FOOTER */
+    .page-footer {
+      border-top: 1px solid var(--border); padding: .13in .6in;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .page-footer-text { font-size: .6rem; color: var(--muted); letter-spacing: .03em; }
+    .page-footer-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); }
+
+    /* PRINT */
+    @media print {
+      body { background: white; }
+      .page { margin: 0; width: 100%; min-height: 100vh; page-break-after: always; break-after: page; }
+      .page:last-child { page-break-after: avoid; break-after: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+
+<!-- ══════════════════════════════════════
+     TA-TAO · PAGE 1 · FEATURED
+══════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <img src="source/sba-logo.png" alt="Gonzaga University School of Business Administration">
+    <div class="header-right">
+      <div class="header-name">Ta-Tao</div>
+      <div class="header-label">Retirement Tribute · Spring 2026</div>
+    </div>
+  </div>
+
+  <div class="page-body">
+
+    <div class="nameplate">
+      <div class="nameplate-eyebrow">With Gratitude &amp; Admiration</div>
+      <h1>Ta-Tao</h1>
+      <div class="nameplate-sub">Beloved Colleague &nbsp;·&nbsp; Mentor &nbsp;·&nbsp; Community Builder &nbsp;·&nbsp; Gonzaga School of Business Administration</div>
+    </div>
+
+    <div class="hero-quote">
+      <p>From the early days — beginning with the day you walked into my office to find me there, instead of Terry — your tender and genuine heart won me over. I am honored to call you colleague and friend and I want you to know you are deeply valued and cherished. Ta-Tao, continue to seek peace; find it and know it and remember it. Go play now!</p>
+      <cite>— Maureen</cite>
+    </div>
+
+    <div class="two-col">
+      <div class="feature-card">
+        <div class="card-label">A Memory That Stays With Us</div>
+        <p>My fondest memories are lunches in the lounge when Ta-Tao offered to pick up Chinese takeout. What a wonderful community builder! I also loved running into Ta-Tao in a random airport when we were both returning from summer trips to Europe. The world is both big and small!</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="feature-card">
+        <div class="card-label">A Memory That Stays With Us</div>
+        <p>In 2009, Ta-Tao used his contacts and influence to help me get connected with Chang Gung University in Taiwan. I was able to spend three amazing weeks there during my first sabbatical. I recall Ta-Tao working tirelessly and enthusiastically to make this experience possible.</p>
+        <cite>— Colleague</cite>
+      </div>
+    </div>
+
+    <div class="letter-panel">
+      <div class="letter-label">A Farewell Letter</div>
+      <p>My dear friend, Ta-Tao — I am SO happy that you have this chance to move on to your next great adventure! We will all miss your exuberant laugh, your thoughtful questions, and the extra effort you've put in to help the non-techies among us get more comfortable with technology. Future Zags will miss the chance to learn from such a knowledgeable professor. But all of us, and all your past students, are better off for having known and learned from you — and that's the best gift you could have given us. I wish you joy, peace, and only good surprises. Please come back for lunch or coffee!</p>
+      <cite>With love, Peggy Sue</cite>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <div class="page-footer-text">Gonzaga University · School of Business Administration · Spring 2026</div>
+    <div class="page-footer-dot"></div>
+    <div class="page-footer-text">With gratitude for a remarkable career</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     TA-TAO · PAGE 2 · ALL MESSAGES
+══════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <img src="source/sba-logo.png" alt="Gonzaga University School of Business Administration">
+    <div class="header-right">
+      <div class="header-name">Ta-Tao</div>
+      <div class="header-label">Messages from Colleagues · Spring 2026</div>
+    </div>
+  </div>
+
+  <div class="page-body">
+
+    <div class="section-label">Memories &amp; Stories <span>·</span> From Those Who Worked Alongside You</div>
+    <div class="mem-grid">
+      <div class="mem-card">
+        <p>When it comes to scheduling grad classes, Ta-Tao can never teach on Wednesday night. It's badminton night at the community center. Badminton runs in his veins.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="mem-card">
+        <p>Ta-Tao is a wonderful colleague and mentor. He often checks in to see how things are going and always has a great story to share — like how he bravely "protected" his wife from mice!</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="mem-card">
+        <p>I will always appreciate Ta-Tao's smile and words of wisdom, especially when it came to food and travel.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="mem-card">
+        <p>There is no better advocate for travel than Ta-Tao! He always has the most amazing photos and gifts he brings back from his travels.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="mem-card">
+        <p>Ta-Tao helps ease my transition to Spokane — the beef noodle soup from his wife is excellent!</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="mem-card">
+        <p>Ta-Tao loved badminton and pickleball, and I was always the spoiled youngster who had some other small plans for big nights.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="mem-card">
+        <p>Ta-Tao was the first colleague I told that I was pregnant. He had arranged for me to teach in Taiwan and I had to tell him I wouldn't be able to go. He was very sweet and supportive, of course.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="mem-card">
+        <p>His love for BBQ chicken wings.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="mem-card">
+        <p>Badminton, Chinese lunch delivery from Hong Kong Express which he organized — so awesome — and learning Power BI together.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="mem-card wide">
+        <p>Ta-Tao's dedication to learning new technologies has been truly inspiring. I will miss having such a wonderful colleague to share learning experiences with.</p>
+        <cite>— Colleague</cite>
+      </div>
+    </div>
+
+    <div class="section-label">Messages &amp; Wishes <span>·</span> Sent With Love</div>
+    <div class="msg-grid">
+      <div class="msg-card gold">
+        <p>As long as you keep playing badminton, I'll know where to find you. I'll miss seeing your smile as you walk around the building — and introducing me to snacks from other countries that we can buy from Costco!</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card gold">
+        <p>Who is going to look after my health now?! I'll stock tea, apples, and good vibes in the office. When I feel wiped, I will go on a walk and imagine that you told me to do it!</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card gold">
+        <p>Ta-Tao, I've appreciated your advice as newer faculty. You told me to take up skiing because it made the winters more fun. I appreciate your sound and fun advice. I'm going to miss you!</p>
+        <cite>— Stephanie</cite>
+      </div>
+      <div class="msg-card">
+        <p>Thank you Ta-Tao. You have been a great colleague. Grateful for your support over the years.</p>
+        <cite>— Ashish</cite>
+      </div>
+      <div class="msg-card">
+        <p>Thanks for your presence in the SBA! Your perspective, your willingness to share, and your concern for our students has made a difference for me. We will miss you!</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>You've been such a dedicated and passionate educator. I hope you enjoy this next chapter and have plenty of time to do all the fun things you love!</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Congratulations on your retirement! I hope to keep hearing from you about AI.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Wishing you all the best with the next chapter. You have always been helpful, kind, and very witty. May you continue to be as awesome and encouraging as you are.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Ta-Tao, thanks for being an awesome and supportive colleague!</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Thank you for your help and friendship over the years. You are an amazing colleague and friend — I wish you the best as you begin this new chapter!</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>I will miss your positive energy and zest for life! Best wishes for a happy retirement.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Congratulations on your retirement, Ta-Tao! It's SKI TIME!</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Thanks for being a wonderful colleague. I appreciate your wonderful advice, working on bringing faculty up to speed on AI, and your passion to promote badminton and pickleball in the SBA.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Knowing you, I am sure that you will continue to do some professional work after retirement! :)</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>This place will not be the same without you. We will miss seeing you in the hallways and telling us about all the new and nifty tech!</p>
+        <cite>— Sara</cite>
+      </div>
+      <div class="msg-card">
+        <p>Your positive attitude has made working at Gonzaga a great place to be! Thank you for encouraging us to play badminton, learn Power BI, and keep challenging our students and ourselves.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Wish you all the best in the next chapter of your life and have fun!</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Cheers to retirement! May this next chapter be full of joy, freedom, and just enough plans to keep things interesting.</p>
+        <cite>— Colleague</cite>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <div class="page-footer-text">Gonzaga University · School of Business Administration · Spring 2026</div>
+    <div class="page-footer-dot"></div>
+    <div class="page-footer-text">With gratitude for a remarkable career</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     JANE · PAGE 1 · FEATURED
+══════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <img src="source/sba-logo.png" alt="Gonzaga University School of Business Administration">
+    <div class="header-right">
+      <div class="header-name">Jane</div>
+      <div class="header-label">Retirement Tribute · Spring 2026</div>
+    </div>
+  </div>
+
+  <div class="page-body">
+
+    <div class="nameplate">
+      <div class="nameplate-eyebrow">With Gratitude &amp; Admiration</div>
+      <h1>Jane</h1>
+      <div class="nameplate-sub">Devoted Advisor &nbsp;·&nbsp; Gold Standard &nbsp;·&nbsp; Cura Personalis Embodied &nbsp;·&nbsp; Gonzaga School of Business Administration</div>
+    </div>
+
+    <div class="hero-quote">
+      <p>You are the embodiment of what cura personalis looks like, and thousands of Zags have found their home here because of your care and concern for them. All of us, and every one of your past advisees and students, are better off for having been accompanied in this life by you.</p>
+      <cite>— Peggy Sue</cite>
+    </div>
+
+    <div class="two-col">
+      <div class="feature-card">
+        <div class="card-label">A Story Worth Telling</div>
+        <p>During my freshman year, Jane called Fr. Siconolfi to ask why he had not invited me to join the Honors Program. She pointed out that my tiny rural Montana high school didn't offer AP classes — and insisted he grant me an interview. I decided "no thank you," but I was so grateful she went to bat for me. She has always been that person.</p>
+        <cite>— Peggy Sue</cite>
+      </div>
+      <div class="feature-card">
+        <div class="card-label">A Memory That Stays With Us</div>
+        <p>I remember a Thanksgiving potluck at your house on 28th Street not long after I arrived at GU. It was such an amazing experience to join the SBA family and learn how much we all took care of each other. The stories shared by colleagues sitting in front of your fireplace are a most awesome memory.</p>
+        <cite>— Sara</cite>
+      </div>
+    </div>
+
+    <div class="letter-panel">
+      <div class="letter-label">A Farewell Letter</div>
+      <p>Dearest Janie — I am SO happy for you that you have decided to move on to your next great adventure! We will all miss your very contagious laugh, your thoughtfulness, your style, and your constancy in keeping us focused on the mission and on student success. You have been the gold standard for the school, setting the bar for excellence. Thank you for everything, and best wishes in all the days ahead. I wish you joy, peace, and only good surprises!</p>
+      <cite>With love, Peggy Sue &amp; Maureen</cite>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <div class="page-footer-text">Gonzaga University · School of Business Administration · Spring 2026</div>
+    <div class="page-footer-dot"></div>
+    <div class="page-footer-text">With gratitude for a remarkable career</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     JANE · PAGE 2 · ALL MESSAGES
+══════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <img src="source/sba-logo.png" alt="Gonzaga University School of Business Administration">
+    <div class="header-right">
+      <div class="header-name">Jane</div>
+      <div class="header-label">Messages from Colleagues · Spring 2026</div>
+    </div>
+  </div>
+
+  <div class="page-body">
+
+    <div class="section-label">Memories &amp; Stories <span>·</span> From Those Who Worked Alongside You</div>
+    <div class="mem-grid">
+      <div class="mem-card">
+        <p>I always knew I could count on Jane to have an answer for me. She helped me with the accelerated students.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="mem-card">
+        <p>Whenever I have questions about advising, Jane has always been gracious and incredibly helpful!</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="mem-card">
+        <p>Jane is amazing and I am so proud of her.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="mem-card">
+        <p>Jane's ability to laugh at the funny and absurd made her the first person I would go to talk to in an SBA social event.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="mem-card">
+        <p>I met Jane's husband at the 2024 Sasquatch Soiree and was so surprised that he looks just like Jane! Happy couples do turn out to resemble each other — I share this story with my newlywed wife often.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="mem-card">
+        <p>Jane, I wish I could share your closet — your outfits are always so stylish. I hope that as I grow older, I can be like you, not just on the outside, but in keeping such a kind and caring heart for everyone.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="mem-card">
+        <p>Early in my career, we held an SBA social at Jane's home on the South Hill. I have fond memories of that evening and the Hession's amazing home and warm hospitality.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="mem-card">
+        <p>I also fondly remember walking around Chicago together at CJBE. We went into Bloomingdale's where I bought a fancy spork, and she taught me about CMFM shoes!</p>
+        <cite>— Peggy Sue</cite>
+      </div>
+    </div>
+
+    <div class="section-label">Messages &amp; Wishes <span>·</span> Sent With Love</div>
+    <div class="msg-grid">
+      <div class="msg-card gold">
+        <p>The decades of information and experience that are leaving this building when you retire are irreplaceable. I wish you best of luck and hope you will still come back to visit.</p>
+        <cite>— Sara</cite>
+      </div>
+      <div class="msg-card gold">
+        <p>You're my favorite, and I am going to miss seeing HONEY in the parking lot and miss hearing your insight and perspectives.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card gold">
+        <p>Thank you for teaching me how to get from Hemmingson to Jepson by cutting through the buildings when it snows. You're truly the best!</p>
+        <cite>— Stephanie</cite>
+      </div>
+      <div class="msg-card">
+        <p>Wishing you a restful and happy retirement. Thank you for your immense and valuable help and support over two decades. Best wishes and god bless.</p>
+        <cite>— Ashish</cite>
+      </div>
+      <div class="msg-card">
+        <p>I loved attending the staff get-togethers knowing you would be there. You put people at ease and that's a great trait to have.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Your help in bringing all of us new advisors up to speed and your dedication to helping transfer students make the transition to Gonzaga made a real difference.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Thank you for always being so encouraging and bringing your life stories into the conversation. I'll miss my office neighbor!</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Congratulations! I don't know what we'll do without you!</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Your energy, joy, and positive spirit is contagious! Thank you for being an incredible colleague!</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Thank you for always being inviting and the life of the party in Jepson. Your knowledge of Gonzaga is crazy amazing. You have impacted me in more ways than words could express.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>I know we already talked about this transition, but I wish you health and every happiness going forward. You've certainly earned it and will be greatly missed.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>I love your joyful attitude toward life, and I appreciate your care for our students and willingness to help others. Best wishes for a wonderful retirement!</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Congratulations on your retirement, Jane! I will truly miss you.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Thank you for being a wonderful friend and colleague. I hope you have a wonderful time in retirement and get to spend as much time with your family.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Thank you for your amazing institutional knowledge and advising our students! I have attended many advising sessions from you, trying to learn the ins and outs of our curriculum nuances.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Wishing you endless weekends, slow mornings, and plenty of time for all the things you actually want to do! You will be sorely missed!!</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Wish you the best in the next chapter — traveling, visiting grandkids, watching games, taking care of mom, and having lots of fun! I will miss you so much!</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>I have so enjoyed having you around this past year. You will be missed and I hope you stop in to see us once in a while. Enjoy your retirement — you deserve the best!</p>
+        <cite>— Colleague</cite>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <div class="page-footer-text">Gonzaga University · School of Business Administration · Spring 2026</div>
+    <div class="page-footer-dot"></div>
+    <div class="page-footer-text">With gratitude for a remarkable career</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     GARY · PAGE 1 · FEATURED
+══════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <img src="source/sba-logo.png" alt="Gonzaga University School of Business Administration">
+    <div class="header-right">
+      <div class="header-name">Gary</div>
+      <div class="header-label">Retirement Tribute · Spring 2026</div>
+    </div>
+  </div>
+
+  <div class="page-body">
+
+    <div class="nameplate">
+      <div class="nameplate-eyebrow">With Gratitude &amp; Admiration</div>
+      <h1>Gary</h1>
+      <div class="nameplate-sub">Builder of Programs &nbsp;·&nbsp; Mentor &nbsp;·&nbsp; Legacy of Excellence &nbsp;·&nbsp; Gonzaga School of Business Administration</div>
+    </div>
+
+    <div class="hero-quote">
+      <p>The accounting program would not be what it is today without you. You've worked tirelessly on behalf of our students, faculty, accreditation, and all of our stakeholders. I really can't thank you enough for what you have done and what you have meant to this program. Wishing you a well-deserved and joyful retirement.</p>
+      <cite>— Colleague</cite>
+    </div>
+
+    <div class="two-col">
+      <div class="feature-card">
+        <div class="card-label">A Memory That Stays With Us</div>
+        <p>When I first interviewed at Gonzaga in 2001, Gary took me to dinner. He called an audible and changed the location to a sports bar so we could watch a GU basketball game. The food was still good, the company better, and I gained insight into Gary's passion for all things Gonzaga — even in those early years when the team was still considered a Cinderella.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="feature-card">
+        <div class="card-label">A Memory That Stays With Us</div>
+        <p>Gary and I are both talkers, so all of my favorite memories involve conversations in our offices, Jepson hallways, Jack &amp; Dan's, Rincon Tapatio, or the Osprey patio. He has always been a go-to person when I need perspective, wisdom, or a good sense of humor.</p>
+        <cite>— Peggy Sue</cite>
+      </div>
+    </div>
+
+    <div class="letter-panel">
+      <div class="letter-label">A Farewell Letter</div>
+      <p>G — I am SO happy for you and Jolanta that you have decided to move on to your future of great adventures! I have been missing your hearty laugh and big smile, your care and concern for me and my family, your unwavering focus on the students and elevating their success, and your dedication to this place. You have been such a role model for me in how to be a great Gonzaga faculty member — I hope that I can carry forward your legacy. Thank you for everything. I wish you joy, peace, and only good surprises in all the days ahead. PS See you in Vegas!</p>
+      <cite>With love, Peggy Sue</cite>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <div class="page-footer-text">Gonzaga University · School of Business Administration · Spring 2026</div>
+    <div class="page-footer-dot"></div>
+    <div class="page-footer-text">With gratitude for a remarkable career</div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════
+     GARY · PAGE 2 · ALL MESSAGES
+══════════════════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <img src="source/sba-logo.png" alt="Gonzaga University School of Business Administration">
+    <div class="header-right">
+      <div class="header-name">Gary</div>
+      <div class="header-label">Messages from Colleagues · Spring 2026</div>
+    </div>
+  </div>
+
+  <div class="page-body">
+
+    <div class="section-label">Memories &amp; Stories <span>·</span> From Those Who Worked Alongside You</div>
+    <div class="mem-grid">
+      <div class="mem-card">
+        <p>Gary can do all the things everywhere and all at once. Amazing ability to focus and reflect at the same time.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="mem-card">
+        <p>I remember Gary's leadership of all our accounting department meetings after Kay retired. He was tirelessly at work all the time from the wee hours of the morning until late at night. Always looking out for the best for our department.</p>
+        <cite>— Sara</cite>
+      </div>
+      <div class="mem-card">
+        <p>Gary, where has the time gone? I still remember you as the welcoming person who greeted me at the Provost's Office 22 years ago. I never imagined the day you would retire. It's also special to me that we were both from Arizona.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="mem-card wide">
+        <p>I still remember my job interview at GU when you took me over to the CDA Resort for lunch. It feels like it was yesterday. Can't believe decades have gone by since then. I hope you are enjoying the warmer weather — and yes, will be thinking about you every single time it snows here!</p>
+        <cite>— Sara</cite>
+      </div>
+    </div>
+
+    <div class="section-label">Messages &amp; Wishes <span>·</span> Sent With Love</div>
+    <div class="msg-grid">
+      <div class="msg-card gold">
+        <p>You made this school phenomenal. We will continue your legacy of excellence.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card gold">
+        <p>My goal is to be "just like Gary" when it comes to caring for others. Your mentorship throughout my time at Gonzaga shaped me into the teacher I am today.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card gold">
+        <p>I really enjoyed our conversation about Harry Potter and the studio tour you took in London. That quick chat before an SBA meeting meant a lot to me. I hope you have lots of fun adventures in retirement!</p>
+        <cite>— Stephanie</cite>
+      </div>
+      <div class="msg-card">
+        <p>Thanks for being an awesome mentor and supporter, and for all your work over the years building our accounting program. I wouldn't be where I am today without you — as a student and alongside you for these last fifteen years.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>I appreciated your calming voice in challenging discussions, your capacity to explain a Gonzaga approach to different questions, and your kindness in recognizing small accomplishments.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Wishing you a happy and healthy retirement. Best regards.</p>
+        <cite>— Ashish</cite>
+      </div>
+      <div class="msg-card">
+        <p>I would have stuck with accounting if you had been my professor. I never thought I would be teaching accounting. Thank you for your support.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Happy retirement! Wishing you health, happiness, and endless good times ahead.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Congratulations and cheers to your next adventure!</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Thank you for your mentoring, your support, your advice, and your amazing work ethic. You are a wonderful colleague and you will be missed!!</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Best of luck in retirement. I really enjoyed having you as a colleague and learning from you. Hopefully we'll still see you around campus or at some future GU games.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>We miss you so much already. I hope you are enjoying the warmer weather. Wishing you lots of fun and happiness in retirement.</p>
+        <cite>— Sara</cite>
+      </div>
+      <div class="msg-card">
+        <p>Wish you all the best in the next chapter of your life and keep having fun!</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>You will be sorely missed by your colleagues and students. Thank you for your many years of dedication to accounting education and for the positive impact you have had on so many people.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>I have already expressed this to you, but I really can't thank you enough for what you have done and meant to this program. You've worked tirelessly on behalf of our students, faculty, and stakeholders.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>Gary, thanks for being an awesome mentor, supporter, and for all your work over the years. I wouldn't be where I am today without you.</p>
+        <cite>— Colleague</cite>
+      </div>
+      <div class="msg-card">
+        <p>I am SO happy for you and Jolanta! I have been missing your hearty laugh and big smile and your unwavering focus on the students.</p>
+        <cite>— Peggy Sue</cite>
+      </div>
+      <div class="msg-card">
+        <p>Dear Gary — you are deeply valued and cherished. Go play now! With appreciation and affection.</p>
+        <cite>— Maureen</cite>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <div class="page-footer-text">Gonzaga University · School of Business Administration · Spring 2026</div>
+    <div class="page-footer-dot"></div>
+    <div class="page-footer-text">With gratitude for a remarkable career</div>
+  </div>
+</div>
+
+</body>
+</html>
