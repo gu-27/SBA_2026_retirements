@@ -3,123 +3,471 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Retirement Tributes · Gonzaga SBA 2026</title>
+  <title>Retirement Celebration · Gonzaga SBA 2026</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --navy: #001A4E; --navy-mid: #002469;
-      --gold: #C8952A; --gold-lt: #F5E6C8;
-      --cream: #FDFBF6;
-      --muted: #6B6050;
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #000D20;
+      color: white;
+      min-height: 100vh;
+      overflow: hidden;
     }
-    html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--navy); color: white; min-height: 100vh; }
 
-    .header { padding: 2.5rem 2rem 0; display: flex; align-items: center; justify-content: center; }
-    .header img { height: 40px; filter: brightness(0) invert(1); opacity: .65; }
-
-    .hero { text-align: center; padding: 3rem 2rem 2.5rem; }
-    .hero-eyebrow { font-size: .65rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
-    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 8vw, 5rem); font-weight: 700; line-height: 1; margin-bottom: 1rem; }
-    .hero-sub { font-size: .85rem; color: rgba(255,255,255,.4); letter-spacing: .05em; }
-    .hero-divider { width: 48px; height: 2px; background: var(--gold); margin: 1.75rem auto 0; border-radius: 2px; }
-
-    .intro { text-align: center; max-width: 520px; margin: 1.75rem auto 0; padding: 0 2rem; font-size: .875rem; line-height: 1.75; color: rgba(255,255,255,.42); }
-
-    /* ── Person cards ── */
-    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; max-width: 1060px; margin: 3rem auto 0; padding: 0 2rem 4rem; }
-
-    .person-card {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 16px; overflow: hidden;
-      text-decoration: none; color: inherit;
-      display: flex; flex-direction: column;
-      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    /* ── DISPLAY (party kiosk) ── */
+    #display {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4vw;
+      transition: background 1s ease;
+      cursor: pointer;
     }
-    .person-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,.4); border-color: rgba(200,149,42,.4); }
 
-    .card-color-strip { height: 6px; }
+    #person-label {
+      font-size: clamp(.65rem, 1.5vw, .85rem);
+      font-weight: 700;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+      margin-bottom: clamp(1rem, 3vh, 2rem);
+      transition: opacity .4s ease;
+    }
 
-    .card-inner { padding: 1.75rem 1.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
-    .card-name { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: white; line-height: 1; margin-bottom: .4rem; }
-    .card-role { font-size: .68rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
-    .card-desc { font-size: .8rem; line-height: 1.7; color: rgba(255,255,255,.4); flex: 1; }
-    .card-cta { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1.25rem; font-size: .73rem; font-weight: 700; letter-spacing: .06em; color: var(--gold); transition: gap .2s; }
-    .person-card:hover .card-cta { gap: .7rem; }
+    #quote-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 4vw, 3rem);
+      font-style: italic;
+      line-height: 1.55;
+      text-align: center;
+      color: white;
+      max-width: min(900px, 90vw);
+      transition: opacity .5s ease;
+    }
 
-    footer { text-align: center; padding: 1.5rem 2rem; border-top: 1px solid rgba(255,255,255,.07); font-size: .67rem; color: rgba(255,255,255,.2); letter-spacing: .05em; }
+    #person-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(4rem, 14vw, 10rem);
+      font-weight: 700;
+      color: rgba(255,255,255,.07);
+      position: absolute;
+      bottom: -2vw;
+      right: 3vw;
+      line-height: 1;
+      pointer-events: none;
+      transition: opacity .4s ease;
+      user-select: none;
+    }
+
+    /* Progress bar */
+    #progress {
+      position: fixed;
+      bottom: 0; left: 0;
+      height: 4px;
+      background: rgba(255,255,255,.35);
+      transition: width linear;
+      border-radius: 0 2px 2px 0;
+    }
+
+    /* Counter */
+    #counter {
+      position: fixed;
+      top: 1.25rem; right: 1.5rem;
+      font-size: .68rem;
+      color: rgba(255,255,255,.25);
+      letter-spacing: .08em;
+    }
+
+    /* Nav hint */
+    #hint {
+      position: fixed;
+      bottom: 1.25rem; left: 50%;
+      transform: translateX(-50%);
+      font-size: .65rem;
+      color: rgba(255,255,255,.2);
+      letter-spacing: .08em;
+      white-space: nowrap;
+    }
+
+    /* Controls */
+    #controls {
+      position: fixed;
+      top: 1.25rem; left: 1.5rem;
+      display: flex;
+      gap: .5rem;
+      z-index: 10;
+    }
+    .ctrl {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.15);
+      color: rgba(255,255,255,.6);
+      font-family: 'Inter', sans-serif;
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      padding: .35rem .8rem;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .ctrl:hover { background: rgba(255,255,255,.2); color: white; }
+    .ctrl.active { background: rgba(255,255,255,.25); color: white; }
+
+    /* Landing page (shown before display starts) */
+    #landing {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 2rem;
+      background: #000D20;
+    }
+    #landing.hidden { display: none; }
+    #display.hidden { display: none; }
+
+    .landing-eyebrow {
+      font-size: .65rem; font-weight: 600; letter-spacing: .2em;
+      text-transform: uppercase; color: #C8952A; margin-bottom: 1rem;
+    }
+    .landing-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 700; line-height: 1; margin-bottom: .75rem; text-align: center;
+    }
+    .landing-sub {
+      font-size: .9rem; color: rgba(255,255,255,.4);
+      letter-spacing: .05em; margin-bottom: 3rem; text-align: center;
+    }
+    .people-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem; max-width: 900px; width: 100%; margin-bottom: 2.5rem;
+    }
+    .person-pill {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 12px; padding: 1.25rem;
+      text-align: center;
+    }
+    .person-pill .pill-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 700; color: white; margin-bottom: .2rem;
+    }
+    .person-pill .pill-count {
+      font-size: .68rem; color: rgba(255,255,255,.35); letter-spacing: .06em;
+    }
+    .person-pill .pill-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      margin: .65rem auto .5rem;
+    }
+    .start-btn {
+      background: #C8952A; color: white;
+      font-family: 'Inter', sans-serif; font-size: 1rem; font-weight: 700;
+      padding: 1rem 2.5rem; border-radius: 100px; border: none;
+      cursor: pointer; letter-spacing: .04em;
+      transition: transform .15s, filter .15s;
+    }
+    .start-btn:hover { filter: brightness(1.1); transform: scale(1.02); }
+
+    /* Fade animation class */
+    .fade-out { opacity: 0 !important; }
   </style>
 </head>
 <body>
 
-<div class="header">
-  <img src="source/sba-logo.png" alt="Gonzaga University School of Business Administration">
+<!-- ── LANDING ── -->
+<div id="landing">
+  <p class="landing-eyebrow">Gonzaga SBA · Spring 2026</p>
+  <h1 class="landing-title">With Gratitude</h1>
+  <p class="landing-sub">Retirement Celebration &nbsp;·&nbsp; Four Remarkable Careers</p>
+
+  <div class="people-cards">
+    <div class="person-pill">
+      <div class="pill-dot" style="background:#1A4E8A;"></div>
+      <div class="pill-name">Ta-Tao</div>
+      <div class="pill-count">27 messages &amp; stories</div>
+    </div>
+    <div class="person-pill">
+      <div class="pill-dot" style="background:#8A1A3A;"></div>
+      <div class="pill-name">Jane</div>
+      <div class="pill-count">28 messages &amp; stories</div>
+    </div>
+    <div class="person-pill">
+      <div class="pill-dot" style="background:#1A5C1A;"></div>
+      <div class="pill-name">Gary</div>
+      <div class="pill-count">22 messages &amp; stories</div>
+    </div>
+    <div class="person-pill">
+      <div class="pill-dot" style="background:#5C1A8A;"></div>
+      <div class="pill-name">Maureen</div>
+      <div class="pill-count">18 messages &amp; stories</div>
+    </div>
+  </div>
+
+  <button class="start-btn" onclick="startDisplay()">▶ Start Celebration Display</button>
 </div>
 
-<div class="hero">
-  <div class="hero-eyebrow">Retirement Celebration · Gonzaga SBA · Spring 2026</div>
-  <h1 class="hero-title">With Gratitude</h1>
-  <p class="hero-sub">Celebrating four remarkable careers</p>
-  <div class="hero-divider"></div>
+<!-- ── DISPLAY ── -->
+<div id="display" class="hidden" onclick="nextSlide()">
+
+  <div id="controls" onclick="event.stopPropagation()">
+    <button class="ctrl" id="btn-pause" onclick="togglePause()">⏸ Pause</button>
+    <button class="ctrl" onclick="prevSlide()">← Prev</button>
+    <button class="ctrl" onclick="nextSlide()">Next →</button>
+    <button class="ctrl" onclick="stopDisplay()">✕ Exit</button>
+  </div>
+
+  <div id="counter"></div>
+
+  <div id="person-label"></div>
+  <div id="quote-text"></div>
+  <div id="person-name"></div>
+
+  <div id="progress"></div>
+  <div id="hint">Click anywhere or press Space / → to advance</div>
 </div>
 
-<p class="intro">
-  The SBA family shares stories, memories, and messages for four colleagues whose dedication has shaped this school for decades.
-</p>
+<script>
+// ── All slides from survey data ──────────────────────────────────────────────
+const SLIDES = [
+  // ── TA-TAO ──
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'Thank you Ta-Tao. You have been a great colleague. Grateful for your support over the years.' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'When it comes to scheduling grad classes, Ta-Tao can never teach on Wednesday night. It\'s badminton night at the community center. Badminton runs in his veins.' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'As long as you keep playing badminton, I\'ll know where to find you. Wednesday or Sundays at the community center playing badminton. I\'ll miss seeing your smile as you walk around the building.' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'Thanks for your presence in the SBA! Your perspective, your willingness to share, and your concern for our students has made a difference for me. We will miss you!' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'Ta-Tao is a wonderful colleague and mentor to me. He often checks in to see how things are going and always has a great story to share.' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'Congratulations on your retirement! You\'ve been such a dedicated and passionate educator to the students. I hope you enjoy this next chapter and have plenty of time to do all the fun things you love!' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'Congratulations on your retirement! I hope to keep hearing from you about AI.' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'You have been a very special part of the gift my work in the business school has been and the joy it has brought me. I am humbled with gratitude. From the early days — beginning with the way you welcomed me into the SBA.' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'I will always appreciate Ta-Tao\'s smile and words of wisdom, especially when it came to food and travel.' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'Ta-Tao, Wishing you all the best with the next chapter of your journey. You have always been helpful, kind and very witty. May you continue to be as awesome and encouraging as you are.' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'I remember when it first started getting cold during my first semester and you asked me how I was doing. I told you I was cold. You told me to take the layers off so my body would acclimate to the cold.' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'There is no better advocate for travel than Ta-Tao! For the last several years, he always has the most amazing photos and gifts he brings back from his travels!' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'Who is going to look after my health now?! I guess I will just stock tea, apples, and good vibes in the office. When I feel wiped, I will go on a walk and imagine that you told me to do it!' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'In 2009, Ta-Tao used his contacts and influence to help me get connected with Chang Gung University in Taiwan. I was able to spend three amazing weeks there during my first sabbatical teaching some courses. It was a life-changing experience for me.' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'Thank you Ta-Tao for your help and friendship over the years. You are an amazing colleague and friend and I wish the best as you begin this new chapter!' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'Ta-Tao, I will miss your positive energy and zest for life! Best wishes for a happy retirement.' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'Ta-Tao loved badminton and pickleball, and I was always the spoiled youngster who had some other small plans for big nights.' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'Congratulations on your retirement, Ta-Tao! It\'s SKI TIME!' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'Ta-Tao helps ease my transition to Spokane — the beef noodle soup from his wife is excellent!' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'My fondest memories are lunches in the lounge when Ta-Tao offered to pick up Chinese takeout. What a wonderful community builder! I loved sharing food and conversation with him and other Jepson characters.' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'My dear friend, Ta-Tao — I am SO happy that you have this chance to move on to your next great adventure! We will all miss your exuberant laugh, your thoughtful questions, and the joy you brought every single day.' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'Ta-Tao — this place will not be the same without you. We will miss seeing you in the hallways and telling us about all the new and nifty tech!' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'Ta-tao, your dedication to learning new technologies has been truly inspiring. I will miss having such a wonderful colleague to share learning experiences with.' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'Ta-Tao, you will be missed! Your positive attitude has made working at Gonzaga a great place to be! I appreciate your encouragement to play badminton, learn Power BI, and keep challenging our students.' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'Cheers to retirement! May this next chapter be full of joy, freedom, and just enough plans to keep things interesting.' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'Ta-Tao, whenever you are around, I always feel like there is someone who genuinely cares and someone I can share things with.' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'Congratulations on your retirement, Ta-Tao! I hope you come by my office again soon to practice our Spanish! Felicidades — te vas a divertir mucho en tus viajes!' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'You gave me a start as an adjunct and when I inquired about becoming a full-time professor, you were very direct with me about the need to get my Ph.D. It was the clearest feedback I received, and you were right.' },
+  { person: 'Ta-Tao', color: '#0D2E52', mid: '#1A4E8A', text: 'As I have gotten to know you well over the years, you have a great balance of wise principles that you are dedicated to with an open generous heart for the important aspects of life. I am really going to miss your mentoring and friendship.' },
 
-<div class="cards">
+  // ── JANE ──
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'Wishing you a restful and happy retirement. Thank you for your immense and valuable help and support over two decades. Best wishes and god bless.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'I always knew I could count on Jane to have an answer for me. She helped me with the accelerated students.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'I loved attending the staff get-togethers knowing you would be there. You put people at ease and that\'s a great trait to have.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'Thank you, Jane. Your help in bringing all of us new advisors up to speed, supporting as we faced more complicated situations, and your dedication to helping our transfer students — it has meant everything.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'Whenever I have questions about advising, Jane has always been gracious and incredibly helpful!' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'Congrats, Jane! Wishing you all the very best in this exciting next chapter!' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'Thank you for always being so encouraging and bringing your life stories into the conversation. I\'ll miss my office neighbor!' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'You have been the gold standard for the students who walk through your door — and for all of us who have watched you work.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'Jane, I want to say "Thank you" for always being inviting and the life of the party in Jepson. Your knowledge of Gonzaga is crazy amazing and I will miss our chats on family, travel, and life.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'You\'re always one of my favorite people to talk to. Thank you for teaching me how to get from Hemmingson to Jepson by cutting through the building!' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'Your energy, joy, and positive spirit is contagious! Thank you for being an incredible colleague!' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'Jane\'s ability to laugh at the funny and absurd made her the first person I would go to talk to in an SBA social event.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'You\'re my favorite, and I am going to miss seeing HONEY in the parking lot and miss hearing your insight and perspectives.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'I have fond memories of the SBA social at Jane\'s home on the South Hill. The Hession\'s amazing home and hospitality left a lasting impression — a true reflection of who Jane is.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'I know we already talked about this transition for you, but I wish you health and every happiness going forward. You\'ve certainly earned it and will be greatly missed.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'Jane, You will be sorely missed! I love your joyful attitude toward life, and I appreciate your care for our students and willingness to help others.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'I met Jane\'s husband at the 2024 Sasquatch Soiree, and I was so surprised that he looks just like Jane! Indeed, happy couples do turn out to resemble each other.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'Congratulations on your retirement, Jane! I will truly miss you.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'Jane, thank you for being a wonderful friend and colleague. I hope you have a wonderful time in retirement and get to spend as much time with your family.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'I have so enjoyed having you around this past year that I have worked in the SBA. You will be missed and I hope you stop in to see us once in a while.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'One favorite memory is a meeting during my freshman year when she called Fr. Siconolfi to ask why he had not invited me to join the Honor\'s Program. She went to bat for me without hesitation.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'Dearest Janie — I am SO happy for you that you have decided to move on to your next great adventure! We will all miss your very contagious laugh, your thoughtfulness, and your style.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'Jane — I don\'t know what we are going to do without you. The decades of information and experience that are leaving this building when you retire are irreplaceable.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'Jane, I wish I could share your closet as your outfits are always so stylish and perfectly put together. I hope that as I grow older, I can be like you — not just on the outside, but in keeping such a joyful spirit.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'Congratulations on your retirement! Wishing you endless weekends, slow mornings, and plenty of time for all the things you actually want to do! You will be sorely missed!!' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'Jane, you are the one who genuinely cares.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'Jane, all our great results and achievements were thanks to your outstanding mentorship of our students. You will be deeply missed!' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'Jane, in many ways, you have been the heart of the School. You\'ve poured yourself into this place and into the students who pass through it in a way that embodies what Gonzaga\'s Mission means.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'When I first started advising students, I had many questions. You were like an encyclopedia — always patient and knowledgeable — and your guidance gave me great confidence.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'I remember meeting you for dinner during my campus visit. You were extremely nice, friendly, and down to earth. I have enjoyed working with you over the years, and every smile you gave over the years meant a lot.' },
+  { person: 'Jane', color: '#520D22', mid: '#8A1A3A', text: 'What an amazing career of contributions to our students, faculty and university. You have played such a rich part of so many students\' experiences and success while at GU — and done so with infectious joy.' },
 
-  <!-- Ta-Tao -->
-  <a href="https://sba-tatao.pages.dev" class="person-card">
-    <div class="card-color-strip" style="background: linear-gradient(90deg, #1A4E8A, #2A7A4E);"></div>
-    <div class="card-inner">
-      <div class="card-name">Ta-Tao</div>
-      <div class="card-role">Faculty · Management Information Systems</div>
-      <p class="card-desc">Badminton champion, tech visionary, health advocate, and the colleague who always had the best travel photos and Chinese takeout recommendations.</p>
-      <div class="card-cta">View Tribute →</div>
-    </div>
-  </a>
+  // ── GARY ──
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'Wishing you a happy and healthy retirement. Best regards.' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'I would have stuck with accounting if you had been my professor. I never thought I would be teaching accounting. Thank you for your support.' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'Thanks for being a part of my first few years at Gonzaga, Gary! I appreciated your calming voice in challenging discussions and your capacity to explain a Gonzaga approach to different questions.' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'Happy retirement! Wishing you health, happiness, and endless good times ahead.' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'You have been a very special part of the gift my work in the business school has been and the joy it has brought me. I am humbled with gratitude. I will always be grateful.' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'I admire how you made connections with students and faculty. I really enjoyed our conversation about Harry Potter and the studio tour you took in London. That quick chat has stuck with me.' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'Gary, thanks for being an awesome mentor, supporter, and for all your work over the years building our accounting program. I wouldn\'t be where I am today without you.' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'Gary can do all the things everywhere and all at once. Amazing ability to focus and reflect at the same time.' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'You made this school phenomenal. We will continue your legacy of excellence.' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'When I first interviewed at Gonzaga in 2001, Gary took me to dinner. He called an audible and changed the location to a sports bar so we could watch a GU basketball game while we ate. That told me everything I needed to know about him.' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'I really can\'t thank you enough for what you have done and meant to the accounting program here. You\'ve worked tirelessly on behalf of our students.' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'Gary, your mentorship throughout my time at Gonzaga shaped me into the teacher I am today. My goal is to be "just like Gary."' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'Congratulations on your retirement, Gary! Congrats and cheers to your next adventure!' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'Gary, best of luck in retirement. I really enjoyed having you as a colleague and learning from you. Hopefully we\'ll still see you around campus or at some future GU games.' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'Gary and I are both talkers, so all of my favorite memories involve conversations in our offices, Jepson hallways, Jack & Dan\'s, Rincon Tapatio, or the Osprey patio! I always appreciate his perspective and wisdom.' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'I am SO happy for you (and Jolanta!) that you have decided to move on to your future of great adventures! I have been missing your hearty laugh and big smile, your care and concern for me and my family.' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'I remember Gary\'s leadership of all our accounting department meetings after Kay retired. He was tirelessly at work all the time from the wee hours of the morning until late at night. Always looking out for everyone.' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'Gary, we miss you so much already. I still remember my job interview at GU when you took me over to the CDA Resort for lunch. It feels like it was yesterday. Can\'t believe decades have gone by since then.' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'Gary, I still remember you as the welcoming person who greeted me at the Provost\'s Office 22 years ago. I never imagined the day you would retire. It\'s also special to me that we are both retiring in the same year.' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'Wish you all the best in the next chapter of your life and keep having fun!' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'Thank you for your mentoring, your support, your advice, and your amazing work ethic. You are a wonderful colleague, and you will be missed!!' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'Working with you in the Graduate School set the standard for me of what it looks like to be a professor in the SBA. The care you brought to students was impossible to miss.' },
+  { person: 'Gary', color: '#0D380D', mid: '#1A5C1A', text: 'I can still remember the first time I met you. You were so genuine in wanting to learn about who I was and gave me such impactful compliments that fueled my drive to grow.' },
 
-  <!-- Jane -->
-  <a href="https://sba-jane.pages.dev" class="person-card">
-    <div class="card-color-strip" style="background: linear-gradient(90deg, #A0284A, #C8952A);"></div>
-    <div class="card-inner">
-      <div class="card-name">Jane</div>
-      <div class="card-role">Academic Advisor · Student Services</div>
-      <p class="card-desc">The heart of the SBA — encyclopedic in knowledge, infectious in laughter, and the standard for what it means to truly care for students.</p>
-      <div class="card-cta">View Tribute →</div>
-    </div>
-  </a>
+  // ── MAUREEN ──
+  { person: 'Maureen', color: '#380D52', mid: '#5C1A8A', text: 'Maureen had big shoes to fill when Terry retired. Instead of trying to be like her, I really appreciated that Maureen made the job hers by bringing her unique gifts and experiences to the work.' },
+  { person: 'Maureen', color: '#380D52', mid: '#5C1A8A', text: 'After 4–5 interviews, Terry was adamant and so right when she told me that Maureen was the one. She was right. Maureen was exactly who the SBA needed.' },
+  { person: 'Maureen', color: '#380D52', mid: '#5C1A8A', text: 'Maureen was so understanding about my late receipts. If I were Maureen, I would have tazed me!' },
+  { person: 'Maureen', color: '#380D52', mid: '#5C1A8A', text: 'Maureen and AJ were the dream team — I always picture the two of you going out for walks together at lunch time.' },
+  { person: 'Maureen', color: '#380D52', mid: '#5C1A8A', text: 'Maureen, during our trip to London, we visited an art museum together, and I came to see the artist within you. I hope that part of you continues to grow and one day fully blossoms in your retirement.' },
+  { person: 'Maureen', color: '#380D52', mid: '#5C1A8A', text: 'My daughter went through a phase where she really loved plants, especially succulents. Maureen always has a jungle going in her office so I mentioned it to her, and she brought in a cutting. It is now a full-grown plant in my daughter\'s home.' },
+  { person: 'Maureen', color: '#380D52', mid: '#5C1A8A', text: 'Thank you Maureen for your support and caring "how are you doing" check-ins. I\'ll miss our spontaneous chats in the faculty lounge on all subjects both personal and professional. Enjoy your retirement!' },
+  { person: 'Maureen', color: '#380D52', mid: '#5C1A8A', text: 'Maureen, you are full of life.' },
+  { person: 'Maureen', color: '#380D52', mid: '#5C1A8A', text: 'Maureen taught me so much when I took over Beta Alpha Psi and how to handle concur and expense reports. She\'s always so gracious and kind. I appreciate her patience.' },
+  { person: 'Maureen', color: '#380D52', mid: '#5C1A8A', text: 'Maureen — you\'ve been so kind and patient with me over the years as I\'ve learned concur and became the BAP advisor. Thank you for all you\'ve done for me personally. You will be missed!' },
+  { person: 'Maureen', color: '#380D52', mid: '#5C1A8A', text: 'Thanks for helping me navigate the whole process. Even when we couldn\'t figure out what exactly HR wanted from us. Enjoy your next adventures!' },
+  { person: 'Maureen', color: '#380D52', mid: '#5C1A8A', text: 'Thank you for always having my back. I appreciate all the support. May your retirement be everything you\'ve dreamed of and more! We will miss you.' },
+  { person: 'Maureen', color: '#380D52', mid: '#5C1A8A', text: 'Maureen, you\'ve been such a steady, welcoming presence in the SBA, which means more than I can easily put into words. Getting to work alongside you over the years and seeing you show up with such openness has been a gift.' },
+  { person: 'Maureen', color: '#380D52', mid: '#5C1A8A', text: 'Maureen helped me propagate a piece of her Christmas cactus. It is now thriving and big, and flowers every winter. I will always have a gift from her growing in my house.' },
+  { person: 'Maureen', color: '#380D52', mid: '#5C1A8A', text: 'Congratulations on your retirement!' },
+  { person: 'Maureen', color: '#380D52', mid: '#5C1A8A', text: 'Maureen thank you for all you\'ve done for me and being the most encouraging and supportive boss I\'ve ever had. We will miss your presence in the office so much.' },
+  { person: 'Maureen', color: '#380D52', mid: '#5C1A8A', text: 'Congratulations on your retirement! Thank you so much for your support when I was starting out. Wishing you a wonderful and fulfilling next chapter.' },
+  { person: 'Maureen', color: '#380D52', mid: '#5C1A8A', text: 'You have been such a wonderful and helpful colleague. You always have a great smile on your face. I\'ll miss seeing you around!' },
+  { person: 'Maureen', color: '#380D52', mid: '#5C1A8A', text: 'Thank you for being such a helpful and supportive colleague. I\'m grateful for all the guidance you gave me to navigate different processes.' },
+  { person: 'Maureen', color: '#380D52', mid: '#5C1A8A', text: 'Thank you so much for being our rock in the SBA and keeping things organized and moving forward. You will be greatly missed but also, we are very happy for you and the next chapter of your journey.' },
+];
 
-  <!-- Gary -->
-  <a href="https://sba-weber.pages.dev" class="person-card">
-    <div class="card-color-strip" style="background: linear-gradient(90deg, #2A6B2A, #1A4E8A);"></div>
-    <div class="card-inner">
-      <div class="card-name">Gary</div>
-      <div class="card-role">Faculty · Accounting</div>
-      <p class="card-desc">Builder of the accounting program, mentor to generations of faculty, and the colleague whose conversations — anywhere, anytime — made you better.</p>
-      <div class="card-cta">View Tribute →</div>
-    </div>
-  </a>
+// ── Display state ─────────────────────────────────────────────────────────────
+let shuffled = [];
+let cur      = 0;
+let paused   = false;
+let timer    = null;
+const DURATION = 8000;
 
-  <!-- Maureen -->
-  <a href="https://sba-maureen.pages.dev" class="person-card">
-    <div class="card-color-strip" style="background: linear-gradient(90deg, #5E35A0, #A0284A);"></div>
-    <div class="card-inner">
-      <div class="card-name">Maureen</div>
-      <div class="card-role">Assistant to the Dean · Administration</div>
-      <p class="card-desc">The steady, generous presence who kept the SBA running — and who somehow always found time to share a plant, a smile, and exactly the right word.</p>
-      <div class="card-cta">View Tribute →</div>
-    </div>
-  </a>
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
-</div>
+function startDisplay() {
+  document.getElementById('landing').classList.add('hidden');
+  document.getElementById('display').classList.remove('hidden');
+  shuffled = shuffle(SLIDES);
+  showSlide(0);
+  schedule();
+  document.addEventListener('keydown', onKey);
+}
 
-<footer>
-  Gonzaga University · School of Business Administration · Spring 2026 · Retirement Celebrations
-</footer>
+function stopDisplay() {
+  clearTimeout(timer);
+  document.getElementById('display').classList.add('hidden');
+  document.getElementById('landing').classList.remove('hidden');
+  document.removeEventListener('keydown', onKey);
+  paused = false;
+  document.getElementById('btn-pause').textContent = '⏸ Pause';
+}
+
+function showSlide(n) {
+  cur = ((n % shuffled.length) + shuffled.length) % shuffled.length;
+  const s = shuffled[cur];
+
+  // Fade out
+  const qt = document.getElementById('quote-text');
+  const pl = document.getElementById('person-label');
+  qt.style.opacity = '0';
+  pl.style.opacity = '0';
+
+  setTimeout(() => {
+    document.getElementById('display').style.background =
+      `linear-gradient(135deg, ${s.color} 0%, ${adjustColor(s.color, 20)} 100%)`;
+    document.getElementById('person-label').textContent =
+      '✦  ' + s.person + '  ✦';
+    document.getElementById('quote-text').textContent = s.text;
+    document.getElementById('person-name').textContent = s.person;
+    document.getElementById('counter').textContent =
+      (cur + 1) + ' / ' + shuffled.length;
+
+    qt.style.opacity = '1';
+    pl.style.opacity = '1';
+  }, 350);
+
+  // Progress bar
+  const bar = document.getElementById('progress');
+  bar.style.transition = 'none';
+  bar.style.width = '0%';
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      bar.style.transition = `width ${DURATION}ms linear`;
+      bar.style.width = '100%';
+    });
+  });
+}
+
+function adjustColor(hex, amount) {
+  const num = parseInt(hex.replace('#',''), 16);
+  const r = Math.min(255, (num >> 16) + amount);
+  const g = Math.min(255, ((num >> 8) & 0xff) + amount);
+  const b = Math.min(255, (num & 0xff) + amount);
+  return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+
+function schedule() {
+  clearTimeout(timer);
+  if (!paused) {
+    timer = setTimeout(() => { showSlide(cur + 1); schedule(); }, DURATION);
+  }
+}
+
+function nextSlide() {
+  clearTimeout(timer);
+  showSlide(cur + 1);
+  if (!paused) schedule();
+}
+
+function prevSlide() {
+  clearTimeout(timer);
+  showSlide(cur - 1);
+  if (!paused) schedule();
+}
+
+function togglePause() {
+  paused = !paused;
+  const btn = document.getElementById('btn-pause');
+  if (paused) {
+    clearTimeout(timer);
+    btn.textContent = '▶ Resume';
+    btn.classList.add('active');
+    document.getElementById('progress').style.transition = 'none';
+  } else {
+    btn.textContent = '⏸ Pause';
+    btn.classList.remove('active');
+    showSlide(cur);
+    schedule();
+  }
+}
+
+function onKey(e) {
+  if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+  if (e.key === 'ArrowLeft')  { e.preventDefault(); prevSlide(); }
+  if (e.key === 'Escape')     stopDisplay();
+  if (e.key === 'p' || e.key === 'P') togglePause();
+}
+</script>
 
 </body>
 </html>
