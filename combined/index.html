@@ -73,20 +73,20 @@
     }
     #display.active { display: flex; }
 
-    /* Top bar */
+    /* Controls bar — stays on top */
     #top-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: .6rem 1.25rem;
-      background: rgba(0,0,0,.4);
+      padding: .55rem 1.25rem;
+      background: rgba(0,0,0,.5);
       border-bottom: 1px solid rgba(255,255,255,.07);
       flex-shrink: 0;
       gap: 1rem;
+      position: relative;
+      z-index: 10;
     }
-    #top-bar-left {
-      display: flex; align-items: center; gap: .75rem;
-    }
+    #top-bar-left { display: flex; align-items: center; gap: .75rem; }
     .bar-title {
       font-family: 'Playfair Display', serif;
       font-size: .95rem; font-style: italic;
@@ -113,76 +113,66 @@
       white-space: nowrap;
     }
 
-    /* 4-column grid */
-    #columns {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+    /* ── STAGE: full-screen single-person ── */
+    #stage {
       flex: 1;
-      overflow: hidden;
-      gap: 0;
-      transition: opacity .5s ease;
-    }
-    #columns.fading { opacity: 0; }
-
-    .person-col {
       display: flex;
       flex-direction: column;
-      border-right: 1px solid rgba(255,255,255,.06);
       overflow: hidden;
+      transition: opacity .5s ease, background-color .5s ease;
     }
-    .person-col:last-child { border-right: none; }
+    #stage.fading { opacity: 0; }
 
-    /* Column header */
-    .col-header {
-      padding: .6rem 1rem .55rem;
+    /* Person header */
+    #person-header {
       flex-shrink: 0;
+      padding: 1.4rem 2.5rem 1.2rem;
       display: flex;
       align-items: baseline;
-      gap: .5rem;
+      gap: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,.1);
     }
-    .col-name {
+    #person-name {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(.9rem, 1.5vw, 1.3rem);
+      font-size: clamp(2rem, 5vw, 3.5rem);
       font-weight: 700;
+      line-height: 1;
       color: white;
     }
-    .col-role {
-      font-size: clamp(.5rem, .8vw, .65rem);
+    #person-role {
+      font-size: clamp(.7rem, 1.2vw, .9rem);
       color: rgba(255,255,255,.45);
-      letter-spacing: .06em;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      font-weight: 500;
     }
 
-    /* Quote cards within a column */
-    .col-quotes {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
+    /* Quote grid: 2×2 */
+    #quote-grid {
       flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 1px;
+      background: rgba(255,255,255,.06);
       overflow: hidden;
-      padding: .5rem .65rem .65rem;
-      gap: .45rem;
     }
 
-    .quote-card {
-      flex: 1;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 8px;
-      padding: .65rem .8rem;
-      overflow: hidden;
+    .quote-cell {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 2.5rem;
+      background: rgba(0,0,0,.22);
+      overflow: hidden;
     }
-    .quote-card p {
+    .quote-cell p {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(.65rem, 1.1vw, .85rem);
       font-style: italic;
-      line-height: 1.6;
-      color: rgba(255,255,255,.82);
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 6;
-      -webkit-box-orient: vertical;
+      font-size: clamp(1rem, 1.8vw, 1.4rem);
+      line-height: 1.65;
+      color: rgba(255,255,255,.92);
+      text-align: center;
     }
 
     /* Progress bar */
@@ -194,7 +184,6 @@
       border-radius: 0 2px 0 0;
     }
 
-    /* Hint */
     #hint {
       position: fixed;
       bottom: .5rem; right: 1rem;
@@ -235,7 +224,7 @@
     </div>
   </div>
 
-  <button class="start-btn" onclick="startDisplay()">▶ Start Celebration Display</button>
+  <button class="start-btn" onclick="startDisplay()">&#9654; Start Celebration Display</button>
 </div>
 
 <!-- ── DISPLAY ── -->
@@ -250,53 +239,39 @@
     </div>
     <div id="top-bar-controls">
       <span id="slide-counter"></span>
-      <button class="ctrl" id="btn-pause" onclick="togglePause()">⏸ Pause</button>
-      <button class="ctrl" onclick="prevPage()">← Prev</button>
-      <button class="ctrl" onclick="nextPage()">Next →</button>
-      <button class="ctrl" onclick="stopDisplay()">✕ Exit</button>
+      <button class="ctrl" id="btn-pause" onclick="togglePause()">&#9646;&#9646; Pause</button>
+      <button class="ctrl" onclick="prevPage()">&#8592; Prev</button>
+      <button class="ctrl" onclick="nextPage()">Next &#8594;</button>
+      <button class="ctrl" onclick="stopDisplay()">&#10005; Exit</button>
     </div>
   </div>
 
-  <div id="columns">
-    <div class="person-col" id="col-tatao">
-      <div class="col-header" style="background:#0D2E52;">
-        <span class="col-name">Ta-Tao</span>
-        <span class="col-role">Faculty · MIS</span>
-      </div>
-      <div class="col-quotes" id="quotes-tatao"></div>
+  <!-- Full-screen person stage -->
+  <div id="stage">
+    <div id="person-header">
+      <span id="person-name"></span>
+      <span id="person-role"></span>
     </div>
-    <div class="person-col" id="col-jane">
-      <div class="col-header" style="background:#520D22;">
-        <span class="col-name">Jane</span>
-        <span class="col-role">Academic Advisor</span>
-      </div>
-      <div class="col-quotes" id="quotes-jane"></div>
-    </div>
-    <div class="person-col" id="col-gary">
-      <div class="col-header" style="background:#0D380D;">
-        <span class="col-name">Gary</span>
-        <span class="col-role">Faculty · Accounting</span>
-      </div>
-      <div class="col-quotes" id="quotes-gary"></div>
-    </div>
-    <div class="person-col" id="col-maureen">
-      <div class="col-header" style="background:#380D52;">
-        <span class="col-name">Maureen</span>
-        <span class="col-role">Assistant to the Dean</span>
-      </div>
-      <div class="col-quotes" id="quotes-maureen"></div>
+    <div id="quote-grid">
+      <div class="quote-cell"><p id="q0"></p></div>
+      <div class="quote-cell"><p id="q1"></p></div>
+      <div class="quote-cell"><p id="q2"></p></div>
+      <div class="quote-cell"><p id="q3"></p></div>
     </div>
   </div>
 
   <div id="progress"></div>
-  <div id="hint">Click · Space · → to advance</div>
+  <div id="hint">Click &middot; Space &middot; &rarr; to advance</div>
 </div>
 
 <script>
 // ── All quotes per person ─────────────────────────────────────────────────────
 const ALL = {
   tatao: {
-    color: '#1A4E8A',
+    name: 'Ta-Tao',
+    role: 'Faculty · MIS',
+    color: '#0D2E52',
+    accent: '#1A4E8A',
     quotes: [
       'Thank you Ta-Tao. You have been a great colleague. Grateful for your support over the years.',
       'When it comes to scheduling grad classes, Ta-Tao can never teach on Wednesday night. It\'s badminton night at the community center. Badminton runs in his veins.',
@@ -330,7 +305,10 @@ const ALL = {
     ]
   },
   jane: {
-    color: '#8A1A3A',
+    name: 'Jane',
+    role: 'Academic Advisor',
+    color: '#2E0A16',
+    accent: '#8A1A3A',
     quotes: [
       'Wishing you a restful and happy retirement. Thank you for your immense and valuable help and support over two decades. Best wishes and god bless.',
       'I always knew I could count on Jane to have an answer for me. She helped me with the accelerated students.',
@@ -363,7 +341,10 @@ const ALL = {
     ]
   },
   gary: {
-    color: '#1A5C1A',
+    name: 'Gary',
+    role: 'Faculty · Accounting',
+    color: '#0A240A',
+    accent: '#1A5C1A',
     quotes: [
       'Wishing you a happy and healthy retirement. Best regards.',
       'I would have stuck with accounting if you had been my professor. I never thought I would be teaching accounting. Thank you for your support.',
@@ -390,40 +371,45 @@ const ALL = {
     ]
   },
   maureen: {
-    color: '#5C1A8A',
+    name: 'Maureen',
+    role: 'Assistant to the Dean',
+    color: '#1A0A2E',
+    accent: '#5C1A8A',
     quotes: [
       'Maureen had big shoes to fill when Terry retired. Instead of trying to be like her, I really appreciated that Maureen made the job hers by bringing her unique gifts and experiences to the work.',
-      'After 4–5 interviews, Terry was adamant and so right when she told me that Maureen was the one. She was right. Maureen was exactly who the SBA needed.',
+      'After 4\u20135 interviews, Terry was adamant and so right when she told me that Maureen was the one. She was right. Maureen was exactly who the SBA needed.',
       'Maureen was so understanding about my late receipts. If I were Maureen, I would have tazed me!',
-      'Maureen and AJ were the dream team — I always picture the two of you going out for walks together at lunch time.',
+      'Maureen and AJ were the dream team \u2014 I always picture the two of you going out for walks together at lunch time.',
       'Maureen, during our trip to London, we visited an art museum together, and I came to see the artist within you. I hope that part of you continues to grow and one day fully blossoms in your retirement.',
-      'My daughter went through a phase where she really loved succulents. Maureen always has a jungle going in her office so I mentioned it to her, and she brought in a cutting. It is now a full-grown plant in my daughter\'s home.',
+      'My daughter went through a phase where she really loved succulents. Maureen always has a jungle going in her office so I mentioned it to her, and she brought in a cutting. It is now a full-grown plant in my daughter\u2019s home.',
       'Thank you Maureen for your support and caring "how are you doing" check-ins. I\'ll miss our spontaneous chats in the faculty lounge on all subjects both personal and professional.',
       'Maureen, you are full of life.',
-      'Maureen taught me so much when I took over Beta Alpha Psi and how to handle concur and expense reports. She\'s always so gracious and kind. I appreciate her patience.',
-      'Maureen — you\'ve been so kind and patient with me over the years as I\'ve learned concur and became the BAP advisor. Thank you for all you\'ve done for me personally. You will be missed!',
+      'Maureen taught me so much when I took over Beta Alpha Psi and how to handle concur and expense reports. She\u2019s always so gracious and kind. I appreciate her patience.',
+      'Maureen \u2014 you\u2019ve been so kind and patient with me over the years as I\u2019ve learned concur and became the BAP advisor. Thank you for all you\u2019ve done for me personally. You will be missed!',
       'Thanks for helping me navigate the whole process. Even when we couldn\'t figure out what exactly HR wanted from us. Enjoy your next adventures!',
-      'Thank you for always having my back. I appreciate all the support. May your retirement be everything you\'ve dreamed of and more! We will miss you.',
-      'Maureen, you\'ve been such a steady, welcoming presence in the SBA, which means more than I can easily put into words. Getting to work alongside you over the years has been a gift.',
+      'Thank you for always having my back. I appreciate all the support. May your retirement be everything you\u2019ve dreamed of and more! We will miss you.',
+      'Maureen, you\u2019ve been such a steady, welcoming presence in the SBA, which means more than I can easily put into words. Getting to work alongside you over the years has been a gift.',
       'Maureen helped me propagate a piece of her Christmas cactus. It is now thriving and big, and flowers every winter. I will always have a gift from her growing in my house.',
-      'Maureen — thank you for all you\'ve done for me and being the most encouraging and supportive boss I\'ve ever had. We will miss your presence in the office so much.',
+      'Maureen \u2014 thank you for all you\u2019ve done for me and being the most encouraging and supportive boss I\u2019ve ever had. We will miss your presence in the office so much.',
       'Congratulations on your retirement! Thank you so much for your support when I was starting out. Wishing you a wonderful and fulfilling next chapter.',
-      'You have been such a wonderful and helpful colleague. You always have a great smile on your face. I\'ll miss seeing you around!',
+      'You have been such a wonderful and helpful colleague. You always have a great smile on your face. I\u2019ll miss seeing you around!',
       'Thank you so much for being our rock in the SBA and keeping things organized and moving forward. You will be greatly missed but also, we are very happy for you and the next chapter of your journey.',
     ]
   }
 };
 
 // ── State ──────────────────────────────────────────────────────────────────────
-const KEYS    = ['tatao', 'jane', 'gary', 'maureen'];
+const KEYS     = ['tatao', 'jane', 'gary', 'maureen'];
 const PER_PAGE = 4;
-const DURATION = 14000; // ms per page
+const DURATION = 14000; // ms per slide
 
-let chunks  = {};   // { tatao: [[q,q,q,q], ...], ... }
-let page    = 0;
-let maxPages = 0;
-let paused  = false;
-let timer   = null;
+// sequence: flat list of {key, chunkIdx}
+// built by interleaving round-robin: tatao[0], jane[0], gary[0], maureen[0], tatao[1]...
+let sequence = [];
+let chunks   = {};
+let page     = 0;
+let paused   = false;
+let timer    = null;
 
 function shuffle(arr) {
   const a = [...arr];
@@ -434,58 +420,76 @@ function shuffle(arr) {
   return a;
 }
 
-function buildChunks() {
+function buildSequence() {
   chunks = {};
-  maxPages = 0;
   KEYS.forEach(k => {
     const shuffled = shuffle(ALL[k].quotes);
     const c = [];
     for (let i = 0; i < shuffled.length; i += PER_PAGE) {
-      c.push(shuffled.slice(i, i + PER_PAGE));
-    }
-    // Pad last chunk if needed
-    while (c[c.length - 1].length < PER_PAGE) {
-      c[c.length - 1].push(shuffled[Math.floor(Math.random() * shuffled.length)]);
+      const chunk = shuffled.slice(i, i + PER_PAGE);
+      // pad last chunk if short
+      while (chunk.length < PER_PAGE) {
+        chunk.push(shuffled[Math.floor(Math.random() * shuffled.length)]);
+      }
+      c.push(chunk);
     }
     chunks[k] = c;
-    maxPages = Math.max(maxPages, c.length);
   });
+
+  // Interleave round-robin
+  sequence = [];
+  const maxRounds = Math.max(...KEYS.map(k => chunks[k].length));
+  for (let r = 0; r < maxRounds; r++) {
+    KEYS.forEach(k => {
+      if (r < chunks[k].length) {
+        sequence.push({ key: k, chunkIdx: r });
+      }
+    });
+  }
 }
 
 function renderPage(n) {
-  KEYS.forEach(k => {
-    const chunkIdx = n % chunks[k].length;
-    const quotes   = chunks[k][chunkIdx];
-    const container = document.getElementById('quotes-' + k);
-    container.innerHTML = '';
-    quotes.forEach(q => {
-      const card = document.createElement('div');
-      card.className = 'quote-card';
-      const p = document.createElement('p');
-      p.textContent = q;
-      card.appendChild(p);
-      container.appendChild(card);
-    });
-  });
+  const { key, chunkIdx } = sequence[n];
+  const cfg    = ALL[key];
+  const quotes = chunks[key][chunkIdx];
 
+  // Background
+  const stage = document.getElementById('stage');
+  stage.style.background = cfg.color;
+
+  // Header
+  document.getElementById('person-name').textContent = cfg.name;
+  document.getElementById('person-role').textContent = cfg.role;
+
+  // Accent color on header border
+  document.getElementById('person-header').style.borderBottomColor =
+    cfg.accent + '55';
+
+  // Quotes
+  for (let i = 0; i < 4; i++) {
+    document.getElementById('q' + i).textContent = quotes[i] || '';
+  }
+
+  // Counter
   document.getElementById('slide-counter').textContent =
-    'Page ' + (n + 1) + ' of ' + maxPages;
+    (n + 1) + ' / ' + sequence.length;
+
+  // Progress bar color
+  document.getElementById('progress').style.background = cfg.accent;
 }
 
 function showPage(n) {
-  page = ((n % maxPages) + maxPages) % maxPages;
-  const cols = document.getElementById('columns');
+  page = ((n % sequence.length) + sequence.length) % sequence.length;
+  const stage = document.getElementById('stage');
 
-  cols.classList.add('fading');
+  stage.classList.add('fading');
   setTimeout(() => {
     renderPage(page);
-    cols.classList.remove('fading');
+    stage.classList.remove('fading');
   }, 450);
 
-  // Progress bar
+  // Restart progress bar
   const bar = document.getElementById('progress');
-  const color = '#C8952A';
-  bar.style.background = color;
   bar.style.transition = 'none';
   bar.style.width = '0%';
   requestAnimationFrame(() => {
@@ -520,11 +524,11 @@ function togglePause() {
   const btn = document.getElementById('btn-pause');
   if (paused) {
     clearTimeout(timer);
-    btn.textContent = '▶ Resume';
+    btn.textContent = '\u25B6 Resume';
     btn.classList.add('active');
     document.getElementById('progress').style.transition = 'none';
   } else {
-    btn.textContent = '⏸ Pause';
+    btn.textContent = '\u23F8 Pause';
     btn.classList.remove('active');
     showPage(page);
     schedule();
@@ -532,7 +536,7 @@ function togglePause() {
 }
 
 function startDisplay() {
-  buildChunks();
+  buildSequence();
   document.getElementById('landing').classList.add('hidden');
   document.getElementById('display').classList.add('active');
   showPage(0);
@@ -546,7 +550,7 @@ function stopDisplay() {
   document.getElementById('landing').classList.remove('hidden');
   document.removeEventListener('keydown', onKey);
   paused = false;
-  document.getElementById('btn-pause').textContent = '⏸ Pause';
+  document.getElementById('btn-pause').textContent = '\u23F8 Pause';
   document.getElementById('btn-pause').classList.remove('active');
 }
 
