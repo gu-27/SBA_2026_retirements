@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retirement Tributes · Gonzaga SBA 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #001A4E; --navy-mid: #002469;
+      --gold: #C8952A; --gold-lt: #F5E6C8;
+      --cream: #FDFBF6;
+      --muted: #6B6050;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--navy); color: white; min-height: 100vh; }
+
+    .header { padding: 2.5rem 2rem 0; display: flex; align-items: center; justify-content: center; }
+    .header img { height: 40px; filter: brightness(0) invert(1); opacity: .65; }
+
+    .hero { text-align: center; padding: 3rem 2rem 2.5rem; }
+    .hero-eyebrow { font-size: .65rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 8vw, 5rem); font-weight: 700; line-height: 1; margin-bottom: 1rem; }
+    .hero-sub { font-size: .85rem; color: rgba(255,255,255,.4); letter-spacing: .05em; }
+    .hero-divider { width: 48px; height: 2px; background: var(--gold); margin: 1.75rem auto 0; border-radius: 2px; }
+
+    .intro { text-align: center; max-width: 520px; margin: 1.75rem auto 0; padding: 0 2rem; font-size: .875rem; line-height: 1.75; color: rgba(255,255,255,.42); }
+
+    /* ── Person cards ── */
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem; max-width: 1060px; margin: 3rem auto 0; padding: 0 2rem 4rem; }
+
+    .person-card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px; overflow: hidden;
+      text-decoration: none; color: inherit;
+      display: flex; flex-direction: column;
+      transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+    }
+    .person-card:hover { transform: translateY(-6px); box-shadow: 0 24px 60px rgba(0,0,0,.4); border-color: rgba(200,149,42,.4); }
+
+    .card-color-strip { height: 6px; }
+
+    .card-inner { padding: 1.75rem 1.5rem 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .card-name { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: white; line-height: 1; margin-bottom: .4rem; }
+    .card-role { font-size: .68rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .card-desc { font-size: .8rem; line-height: 1.7; color: rgba(255,255,255,.4); flex: 1; }
+    .card-cta { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1.25rem; font-size: .73rem; font-weight: 700; letter-spacing: .06em; color: var(--gold); transition: gap .2s; }
+    .person-card:hover .card-cta { gap: .7rem; }
+
+    footer { text-align: center; padding: 1.5rem 2rem; border-top: 1px solid rgba(255,255,255,.07); font-size: .67rem; color: rgba(255,255,255,.2); letter-spacing: .05em; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <img src="source/sba-logo.png" alt="Gonzaga University School of Business Administration">
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Retirement Celebration · Gonzaga SBA · Spring 2026</div>
+  <h1 class="hero-title">With Gratitude</h1>
+  <p class="hero-sub">Celebrating four remarkable careers</p>
+  <div class="hero-divider"></div>
+</div>
+
+<p class="intro">
+  The SBA family shares stories, memories, and messages for four colleagues whose dedication has shaped this school for decades.
+</p>
+
+<div class="cards">
+
+  <!-- Ta-Tao -->
+  <a href="https://sba-tatao.pages.dev" class="person-card">
+    <div class="card-color-strip" style="background: linear-gradient(90deg, #1A4E8A, #2A7A4E);"></div>
+    <div class="card-inner">
+      <div class="card-name">Ta-Tao</div>
+      <div class="card-role">Faculty · Management Information Systems</div>
+      <p class="card-desc">Badminton champion, tech visionary, health advocate, and the colleague who always had the best travel photos and Chinese takeout recommendations.</p>
+      <div class="card-cta">View Tribute →</div>
+    </div>
+  </a>
+
+  <!-- Jane -->
+  <a href="https://sba-jane.pages.dev" class="person-card">
+    <div class="card-color-strip" style="background: linear-gradient(90deg, #A0284A, #C8952A);"></div>
+    <div class="card-inner">
+      <div class="card-name">Jane</div>
+      <div class="card-role">Academic Advisor · Student Services</div>
+      <p class="card-desc">The heart of the SBA — encyclopedic in knowledge, infectious in laughter, and the standard for what it means to truly care for students.</p>
+      <div class="card-cta">View Tribute →</div>
+    </div>
+  </a>
+
+  <!-- Gary -->
+  <a href="https://sba-weber.pages.dev" class="person-card">
+    <div class="card-color-strip" style="background: linear-gradient(90deg, #2A6B2A, #1A4E8A);"></div>
+    <div class="card-inner">
+      <div class="card-name">Gary</div>
+      <div class="card-role">Faculty · Accounting</div>
+      <p class="card-desc">Builder of the accounting program, mentor to generations of faculty, and the colleague whose conversations — anywhere, anytime — made you better.</p>
+      <div class="card-cta">View Tribute →</div>
+    </div>
+  </a>
+
+  <!-- Maureen -->
+  <a href="https://sba-maureen.pages.dev" class="person-card">
+    <div class="card-color-strip" style="background: linear-gradient(90deg, #5E35A0, #A0284A);"></div>
+    <div class="card-inner">
+      <div class="card-name">Maureen</div>
+      <div class="card-role">Assistant to the Dean · Administration</div>
+      <p class="card-desc">The steady, generous presence who kept the SBA running — and who somehow always found time to share a plant, a smile, and exactly the right word.</p>
+      <div class="card-cta">View Tribute →</div>
+    </div>
+  </a>
+
+</div>
+
+<footer>
+  Gonzaga University · School of Business Administration · Spring 2026 · Retirement Celebrations
+</footer>
+
+</body>
+</html>
