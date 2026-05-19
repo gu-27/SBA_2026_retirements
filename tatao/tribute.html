@@ -7,568 +7,372 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --navy: #001A4E; --navy-mid: #002469; --gold: #C8952A;
-      --cream: #FDFBF6; --light: #F3F0E8; --muted: #6B6050; --dark: #12100A;
-    }
+    :root { --c: #1A4E8A; --cd: #0D2E52; --gold: #C8952A; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: var(--dark); color: var(--dark); overflow-x: hidden; }
+    body { font-family: 'Inter', sans-serif; background: #001030; color: white; }
+    section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 5rem 2rem; }
+    .inner { max-width: 900px; margin: 0 auto; width: 100%; }
+    .eyebrow { font-size: .65rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem,6vw,3.5rem); font-style: italic; line-height: 1.1; margin-bottom: 1.25rem; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .pillar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .stories-stack { display: flex; flex-direction: column; gap: 2.5rem; margin-top: 2rem; }
+    .voices-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .back-btn { position: fixed; top: 1rem; left: 1rem; z-index: 100; background: rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.7); font-family: 'Inter', sans-serif; font-size: .72rem; padding: .45rem .9rem; border-radius: 100px; text-decoration: none; }
+    .kiosk-btn { position: fixed; top: 1rem; right: 1rem; z-index: 100; background: var(--c); color: white; font-family: 'Inter', sans-serif; font-size: .72rem; font-weight: 600; padding: .45rem .9rem; border-radius: 100px; border: none; cursor: pointer; }
 
-    /* ── KIOSK TOGGLE ── */
-    #kiosk-btn {
-      position: fixed; top: 1.25rem; right: 1.5rem; z-index: 500;
-      background: rgba(200,149,42,.18); border: 1.5px solid var(--gold);
-      color: var(--gold); font-size: .72rem; font-weight: 700; letter-spacing: .1em;
-      text-transform: uppercase; padding: .5rem 1rem; border-radius: 100px;
-      cursor: pointer; backdrop-filter: blur(8px); transition: all .2s;
-    }
-    #kiosk-btn:hover { background: var(--gold); color: white; }
-
-    /* ── SCROLL SECTIONS ── */
-    section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-
-    /* ── 1. HERO ── */
-    .s-hero {
-      background: var(--navy);
-      align-items: center; text-align: center;
-      position: relative; overflow: hidden;
-    }
-    .hero-glow {
-      position: absolute; width: 600px; height: 600px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(200,149,42,.12) 0%, transparent 70%);
-      top: 50%; left: 50%; transform: translate(-50%,-50%);
-      animation: pulse 5s ease-in-out infinite;
-    }
-    @keyframes pulse { 0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.6} 50%{transform:translate(-50%,-50%) scale(1.3);opacity:1} }
-    .hero-inner { position: relative; z-index: 1; padding: 3rem 2rem; }
-    .hero-logo { height: 40px; filter: brightness(0) invert(1); opacity: .7; margin-bottom: 3rem; }
-    .hero-eyebrow {
-      font-size: .7rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 1.25rem;
-      opacity: 0; animation: fadeUp .8s .3s forwards;
-    }
-    .hero-name {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(4.5rem, 14vw, 9rem);
-      font-weight: 700; color: white; line-height: .95;
-      opacity: 0; animation: fadeUp .9s .6s forwards;
-    }
-    .hero-sub {
-      font-size: clamp(.85rem, 1.8vw, 1.05rem); color: rgba(255,255,255,.45);
-      margin-top: 1.5rem; letter-spacing: .06em;
-      opacity: 0; animation: fadeUp .8s .9s forwards;
-    }
-    .hero-scroll {
-      margin-top: 4rem; color: rgba(255,255,255,.3); font-size: .7rem;
-      letter-spacing: .15em; text-transform: uppercase;
-      opacity: 0; animation: fadeUp .8s 1.2s forwards;
-    }
-    .hero-scroll span { display: block; margin-top: .5rem; animation: bounce 1.5s infinite; }
-    @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
-    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:none} }
-
-    /* ── 2. ESSENCE ── */
-    .s-essence { background: var(--cream); padding: 5rem 4rem; }
-    .essence-inner { max-width: 900px; margin: 0 auto; }
-    .pillars { display: flex; gap: 2rem; justify-content: center; margin-bottom: 3.5rem; flex-wrap: wrap; }
-    .pillar {
-      display: flex; align-items: center; gap: .6rem;
-      font-size: .72rem; font-weight: 700; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--navy);
-      padding: .55rem 1.4rem; border-radius: 100px;
-      border: 1.5px solid rgba(0,36,105,.2);
-    }
-    .pillar-icon { font-size: 1.1rem; }
-    .essence-quote {
-      background: var(--navy); border-radius: 12px;
-      padding: 3rem 3.5rem 2.5rem 4rem; position: relative;
-    }
-    .essence-quote::before {
-      content: '\201C'; font-family: 'Playfair Display', serif;
-      font-size: 7rem; line-height: 1; color: rgba(200,149,42,.2);
-      position: absolute; top: .5rem; left: 1.5rem; pointer-events: none;
-    }
-    .essence-quote p {
-      font-family: 'Playfair Display', serif; font-size: clamp(1.1rem,2.2vw,1.4rem);
-      font-style: italic; line-height: 1.8; color: white;
-    }
-    .essence-quote cite {
-      display: block; font-size: .72rem; font-weight: 600; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--gold); margin-top: 1.25rem; font-style: normal;
-    }
-
-    /* ── 3. STORIES ── */
-    .s-stories { background: #0D1F45; padding: 5rem 4rem; gap: 3rem; }
-    .s-stories h2 {
-      font-family: 'Playfair Display', serif; font-size: clamp(1.6rem,3vw,2.2rem);
-      color: white; text-align: center; margin-bottom: 1rem;
-    }
-    .s-stories .section-sub { text-align: center; color: rgba(255,255,255,.4); font-size: .85rem; margin-bottom: 3rem; }
-    .stories-stack { display: flex; flex-direction: column; gap: 1.5rem; max-width: 860px; margin: 0 auto; }
-    .story-row {
-      display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; align-items: start;
-    }
-    .story-row.right { grid-template-columns: 1fr auto; }
-    .story-tag {
-      writing-mode: vertical-rl; text-orientation: mixed;
-      transform: rotate(180deg); font-size: .6rem; font-weight: 700;
-      letter-spacing: .16em; text-transform: uppercase; color: var(--gold);
-      padding: .5rem .35rem; border-left: 2px solid var(--gold); white-space: nowrap;
-      align-self: stretch; display: flex; align-items: center;
-    }
-    .story-row.right .story-tag { transform: rotate(0deg); border-left: none; border-right: 2px solid var(--gold); order: 2; }
-    .story-content {
-      background: rgba(255,255,255,.05); border-radius: 8px;
-      padding: 1.4rem 1.75rem;
-    }
-    .story-content p {
-      font-size: .88rem; line-height: 1.78; color: rgba(255,255,255,.8); font-style: italic;
-    }
-
-    /* ── 4. VOICES ── */
-    .s-voices { background: var(--light); padding: 5rem 4rem; }
-    .s-voices h2 {
-      font-family: 'Playfair Display', serif; font-size: clamp(1.6rem,3vw,2.2rem);
-      color: var(--navy); text-align: center; margin-bottom: .75rem;
-    }
-    .voices-sub { text-align: center; color: var(--muted); font-size: .85rem; margin-bottom: 3rem; }
-    .voices-grid {
-      display: grid; grid-template-columns: repeat(3,1fr); gap: .85rem;
-      max-width: 960px; margin: 0 auto;
-    }
-    .voice-card {
-      background: white; border-radius: 8px; padding: 1.1rem 1.25rem;
-      border-top: 3px solid var(--gold); box-shadow: 0 2px 12px rgba(0,0,0,.05);
-    }
-    .voice-concept {
-      font-size: .58rem; font-weight: 700; letter-spacing: .12em;
-      text-transform: uppercase; color: var(--gold); margin-bottom: .5rem;
-    }
-    .voice-card p { font-size: .76rem; line-height: 1.68; color: var(--dark); font-style: italic; }
-
-    /* ── 5. LETTERS ── */
-    .s-letters { background: var(--cream); padding: 5rem 4rem; }
-    .s-letters h2 {
-      font-family: 'Playfair Display', serif; font-size: clamp(1.6rem,3vw,2.2rem);
-      color: var(--navy); text-align: center; margin-bottom: 3rem;
-    }
-    .letters-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 960px; margin: 0 auto; }
-    .letter-card {
-      background: white; border-top: 4px solid var(--navy); border-radius: 0 0 8px 8px;
-      padding: 2rem; box-shadow: 0 4px 24px rgba(0,0,0,.07);
-    }
-    .letter-from {
-      font-size: .62rem; font-weight: 700; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--gold); margin-bottom: 1rem;
-    }
-    .letter-card p { font-size: .82rem; line-height: 1.85; color: var(--dark); }
-    .letter-sig { font-style: italic; color: var(--muted); margin-top: .85rem; font-size: .78rem; }
-
-    /* ── 6. CLOSING ── */
-    .s-closing {
-      background: var(--navy); align-items: center; text-align: center;
-      padding: 5rem 2rem; gap: 2rem;
-    }
-    .closing-logo { height: 38px; filter: brightness(0) invert(1); opacity: .55; }
-    .closing-headline {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.5rem, 8vw, 5.5rem);
-      font-style: italic; color: white; line-height: 1.1;
-    }
-    .closing-headline span { color: var(--gold); }
-    .closing-sub { color: rgba(255,255,255,.45); font-size: .88rem; letter-spacing: .06em; }
-
-    /* ── REVEAL ANIMATIONS ── */
-    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .75s ease, transform .75s ease; }
-    .reveal-left { opacity: 0; transform: translateX(-40px); transition: opacity .75s ease, transform .75s ease; }
-    .reveal-right { opacity: 0; transform: translateX(40px); transition: opacity .75s ease, transform .75s ease; }
-    .reveal.visible, .reveal-left.visible, .reveal-right.visible { opacity: 1; transform: none; }
-    .delay-1 { transition-delay: .1s; }
-    .delay-2 { transition-delay: .2s; }
-    .delay-3 { transition-delay: .3s; }
-    .delay-4 { transition-delay: .4s; }
-    .delay-5 { transition-delay: .5s; }
-    .delay-6 { transition-delay: .6s; }
-    .delay-7 { transition-delay: .7s; }
-    .delay-8 { transition-delay: .8s; }
-    .delay-9 { transition-delay: .9s; }
-
-    /* ════════════════════════════════
-       KIOSK MODE
-    ════════════════════════════════ */
-    #kiosk {
-      position: fixed; inset: 0; z-index: 1000;
-      background: #000D26; display: none;
-      flex-direction: column; align-items: center; justify-content: center;
-      cursor: pointer;
-    }
+    /* ── KIOSK ── */
+    #kiosk { display: none; position: fixed; inset: 0; background: var(--cd); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; }
     #kiosk.active { display: flex; }
-    .kiosk-watermark {
-      position: absolute; font-family: 'Playfair Display', serif;
-      font-size: 28vw; font-weight: 700; color: rgba(255,255,255,.025);
-      user-select: none; pointer-events: none; white-space: nowrap;
-      top: 50%; left: 50%; transform: translate(-50%,-50%);
-    }
-    .kiosk-logo {
-      position: absolute; top: 2rem; left: 2.5rem;
-      height: 34px; filter: brightness(0) invert(1); opacity: .4;
-    }
-    #kiosk-exit {
-      position: absolute; top: 1.5rem; right: 2rem;
-      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
-      color: rgba(255,255,255,.5); font-size: .7rem; font-weight: 600;
-      letter-spacing: .1em; text-transform: uppercase;
-      padding: .45rem .9rem; border-radius: 100px; cursor: pointer;
-      transition: all .2s;
-    }
-    #kiosk-exit:hover { background: rgba(255,255,255,.15); color: white; }
-    .kiosk-slide {
-      position: absolute; inset: 0; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; padding: 5rem 8vw;
-      opacity: 0; transition: opacity .7s ease; pointer-events: none;
-    }
-    .kiosk-slide.active { opacity: 1; pointer-events: auto; }
-    .kiosk-concept {
-      font-size: .72rem; font-weight: 700; letter-spacing: .2em;
-      text-transform: uppercase; color: var(--gold);
-      background: rgba(200,149,42,.12); border: 1px solid rgba(200,149,42,.3);
-      padding: .4rem 1.1rem; border-radius: 100px; margin-bottom: 2.5rem;
-    }
-    .kiosk-quote {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.6rem, 3.5vw, 2.6rem);
-      font-style: italic; color: white; line-height: 1.6;
-      text-align: center; max-width: 850px;
-    }
-    .kiosk-quote.intro-slide { font-style: normal; font-size: clamp(2rem,5vw,3.5rem); }
-    .kiosk-source {
-      font-size: .78rem; font-weight: 500; color: rgba(255,255,255,.4);
-      margin-top: 2rem; letter-spacing: .06em;
-    }
-    /* Progress bar */
-    .kiosk-progress {
-      position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-      background: rgba(255,255,255,.08);
-    }
-    .kiosk-progress-fill {
-      height: 100%; background: var(--gold);
-      transition: width .3s linear;
-    }
-    /* Nav arrows */
-    .kiosk-nav {
-      position: absolute; bottom: 2rem;
-      display: flex; gap: 1rem; align-items: center;
-    }
-    .kiosk-nav button {
-      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
-      color: rgba(255,255,255,.5); width: 40px; height: 40px; border-radius: 50%;
-      cursor: pointer; font-size: 1rem; transition: all .2s; display: flex;
-      align-items: center; justify-content: center;
-    }
-    .kiosk-nav button:hover { background: rgba(255,255,255,.15); color: white; }
-    .kiosk-counter {
-      font-size: .68rem; color: rgba(255,255,255,.3); letter-spacing: .1em;
-      min-width: 48px; text-align: center;
-    }
+    #kiosk-label { font-size: .65rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+    #kiosk-text { font-family: 'Playfair Display', serif; font-size: clamp(1.1rem,3vw,2rem); font-style: italic; line-height: 1.6; color: white; text-align: center; max-width: 900px; }
+    #kiosk-name { margin-top: 2rem; font-family: 'Playfair Display', serif; font-size: clamp(1.8rem,5vw,3.5rem); font-weight: 700; color: white; opacity: .15; }
+    #kiosk-prog { position: absolute; bottom: 0; left: 0; height: 3px; background: var(--gold); transition: width linear; }
+    #kiosk-counter { position: absolute; bottom: 1rem; right: 1.5rem; font-size: .65rem; color: rgba(255,255,255,.3); }
+    #kiosk-close { position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,.1); border: none; color: rgba(255,255,255,.6); font-size: .75rem; padding: .4rem .8rem; border-radius: 100px; cursor: pointer; font-family: 'Inter', sans-serif; }
   </style>
 </head>
 <body>
 
-<button id="kiosk-btn" onclick="enterKiosk()">⊞ Kiosk Mode</button>
+<a href="index.html" class="back-btn">← Back</a>
+<button class="kiosk-btn" onclick="startKiosk()">⊞ Kiosk Mode</button>
 
-<!-- ══ 1. HERO ══ -->
-<section class="s-hero">
-  <div class="hero-glow"></div>
-  <div class="hero-inner">
-    <img class="hero-logo" src="source/sba-logo.png" alt="Gonzaga SBA">
-    <div class="hero-eyebrow">Retirement Celebration · Gonzaga SBA · Spring 2026</div>
-    <h1 class="hero-name">Ta-Tao</h1>
-    <p class="hero-sub">Educator &nbsp;·&nbsp; Community Builder &nbsp;·&nbsp; Adventurer &nbsp;·&nbsp; Friend</p>
-    <div class="hero-scroll">Scroll to explore <span>↓</span></div>
+<!-- HERO -->
+<section style="background: linear-gradient(160deg, #0D2E52 0%, #001030 100%);">
+  <div class="inner" style="text-align:center;">
+    <p class="eyebrow reveal">Retirement Tribute &nbsp;·&nbsp; Gonzaga SBA &nbsp;·&nbsp; Spring 2026</p>
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(4rem,14vw,9rem);font-weight:700;color:white;line-height:.9;" class="reveal">Ta-Tao</h1>
+    <p style="font-size:clamp(.8rem,2vw,.95rem);color:rgba(255,255,255,.4);margin-top:1.25rem;letter-spacing:.06em;" class="reveal">Educator &nbsp;·&nbsp; Adventurer &nbsp;·&nbsp; Tech Visionary &nbsp;·&nbsp; Health Advocate</p>
+    <div style="width:48px;height:2px;background:#C8952A;margin:2rem auto 0;border-radius:2px;" class="reveal"></div>
   </div>
 </section>
 
-<!-- ══ 2. ESSENCE ══ -->
-<section class="s-essence">
-  <div class="essence-inner">
-    <div class="pillars">
-      <div class="pillar reveal delay-1"><span class="pillar-icon">🏸</span> The Athlete</div>
-      <div class="pillar reveal delay-2"><span class="pillar-icon">✈️</span> The Traveler</div>
-      <div class="pillar reveal delay-3"><span class="pillar-icon">🍜</span> The Community Table</div>
-      <div class="pillar reveal delay-4"><span class="pillar-icon">💡</span> The Innovator</div>
-      <div class="pillar reveal delay-5"><span class="pillar-icon">💛</span> The Gentle Heart</div>
-    </div>
-    <div class="essence-quote reveal delay-2">
-      <p>From the early days — beginning with the day you walked into my office to find me there, instead of Terry — your tender and genuine heart won me over. I am honored to call you colleague and friend and I want you to know you are deeply valued and cherished. Ta-Tao, continue to seek peace; find it and know it and remember it.</p>
-      <cite>— Maureen</cite>
-    </div>
-  </div>
-</section>
-
-<!-- ══ 3. STORIES ══ -->
-<section class="s-stories">
-  <h2 class="reveal">Stories That Define You</h2>
-  <p class="section-sub reveal delay-1">Moments your colleagues will carry with them</p>
-  <div class="stories-stack">
-
-    <div class="story-row reveal-left">
-      <div class="story-tag">Badminton Nights</div>
-      <div class="story-content">
-        <p>When it comes to scheduling grad classes, Ta-Tao can never teach on Wednesday night. It's badminton night at the community center. Badminton runs in his veins.</p>
-      </div>
-    </div>
-
-    <div class="story-row right reveal-right">
-      <div class="story-content">
-        <p>My fondest memories are lunches in the lounge when Ta-Tao offered to pick up Chinese takeout. What a wonderful community builder! I also loved running into Ta-Tao in a random airport when we were both returning from summer trips to Europe. The world is both big and small!</p>
-      </div>
-      <div class="story-tag">Community Builder</div>
-    </div>
-
-    <div class="story-row reveal-left">
-      <div class="story-tag">The Bridge Builder</div>
-      <div class="story-content">
-        <p>In 2009, Ta-Tao used his contacts and influence to help me get connected with Chang Gung University in Taiwan. I was able to spend three amazing weeks there during my first sabbatical, teaching classes and collaborating on two papers. Ta-Tao worked tirelessly and enthusiastically to make it happen.</p>
-      </div>
-    </div>
-
-    <div class="story-row right reveal-right">
-      <div class="story-content">
-        <p>Ta-Tao helps ease my transition to Spokane — the beef noodle soup from his wife is excellent! Ta-Tao was also the first colleague I told I was pregnant. He had arranged for me to teach in Taiwan and I had to tell him I couldn't go. He was very sweet and supportive, of course.</p>
-      </div>
-      <div class="story-tag">The Welcomer</div>
-    </div>
-
-    <div class="story-row reveal-left">
-      <div class="story-tag">Life Coach</div>
-      <div class="story-content">
-        <p>I remember when it first started getting cold during my first semester and I told Ta-Tao I was cold. He told me to take up skiing because it made the winters more fun. I appreciate your sound and fun advice. I'm going to miss you!</p>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ══ 4. VOICES ══ -->
-<section class="s-voices">
-  <h2 class="reveal">Voices of Colleagues</h2>
-  <p class="voices-sub reveal delay-1">Words sent with love from those who worked alongside you</p>
-  <div class="voices-grid">
-
-    <div class="voice-card reveal delay-1">
-      <div class="voice-concept">🏆 The Champion</div>
-      <p>Your positive attitude has made working at Gonzaga a great place to be! I appreciate your encouragement to play badminton, learn Power BI, and keep challenging our students and ourselves.</p>
-    </div>
-    <div class="voice-card reveal delay-2">
-      <div class="voice-concept">❤️ Gentle Heart</div>
-      <p>As long as you keep playing badminton, I'll know where to find you. I'll miss seeing your smile as you walk around the building — and introducing me to snacks from other countries at Costco!</p>
-    </div>
-    <div class="voice-card reveal delay-3">
-      <div class="voice-concept">🍎 Health Advocate</div>
-      <p>Who is going to look after my health now?! I'll stock tea, apples, and good vibes in the office. When I feel wiped, I will go on a walk and imagine that you told me to do it!</p>
-    </div>
-    <div class="voice-card reveal delay-4">
-      <div class="voice-concept">✈️ The World Traveler</div>
-      <p>There is no better advocate for travel than Ta-Tao! For the last several years, he always has the most amazing photos and gifts he brings back from his travels.</p>
-    </div>
-    <div class="voice-card reveal delay-5">
-      <div class="voice-concept">🚀 The Futurist</div>
-      <p>Congratulations on your retirement! I hope to keep hearing from you about AI.</p>
-    </div>
-    <div class="voice-card reveal delay-6">
-      <div class="voice-concept">⚡ The Energizer</div>
-      <p>I will miss your positive energy and zest for life! Best wishes for a happy retirement.</p>
-    </div>
-    <div class="voice-card reveal delay-7">
-      <div class="voice-concept">💻 Tech Evangelist</div>
-      <p>This place will not be the same without you. We will miss seeing you in the hallways telling us about all the new and nifty tech!</p>
-    </div>
-    <div class="voice-card reveal delay-8">
-      <div class="voice-concept">💡 The Innovator</div>
-      <p>Your dedication to learning new technologies has been truly inspiring. I will miss having such a wonderful colleague to share learning experiences with.</p>
-    </div>
-    <div class="voice-card reveal delay-9">
-      <div class="voice-concept">🎿 The Adventurer</div>
-      <p>Congratulations on your retirement, Ta-Tao! It's SKI TIME!</p>
-    </div>
-    <div class="voice-card reveal delay-1">
-      <div class="voice-concept">🤝 Steadfast</div>
-      <p>Thank you Ta-Tao. You have been a great colleague. Grateful for your support over the years.</p>
-    </div>
-    <div class="voice-card reveal delay-2">
-      <div class="voice-concept">🧭 The Guide</div>
-      <p>You've been such a dedicated and passionate educator. I really enjoyed your workshops — you made information systems less intimidating.</p>
-    </div>
-    <div class="voice-card reveal delay-3">
-      <div class="voice-concept">📖 The Scholar</div>
-      <p>Knowing you, I am sure that you will continue to do some professional work after retirement! :)</p>
-    </div>
-    <div class="voice-card reveal delay-4">
-      <div class="voice-concept">🌟 The Sharer</div>
-      <p>Thanks for your presence in the SBA! Your perspective, your willingness to share, and your concern for our students has made a difference for me.</p>
-    </div>
-    <div class="voice-card reveal delay-5">
-      <div class="voice-concept">🍗 Wing Man</div>
-      <p>His love for BBQ chicken wings.</p>
-    </div>
-    <div class="voice-card reveal delay-6">
-      <div class="voice-concept">☀️ The Bright Side</div>
-      <p>You have always been helpful, kind, and very witty. May you continue to be as awesome and encouraging as you are.</p>
-    </div>
-    <div class="voice-card reveal delay-7">
-      <div class="voice-concept">🕊️ Free Spirit</div>
-      <p>Cheers to retirement! May this next chapter be full of joy, freedom, and just enough plans to keep things interesting.</p>
-    </div>
-    <div class="voice-card reveal delay-8">
-      <div class="voice-concept">🌅 New Horizons</div>
-      <p>Thank you for your help and friendship over the years. You are an amazing colleague and friend — I wish you the best as you begin this new chapter!</p>
-    </div>
-    <div class="voice-card reveal delay-9">
-      <div class="voice-concept">😄 The Wit</div>
-      <p>Thanks for being a wonderful colleague. I appreciate your advice, working on bringing faculty up to speed on AI, and your passion to promote badminton and pickleball in the SBA.</p>
-    </div>
-
-  </div>
-</section>
-
-<!-- ══ 5. LETTERS ══ -->
-<section class="s-letters">
-  <h2 class="reveal">Letters from the Heart</h2>
-  <div class="letters-wrap">
-    <div class="letter-card reveal-left delay-1">
-      <div class="letter-from">A letter from Maureen</div>
-      <p>Dear Ta-Tao — You have been a very special part of the gift my work in the business school has been and the joy it has brought me. I am humbled with gratitude. From the early days, beginning with the day you walked into my office to find me there instead of Terry, your tender and genuine heart won me over. I am honored to call you colleague and friend and I want you to know you are deeply valued and cherished, by me. Ta-Tao, as you do, continue to seek peace; find it and know it and remember it. I believe that you give yourself that gift with your retirement.</p>
-      <p class="letter-sig">Go play now! With appreciation and affection, Maureen</p>
-    </div>
-    <div class="letter-card reveal-right delay-2">
-      <div class="letter-from">A letter from Peggy Sue</div>
-      <p>My dear friend, Ta-Tao — I am SO happy that you have this chance to move on to your next great adventure! How wonderful for you! We will all miss your exuberant laugh, your thoughtful questions, and the extra effort you've put in to help the non-techies among us get more comfortable with technology. Future Zags will miss the chance to learn from such a knowledgeable professor. But all of us, and all your past students, are better off for having known and learned from you, and that's the best gift you could have given us!</p>
-      <p class="letter-sig">Thank you and best wishes! I wish you joy, peace, and only good surprises. — Peggy Sue. PS Please come back for lunch or coffee!</p>
+<!-- PILLARS -->
+<section style="background:#001030;">
+  <div class="inner">
+    <p class="eyebrow reveal">Who They Are</p>
+    <h2 class="reveal">Four ways to know Ta-Tao.</h2>
+    <div class="pillar-grid">
+      
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.5rem;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.75rem;">✈️</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:white;margin-bottom:.5rem;">The Explorer</h3>
+          <p style="font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.5);">From Taiwan to Spokane, his travels brought the world into Jepson.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.5rem;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.75rem;">🏸</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:white;margin-bottom:.5rem;">The Athlete</h3>
+          <p style="font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.5);">Badminton Wednesdays. Pickleball weekends. An open invitation, always.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.5rem;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.75rem;">💡</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:white;margin-bottom:.5rem;">The Futurist</h3>
+          <p style="font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.5);">First in the building to embrace new technology. Last to stop talking about it.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.5rem;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.75rem;">🍵</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:white;margin-bottom:.5rem;">The Healer</h3>
+          <p style="font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.5);">Tea. Apples. A walk. His prescription for whatever ailed you.</p>
+        </div>
     </div>
   </div>
 </section>
 
-<!-- ══ 6. CLOSING ══ -->
-<section class="s-closing">
-  <img class="closing-logo reveal" src="source/sba-logo.png" alt="Gonzaga SBA">
-  <h2 class="closing-headline reveal delay-1">Go Play <span>Now.</span></h2>
-  <p class="closing-sub reveal delay-2">With love and gratitude · The Gonzaga SBA Family · Spring 2026</p>
+<!-- STORIES -->
+<section style="background: linear-gradient(180deg, #001030 0%, #0D2E5222 100%);">
+  <div class="inner">
+    <p class="eyebrow reveal">Stories &amp; Memories</p>
+    <h2 class="reveal">Moments that stick.</h2>
+    <div class="stories-stack">
+      
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-right:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🤝</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Colleague</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #1A4E8A;padding-left:1.25rem;">When it comes to scheduling grad classes, Ta-Tao can never teach on Wednesday night. It&#x27;s badminton night at the community center. Badminton runs in his veins.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-left:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🏸</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Athlete</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #1A4E8A;padding-left:1.25rem;">Ta-Tao is a wonderful colleague and mentor to me. He often checks in to see how things are going and always has a great story to share. One that really sticks with me is how he bravely “protected” his wife from mice and successfully caught those naughty little troublemakers!:)</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-right:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">📚</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Teacher</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #1A4E8A;padding-left:1.25rem;">I will always appreciate Ta-Tao&#x27;s smile and words of wisdom, especially when it came to food and travel.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-left:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🛡️</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Protector</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #1A4E8A;padding-left:1.25rem;">There is no better advocate for travel than Ta-Tao! For the last several years, he always has the most amazing photos and gifts he brings back from his travels!</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-right:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">💡</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Futurist</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #1A4E8A;padding-left:1.25rem;">In 2009. Ta-Tao used his contacts and influence to help me get connected with Chang Gung University in Taiwan.  I was able to spend three amazing weeks there during my first sabbatical teaching some classes and connecting with faculty and students.  From this, I was able to collaborate with new friends on two papers.  I recall Ta-Tao working tirelessly and enthusiastically to make this experience in Taiwan for me possible.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-left:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🌱</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Foundation</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #1A4E8A;padding-left:1.25rem;">Ta-Tao loved badminton and pickleball, and I was always the spoiled youngster who had some other small plans for big nights.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-right:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">✈️</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Explorer</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #1A4E8A;padding-left:1.25rem;">His love for BBQ chicken wings.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-left:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🎯</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Mentor</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #1A4E8A;padding-left:1.25rem;">Ta-Tao helps ease my transition to Spokane - the beef noodle soup from his wife is excellent!</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-right:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">⚡</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Spirit</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #1A4E8A;padding-left:1.25rem;">My fondest memories are lunches in the lounge when Ta-Tao offered to pick up Chinese takeout. What a wonderful community builder! I loved sharing food and conversation with him and other Jepson characters like Hickman and Shrader.<br><br>I also loved running into Ta-Tao in a random airport when we were both returning from summer trips to Europe. The world is both big and small!<br><br>Also, Ta-Tao was the first colleague I told that I was pregnant with Marie. He had arranged for me to teach in Taiwan, and I had to tell him that I wouldn&#x27;t be able to go after all. He was very sweet and supportive about it, of course.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-left:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">📸</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Storyteller</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #1A4E8A;padding-left:1.25rem;">Ta-tao, your dedication to learning new technologies has been truly inspiring. I will miss having such a wonderful colleague to share learning experiences with.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-right:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🍵</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Healer</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #1A4E8A;padding-left:1.25rem;">Badminton, Chinese lunch delivery from Hong Kong Express which he organized for a while and was so awesome, and learning Power BI.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-left:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🌉</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Bridge</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #1A4E8A;padding-left:1.25rem;">You discouraged me from moving to Spokane! You were so honest, even though I was a job candidate. I still remeber that! haha</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-right:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">✨</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Spark</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #1A4E8A;padding-left:1.25rem;">Ta Tao’s dedication to continuous learning and his passion for incorporating new technologies into his teaching have left a lasting impact on both students and colleagues.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-left:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🏓</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Athlete</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #1A4E8A;padding-left:1.25rem;">You gave me a start as an adjunct and when I inquired about becoming a full-time professor, you were very direct with me about the need to get my Ph.D.  It was the clearest feedback I received and you didn&#x27;t flinch about the commitment. Without this direct feedback, I would have taken much longer to understand what I needed to do in order to achieve my goals.</blockquote>
+        </div>
+    </div>
+  </div>
 </section>
 
+<!-- VOICES -->
+<section style="background:#000D26;">
+  <div class="inner">
+    <p class="eyebrow reveal">Voices</p>
+    <h2 class="reveal">What colleagues say.</h2>
+    <div class="voices-grid">
+      
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Colleague</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Thank you Ta-Tao. You have been a great colleague. Grateful for your support over the years.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Athlete</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">As long as you keep playing badminton, I&#x27;ll know where to find you. Wednesday or Sundays at the community center playing badminton. I&#x27;ll miss seeing your smile as you walk around the building. And introducing me to snacks, sweets or fruit from other countries that we can buy from Costco. ;)<br>I really enjoyed your workshops. You made information systems less intimidating.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Teacher</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Thanks for your presence in the SBA! Your perspective, your willingness to share, and your concern for our students has made a difference for me. We will miss you!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Protector</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Congratulations on your retirement! You’ve been such a dedicated and passionate educator to the students. I hope you enjoy this next chapter and have plenty of time to do all the fun things you love!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Futurist</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Congratulations on your retirement! I hope to keep hearing from you about AI.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Foundation</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Dear Ta-Tao,<br>You have been a very special part of the gift my work in the business school has been and the joy it has brought me.  I am humbled with gratitude.  From the early days-beginning with the day you walked into my office to find me there, instead of Terry- your tender and genuine heart won me over.   I am honored to call you colleague and friend and I want you to know you are deeply valued and cherished, by me.  <br>Ta-Tao, as you do, continue to seek peace; find it and know it and remember it.  I believe that you give yourself that gift with your retirement.  <br>Go play now!<br>With appreciation and affection,<br>Maureen</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Explorer</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Ta-Tao, Wishing you all the best with the next chapter of your journey. You have always been helpful, kind and very witty. May you continue to be as awesome and encouraging as you are.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Mentor</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Ta-Tao, I&#x27;ve appreciated your advice as newer faculty. I remember when it first started getting cold during my first semester and you asked me how I was doing. I told you I was cold. You told me to take up skiing because it made the winters more fun. I appreciate your sound and fun advice. I&#x27;m going to miss you! <br>-Stephanie</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Spirit</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Ta-Tao, thanks for being an awesome and supportive colleague!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Storyteller</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Who is going to look after my health now?! I guess I will just stock tea, apples, and good vibes in the office. When I feel wiped, I will go on a walk and imagine that you told me to do it!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Healer</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Thank you Ta-Tao for your help and friendship over the years.  You are an amazing colleague and friend and I wish the best as you begin this new chapter!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Bridge</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Ta-Tao, I will miss your positive energy and zest for life! Best wishes for a happy retirement. :)</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Spark</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Congratulations on your retirement, Ta-Tao! It&#x27;s SKI TIME!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Athlete</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Thanks for being a wonderful colleague. I appreciate all of the wonderful your advice, working on bringing faculty up to speed on AI, and your passion to promote badminton and pickleball in the SBA.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Host</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Knowing you, I am sure that you will continue to do some professional works after retirement...:)</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Welcome</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">My dear friend, Ta-Tao,<br><br>I am SO happy that you have this chance to move on to your next great adventure! How wonderful for you! We will all miss your exuberant laugh, your thoughtful questions, and the extra effort you&#x27;ve put in to help the non-techies among us get more comfortable with technology. Future Zags will miss the chance to learn from such a knowledgeable professor. But all of us, and all your past students, are better off for having known and learned from you, and that&#x27;s the best gift you could have given us! <br><br>Thank you and best wishes in all the days ahead!!! I wish you joy, peace, and only good surprises!<br><br>Peggy Sue <br><br>PS Please come back for lunch or coffee!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Host</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Ta-Tao - this place will not be the same without you.  We will miss seeing you in the hallways and telling us about all the new and nifty tech!<br>-Sara</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Futurist</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Wish you all the best in the next chapter of your life and have fun!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Learner</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Ta-Tao, you will be missed! Your positive attitude has made working at Gonzaga a great place to be! I appreciate your encouragement to play badminton, learn Power BI, and keep challenging our students and ourselves.  Thank you!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Encourager</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Cheers to retirement! May this next chapter be full of joy, freedom, and just enough plans to keep things interesting.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">Next Chapter</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Ta-Tao, whenever you are around, I always feel like there is someone who genuinely cares and someone I can share things with.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Honest</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Thank you for all the support, mentorship, and guidance in the last two years. It is very appreciated and means so much more than you know. Your hard work and dedication have set a high standard for us all. Thank you for everything, and enjoy this new chapter of your life. May your retirement be everything you&#x27;ve dreamed of and more. We will miss you</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Presence</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Ta-Tao, I can&#x27;t believe you won&#x27;t be my neighbor next year! I&#x27;m so glad I got to know you better over the last several years, and even though I&#x27;m going to miss seeing you daily, I&#x27;m excited for you to have the time to do the things you&#x27;re looking forward to - without deadlines! Best wishes!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Guide</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Congratulations on your well-deserved retirement! Wishing you all the best in your next chapter.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Neighbor</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">It’s been such a joy working with you, Ta-Tao! You always had time for a quick chat and were always willing to be to share your knowledge with me. Your passion and dedication to your students stood out to me. You will be missed!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Learner</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Congratulations on your retirement, Ta-Tao! I hope you come by my office again soon to practice our Spanish! Felicidades 🥳 te vas a divertir mucho en tus viajes! ✈️ - Mariella</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Teacher</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">As I have gotten to know you well over the years, you have a great balance of wise principles that you are dedicated to with an open generous heart for the important aspects of life.  I am really going to miss working with you and thank you for all you have done for me, the discipline, the SBA and university.  Please do not be a stranger!  John</p>
+        </div>
+    </div>
+  </div>
+</section>
 
-<!-- ════════════════════════════════
-     KIOSK MODE OVERLAY
-════════════════════════════════ -->
+<!-- CLOSING -->
+<section style="background: linear-gradient(160deg, #0D2E52 0%, #001030 100%);">
+  <div class="inner" style="text-align:center;">
+    <p class="eyebrow reveal">From All of Us</p>
+    <h2 class="reveal" style="color:white;">Go Play Now</h2>
+    <p style="font-size:clamp(.9rem,2vw,1.1rem);line-height:1.8;color:rgba(255,255,255,.6);max-width:620px;margin:0 auto;" class="reveal">Go play badminton on Wednesday. Go travel somewhere with a camera. Go tell someone to eat an apple and take a walk. The SBA will be different without you — and richer for every year you were here.</p>
+    <div style="width:48px;height:2px;background:#C8952A;margin:2.5rem auto 0;border-radius:2px;"></div>
+    <p style="margin-top:1.5rem;font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.08em;text-transform:uppercase;">Gonzaga University · School of Business Administration · Spring 2026</p>
+  </div>
+</section>
+
+<!-- KIOSK OVERLAY -->
 <div id="kiosk">
-  <div class="kiosk-watermark">Ta-Tao</div>
-  <img class="kiosk-logo" src="source/sba-logo.png" alt="Gonzaga SBA">
-  <button id="kiosk-exit" onclick="exitKiosk()">✕ Exit</button>
-
-  <!-- Slides injected by JS -->
-
-  <div class="kiosk-progress"><div class="kiosk-progress-fill" id="kiosk-bar"></div></div>
-  <div class="kiosk-nav">
-    <button onclick="prevSlide()">←</button>
-    <div class="kiosk-counter" id="kiosk-counter">1 / 20</div>
-    <button onclick="nextSlide()">→</button>
-  </div>
+  <button id="kiosk-close" onclick="stopKiosk()">✕ Exit</button>
+  <div id="kiosk-label">Memory</div>
+  <div id="kiosk-text"></div>
+  <div id="kiosk-name">Ta-Tao</div>
+  <div id="kiosk-prog"></div>
+  <div id="kiosk-counter"></div>
 </div>
 
 <script>
-// ── SCROLL ANIMATIONS ──
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.12 });
-document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+  // ── Scroll reveal ──
+  const obs = new IntersectionObserver(els => els.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); }), { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
 
-// ── KIOSK DATA ──
-const slides = [
-  { concept: null, quote: "Celebrating Ta-Tao", sub: "Gonzaga School of Business Administration · Spring 2026", intro: true },
-  { concept: "Gentle Heart 💛", quote: "From the early days, your tender and genuine heart won me over. I am honored to call you colleague and friend and I want you to know you are deeply valued and cherished.", source: "— Maureen" },
-  { concept: "Badminton Nights 🏸", quote: "Ta-Tao can never teach on Wednesday night. It's badminton night at the community center. Badminton runs in his veins.", source: "— Colleague" },
-  { concept: "The World Traveler ✈️", quote: "There is no better advocate for travel than Ta-Tao! He always has the most amazing photos and gifts he brings back from his travels.", source: "— Colleague" },
-  { concept: "Community Builder 🤝", quote: "My fondest memories are lunches in the lounge when Ta-Tao offered to pick up Chinese takeout. What a wonderful community builder!", source: "— Colleague" },
-  { concept: "The Bridge Builder 🌉", quote: "In 2009, Ta-Tao worked tirelessly and enthusiastically to help me get connected with Chang Gung University in Taiwan. I was able to spend three amazing weeks there during my first sabbatical.", source: "— Colleague" },
-  { concept: "The Welcomer 🍜", quote: "Ta-Tao helps ease my transition to Spokane — the beef noodle soup from his wife is excellent!", source: "— Colleague" },
-  { concept: "Health Advocate 🍎", quote: "Who is going to look after my health now?! I guess I will just stock tea, apples, and good vibes in the office.", source: "— Colleague" },
-  { concept: "Life Coach 🎿", quote: "I told Ta-Tao I was cold. He told me to take up skiing because it made the winters more fun. I appreciate your sound and fun advice.", source: "— Stephanie" },
-  { concept: "The Laugher 😄", quote: "We will all miss your exuberant laugh, your thoughtful questions, and the extra effort you put in to help the non-techies among us get more comfortable with technology.", source: "— Peggy Sue" },
-  { concept: "Tech Evangelist 💻", quote: "We will miss seeing you in the hallways telling us about all the new and nifty tech!", source: "— Sara" },
-  { concept: "The Bright Side ☀️", quote: "Your positive attitude has made working at Gonzaga a great place to be!", source: "— Colleague" },
-  { concept: "The Innovator 💡", quote: "Your dedication to learning new technologies has been truly inspiring. I will miss having such a wonderful colleague to share learning experiences with.", source: "— Colleague" },
-  { concept: "Wing Man 🍗", quote: "His love for BBQ chicken wings.", source: "— Colleague" },
-  { concept: "The Athlete 🏅", quote: "Ta-Tao loved badminton and pickleball, and I was always the spoiled youngster who had some other small plans for big nights.", source: "— Colleague" },
-  { concept: "The Scholar 📖", quote: "Knowing you, I am sure that you will continue to do some professional work after retirement! :)", source: "— Colleague" },
-  { concept: "The Adventurer 🎿", quote: "Congratulations on your retirement, Ta-Tao! It's SKI TIME!", source: "— Colleague" },
-  { concept: "Free Spirit 🕊️", quote: "May this next chapter be full of joy, freedom, and just enough plans to keep things interesting.", source: "— Colleague" },
-  { concept: "New Horizons 🌅", quote: "I wish you joy, peace, and only good surprises. Please come back for lunch or coffee!", source: "— Peggy Sue" },
-  { concept: null, quote: "Go Play Now.", sub: "With love and gratitude · The Gonzaga SBA Family", intro: true },
-];
+  // ── Kiosk ──
+  const SLIDES = [{"text": "Thank you Ta-Tao. You have been a great colleague. Grateful for your support over the years.", "label": "Message"}, {"text": "When it comes to scheduling grad classes, Ta-Tao can never teach on Wednesday night. It's badminton night at the community center. Badminton runs in his veins.", "label": "Story"}, {"text": "As long as you keep playing badminton, I'll know where to find you. Wednesday or Sundays at the community center playing badminton. I'll miss seeing your smile as you walk around the building. And introducing me to snacks, sweets or fruit from other countries that we can buy from Costco. ;)\nI really enjoyed your workshops. You made information systems less intimidating.", "label": "Message"}, {"text": "Thanks for your presence in the SBA! Your perspective, your willingness to share, and your concern for our students has made a difference for me. We will miss you!", "label": "Message"}, {"text": "Ta-Tao is a wonderful colleague and mentor to me. He often checks in to see how things are going and always has a great story to share. One that really sticks with me is how he bravely “protected” his wife from mice and successfully caught those naughty little troublemakers!:)", "label": "Story"}, {"text": "Congratulations on your retirement! You’ve been such a dedicated and passionate educator to the students. I hope you enjoy this next chapter and have plenty of time to do all the fun things you love!", "label": "Message"}, {"text": "Congratulations on your retirement! I hope to keep hearing from you about AI.", "label": "Message"}, {"text": "Dear Ta-Tao,\nYou have been a very special part of the gift my work in the business school has been and the joy it has brought me.  I am humbled with gratitude.  From the early days-beginning with the day you walked into my office to find me there, instead of Terry- your tender and genuine heart won me over.   I am honored to call you colleague and friend and I want you to know you are deeply valued and cherished, by me.  \nTa-Tao, as you do, continue to seek peace; find it and know it and remember it.  I believe that you give yourself that gift with your retirement.  \nGo play now!\nWith appreciation and affection,\nMaureen", "label": "Message"}, {"text": "I will always appreciate Ta-Tao's smile and words of wisdom, especially when it came to food and travel.", "label": "Story"}, {"text": "Ta-Tao, Wishing you all the best with the next chapter of your journey. You have always been helpful, kind and very witty. May you continue to be as awesome and encouraging as you are.", "label": "Message"}, {"text": "Ta-Tao, I've appreciated your advice as newer faculty. I remember when it first started getting cold during my first semester and you asked me how I was doing. I told you I was cold. You told me to take up skiing because it made the winters more fun. I appreciate your sound and fun advice. I'm going to miss you! \n-Stephanie", "label": "Message"}, {"text": "Ta-Tao, thanks for being an awesome and supportive colleague!", "label": "Message"}, {"text": "There is no better advocate for travel than Ta-Tao! For the last several years, he always has the most amazing photos and gifts he brings back from his travels!", "label": "Story"}, {"text": "Who is going to look after my health now?! I guess I will just stock tea, apples, and good vibes in the office. When I feel wiped, I will go on a walk and imagine that you told me to do it!", "label": "Message"}, {"text": "In 2009. Ta-Tao used his contacts and influence to help me get connected with Chang Gung University in Taiwan.  I was able to spend three amazing weeks there during my first sabbatical teaching some classes and connecting with faculty and students.  From this, I was able to collaborate with new friends on two papers.  I recall Ta-Tao working tirelessly and enthusiastically to make this experience in Taiwan for me possible.", "label": "Story"}, {"text": "Thank you Ta-Tao for your help and friendship over the years.  You are an amazing colleague and friend and I wish the best as you begin this new chapter!", "label": "Message"}, {"text": "Ta-Tao, I will miss your positive energy and zest for life! Best wishes for a happy retirement. :)", "label": "Message"}, {"text": "Ta-Tao loved badminton and pickleball, and I was always the spoiled youngster who had some other small plans for big nights.", "label": "Story"}, {"text": "Congratulations on your retirement, Ta-Tao! It's SKI TIME!", "label": "Message"}, {"text": "His love for BBQ chicken wings.", "label": "Story"}, {"text": "Thanks for being a wonderful colleague. I appreciate all of the wonderful your advice, working on bringing faculty up to speed on AI, and your passion to promote badminton and pickleball in the SBA.", "label": "Message"}, {"text": "Ta-Tao helps ease my transition to Spokane - the beef noodle soup from his wife is excellent!", "label": "Story"}, {"text": "Knowing you, I am sure that you will continue to do some professional works after retirement...:)", "label": "Message"}, {"text": "My fondest memories are lunches in the lounge when Ta-Tao offered to pick up Chinese takeout. What a wonderful community builder! I loved sharing food and conversation with him and other Jepson characters like Hickman and Shrader.\n\nI also loved running into Ta-Tao in a random airport when we were both returning from summer trips to Europe. The world is both big and small!\n\nAlso, Ta-Tao was the first colleague I told that I was pregnant with Marie. He had arranged for me to teach in Taiwan, and I had to tell him that I wouldn't be able to go after all. He was very sweet and supportive about it, of course.", "label": "Story"}, {"text": "My dear friend, Ta-Tao,\n\nI am SO happy that you have this chance to move on to your next great adventure! How wonderful for you! We will all miss your exuberant laugh, your thoughtful questions, and the extra effort you've put in to help the non-techies among us get more comfortable with technology. Future Zags will miss the chance to learn from such a knowledgeable professor. But all of us, and all your past students, are better off for having known and learned from you, and that's the best gift you could have given us! \n\nThank you and best wishes in all the days ahead!!! I wish you joy, peace, and only good surprises!\n\nPeggy Sue \n\nPS Please come back for lunch or coffee!", "label": "Message"}, {"text": "Ta-Tao - this place will not be the same without you.  We will miss seeing you in the hallways and telling us about all the new and nifty tech!\n-Sara", "label": "Message"}, {"text": "Ta-tao, your dedication to learning new technologies has been truly inspiring. I will miss having such a wonderful colleague to share learning experiences with.", "label": "Story"}, {"text": "Wish you all the best in the next chapter of your life and have fun!", "label": "Message"}, {"text": "Badminton, Chinese lunch delivery from Hong Kong Express which he organized for a while and was so awesome, and learning Power BI.", "label": "Story"}, {"text": "Ta-Tao, you will be missed! Your positive attitude has made working at Gonzaga a great place to be! I appreciate your encouragement to play badminton, learn Power BI, and keep challenging our students and ourselves.  Thank you!", "label": "Message"}, {"text": "Cheers to retirement! May this next chapter be full of joy, freedom, and just enough plans to keep things interesting.", "label": "Message"}, {"text": "You discouraged me from moving to Spokane! You were so honest, even though I was a job candidate. I still remeber that! haha", "label": "Story"}, {"text": "Ta-Tao, whenever you are around, I always feel like there is someone who genuinely cares and someone I can share things with.", "label": "Message"}, {"text": "Thank you for all the support, mentorship, and guidance in the last two years. It is very appreciated and means so much more than you know. Your hard work and dedication have set a high standard for us all. Thank you for everything, and enjoy this new chapter of your life. May your retirement be everything you've dreamed of and more. We will miss you", "label": "Message"}, {"text": "Ta-Tao, I can't believe you won't be my neighbor next year! I'm so glad I got to know you better over the last several years, and even though I'm going to miss seeing you daily, I'm excited for you to have the time to do the things you're looking forward to - without deadlines! Best wishes!", "label": "Message"}, {"text": "Ta Tao’s dedication to continuous learning and his passion for incorporating new technologies into his teaching have left a lasting impact on both students and colleagues.", "label": "Story"}, {"text": "Congratulations on your well-deserved retirement! Wishing you all the best in your next chapter.", "label": "Message"}, {"text": "It’s been such a joy working with you, Ta-Tao! You always had time for a quick chat and were always willing to be to share your knowledge with me. Your passion and dedication to your students stood out to me. You will be missed!", "label": "Message"}, {"text": "Congratulations on your retirement, Ta-Tao! I hope you come by my office again soon to practice our Spanish! Felicidades 🥳 te vas a divertir mucho en tus viajes! ✈️ - Mariella", "label": "Message"}, {"text": "You gave me a start as an adjunct and when I inquired about becoming a full-time professor, you were very direct with me about the need to get my Ph.D.  It was the clearest feedback I received and you didn't flinch about the commitment. Without this direct feedback, I would have taken much longer to understand what I needed to do in order to achieve my goals.", "label": "Story"}, {"text": "As I have gotten to know you well over the years, you have a great balance of wise principles that you are dedicated to with an open generous heart for the important aspects of life.  I am really going to miss working with you and thank you for all you have done for me, the discipline, the SBA and university.  Please do not be a stranger!  John", "label": "Message"}];
+  const INTERVAL = 9000;
+  let cur = 0, timer = null, prog = null;
 
-let current = 0;
-let timer = null;
-const DURATION = 7000;
+  function showSlide(n) {
+    cur = (n + SLIDES.length) % SLIDES.length;
+    const s = SLIDES[cur];
+    document.getElementById('kiosk-label').textContent = s.label;
+    document.getElementById('kiosk-text').textContent = s.text;
+    document.getElementById('kiosk-counter').textContent = (cur + 1) + ' / ' + SLIDES.length;
+    const bar = document.getElementById('kiosk-prog');
+    bar.style.transition = 'none'; bar.style.width = '0%';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        bar.style.transition = 'width ' + INTERVAL + 'ms linear';
+        bar.style.width = '100%';
+      });
+    });
+  }
 
-function buildSlides() {
-  const kiosk = document.getElementById('kiosk');
-  slides.forEach((s, i) => {
-    const div = document.createElement('div');
-    div.className = 'kiosk-slide' + (i === 0 ? ' active' : '');
-    div.dataset.index = i;
-    if (s.intro) {
-      div.innerHTML = `<div class="kiosk-quote intro-slide">${s.quote}</div><div class="kiosk-source" style="margin-top:1.5rem;font-size:.9rem;">${s.sub||''}</div>`;
-    } else {
-      div.innerHTML = `
-        <div class="kiosk-concept">${s.concept}</div>
-        <div class="kiosk-quote">${s.quote}</div>
-        <div class="kiosk-source">${s.source||''}</div>`;
-    }
-    kiosk.insertBefore(div, kiosk.querySelector('.kiosk-progress'));
-  });
-}
+  function startKiosk() {
+    document.getElementById('kiosk').classList.add('active');
+    showSlide(0);
+    timer = setInterval(() => showSlide(cur + 1), INTERVAL);
+    document.addEventListener('keydown', kioskKey);
+    document.getElementById('kiosk').addEventListener('click', () => { clearInterval(timer); showSlide(cur + 1); timer = setInterval(() => showSlide(cur + 1), INTERVAL); });
+  }
 
-function showSlide(n) {
-  const allSlides = document.querySelectorAll('.kiosk-slide');
-  allSlides.forEach(s => s.classList.remove('active'));
-  current = (n + slides.length) % slides.length;
-  allSlides[current].classList.add('active');
-  document.getElementById('kiosk-counter').textContent = `${current + 1} / ${slides.length}`;
-  // Animate progress bar
-  const bar = document.getElementById('kiosk-bar');
-  bar.style.transition = 'none';
-  bar.style.width = '0%';
-  setTimeout(() => {
-    bar.style.transition = `width ${DURATION}ms linear`;
-    bar.style.width = '100%';
-  }, 50);
-}
+  function stopKiosk() {
+    clearInterval(timer);
+    document.getElementById('kiosk').classList.remove('active');
+    document.removeEventListener('keydown', kioskKey);
+  }
 
-function nextSlide() { clearInterval(timer); showSlide(current + 1); startTimer(); }
-function prevSlide() { clearInterval(timer); showSlide(current - 1); startTimer(); }
-function startTimer() { timer = setInterval(() => showSlide(current + 1), DURATION); }
-
-function enterKiosk() {
-  document.getElementById('kiosk').classList.add('active');
-  showSlide(0); startTimer();
-  document.addEventListener('keydown', kioskKeys);
-}
-function exitKiosk() {
-  document.getElementById('kiosk').classList.remove('active');
-  clearInterval(timer);
-  document.removeEventListener('keydown', kioskKeys);
-}
-function kioskKeys(e) {
-  if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
-  if (e.key === 'ArrowLeft') prevSlide();
-  if (e.key === 'Escape') exitKiosk();
-}
-
-// Click anywhere on kiosk to advance (but not on buttons)
-document.getElementById('kiosk').addEventListener('click', function(e) {
-  if (!e.target.closest('button')) nextSlide();
-});
-
-buildSlides();
+  function kioskKey(e) {
+    if (e.key === 'ArrowRight' || e.key === ' ') { clearInterval(timer); showSlide(cur + 1); timer = setInterval(() => showSlide(cur + 1), INTERVAL); }
+    if (e.key === 'ArrowLeft') { clearInterval(timer); showSlide(cur - 1); timer = setInterval(() => showSlide(cur + 1), INTERVAL); }
+    if (e.key === 'Escape') stopKiosk();
+  }
 </script>
 </body>
 </html>

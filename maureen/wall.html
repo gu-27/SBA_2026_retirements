@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maureen · Memory Wall · Gonzaga SBA 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: #0D1829; color: white; min-height: 100vh; }
+    .top-bar { background: #001040; padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid rgba(255,255,255,.08); }
+    .top-bar-left { display: flex; align-items: center; gap: 1rem; }
+    .top-bar img { height: 32px; filter: brightness(0) invert(1); opacity: .6; }
+    .top-bar-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-style: italic; color: white; }
+    .top-bar-sub { font-size: .65rem; color: rgba(255,255,255,.35); letter-spacing: .08em; text-transform: uppercase; }
+    .controls { display: flex; gap: .5rem; flex-wrap: wrap; align-items: center; }
+    .ctrl-btn { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.7); font-family: 'Inter', sans-serif; font-size: .7rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: .4rem .9rem; border-radius: 100px; cursor: pointer; transition: background .2s, color .2s; }
+    .ctrl-btn:hover, .ctrl-btn.active { background: #5C1A8A; border-color: #5C1A8A; color: white; }
+    .wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; padding: 1.5rem 2rem 3rem; max-width: 1400px; margin: 0 auto; }
+    .card-wrap { height: 220px; perspective: 1000px; cursor: pointer; }
+    .card-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .6s cubic-bezier(.4,0,.2,1); }
+    .card-wrap:hover .card-inner { transform: rotateY(180deg); }
+    .card-face { position: absolute; inset: 0; border-radius: 12px; backface-visibility: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.25rem 1rem; overflow: hidden; }
+    .card-back { transform: rotateY(180deg); }
+    footer { text-align: center; padding: 1.5rem; border-top: 1px solid rgba(255,255,255,.07); font-size: .67rem; color: rgba(255,255,255,.2); }
+  </style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-left">
+    <img src="source/sba-logo.png" alt="Gonzaga SBA">
+    <div>
+      <div class="top-bar-title">Maureen · Memory Wall</div>
+      <div class="top-bar-sub">Hover any card to reveal the message</div>
+    </div>
+  </div>
+  <div class="controls">
+    <button class="ctrl-btn active" onclick="shuffle()">⇄ Shuffle</button>
+    <a href="index.html" class="ctrl-btn" style="text-decoration:none;">← Back</a>
+  </div>
+</div>
+
+<div class="wall" id="wall">
+
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-face card-front" style="background:#380D52;">
+          <div style="font-size:2.5rem;line-height:1;margin-bottom:.75rem;">🌱</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:white;text-align:center;line-height:1.25;">The Gardener</div>
+        </div>
+        <div class="card-face card-back" style="background:#F2E8FA;">
+          <p style="font-family:'Playfair Display',serif;font-size:.78rem;font-style:italic;line-height:1.6;color:#380D52;text-align:center;">Maureen had big shoes to fill when Terry retired.  Instead of trying to be like her, I really appreciated that Maureen made the job hers by bringing her unique gifts and experiences to the work.</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-face card-front" style="background:#380D52;">
+          <div style="font-size:2.5rem;line-height:1;margin-bottom:.75rem;">🪨</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:white;text-align:center;line-height:1.25;">The Rock</div>
+        </div>
+        <div class="card-face card-back" style="background:#F2E8FA;">
+          <p style="font-family:'Playfair Display',serif;font-size:.68rem;font-style:italic;line-height:1.6;color:#380D52;text-align:center;">Maureen was a candidate for the position in the SBA for Assistant to the Dean. After 4 - 5 interviews Terry Coombes and I did a post review of the candidates. Terry was adamant and so right when she told me that if you hire Maureen she will bring positive leadership to her employment. Terry, you were right.</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-face card-front" style="background:#380D52;">
+          <div style="font-size:2.5rem;line-height:1;margin-bottom:.75rem;">🎨</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:white;text-align:center;line-height:1.25;">The Artist</div>
+        </div>
+        <div class="card-face card-back" style="background:#F2E8FA;">
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.6;color:#380D52;text-align:center;">Maureen was so understanding about my late receipts... If I were Maureen, I would have tazed me!</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-face card-front" style="background:#380D52;">
+          <div style="font-size:2.5rem;line-height:1;margin-bottom:.75rem;">🌸</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:white;text-align:center;line-height:1.25;">The Grace</div>
+        </div>
+        <div class="card-face card-back" style="background:#F2E8FA;">
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.6;color:#380D52;text-align:center;">Maureen and AJ were the dream team - I always picture the two of you going out for walks together at lunch time or the early afternoon.</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-face card-front" style="background:#380D52;">
+          <div style="font-size:2.5rem;line-height:1;margin-bottom:.75rem;">🗂️</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:white;text-align:center;line-height:1.25;">The Guide</div>
+        </div>
+        <div class="card-face card-back" style="background:#F2E8FA;">
+          <p style="font-family:'Playfair Display',serif;font-size:.78rem;font-style:italic;line-height:1.6;color:#380D52;text-align:center;">Maureen, during our trip to London, we visited an art museum together, and I came to see the artist within you. I hope that part of you continues to grow and one day fully blossoms in your retirement.</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-face card-front" style="background:#380D52;">
+          <div style="font-size:2.5rem;line-height:1;margin-bottom:.75rem;">🚶</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:white;text-align:center;line-height:1.25;">The Partner</div>
+        </div>
+        <div class="card-face card-back" style="background:#F2E8FA;">
+          <p style="font-family:'Playfair Display',serif;font-size:.68rem;font-style:italic;line-height:1.6;color:#380D52;text-align:center;">My daughter Beth went through a phase where she really loved plants, especially succulents. Maureen always has a jungle going in her office (and in the lounge!) so I mentioned that to her, and she brought in a bunch of sweet little green things for Beth to nurture. Beth is off to college now, but I&#x27;m still taking care of the survivors! I think of Maureen every time I do.</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-face card-front" style="background:#380D52;">
+          <div style="font-size:2.5rem;line-height:1;margin-bottom:.75rem;">🏛️</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:white;text-align:center;line-height:1.25;">The Foundation</div>
+        </div>
+        <div class="card-face card-back" style="background:#F2E8FA;">
+          <p style="font-family:'Playfair Display',serif;font-size:.68rem;font-style:italic;line-height:1.6;color:#380D52;text-align:center;">Thank you Maureen for your support and caring &quot;how are you doing&quot; check-ins.  I&#x27;ll miss our spontaneous chats in the faculty lounge on all subjects both personal and professional.  Enjoy your retirement!  I&#x27;m sure you will fill your days with fun projects and opportunities to be with friends and family.  We will miss you!</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-face card-front" style="background:#380D52;">
+          <div style="font-size:2.5rem;line-height:1;margin-bottom:.75rem;">💛</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:white;text-align:center;line-height:1.25;">The Warmth</div>
+        </div>
+        <div class="card-face card-back" style="background:#F2E8FA;">
+          <p style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;line-height:1.6;color:#380D52;text-align:center;">Maureen, you are full of life. :)</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-face card-front" style="background:#380D52;">
+          <div style="font-size:2.5rem;line-height:1;margin-bottom:.75rem;">🌿</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:white;text-align:center;line-height:1.25;">The Nurturer</div>
+        </div>
+        <div class="card-face card-back" style="background:#F2E8FA;">
+          <p style="font-family:'Playfair Display',serif;font-size:.78rem;font-style:italic;line-height:1.6;color:#380D52;text-align:center;">Maureen- you&#x27;ve been so kind and patient with me over the years as I&#x27;ve learned concur and became the BAP advisor. Thank you for all you&#x27;ve done for me personally. You will be missed!</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-face card-front" style="background:#380D52;">
+          <div style="font-size:2.5rem;line-height:1;margin-bottom:.75rem;">✨</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:white;text-align:center;line-height:1.25;">The Steady</div>
+        </div>
+        <div class="card-face card-back" style="background:#F2E8FA;">
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.6;color:#380D52;text-align:center;">Thanks for helping me navigate the whole process. Even when we couldn&#x27;t figure out what exactly HR wanted from us. Enjoy your next adventures!</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-face card-front" style="background:#380D52;">
+          <div style="font-size:2.5rem;line-height:1;margin-bottom:.75rem;">🤗</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:white;text-align:center;line-height:1.25;">The Welcome</div>
+        </div>
+        <div class="card-face card-back" style="background:#F2E8FA;">
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.6;color:#380D52;text-align:center;">Thank you for always having my back. I appreciate all the support. May your retirement be everything you&#x27;ve dreamed of and more! We will miss you &lt;3</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-face card-front" style="background:#380D52;">
+          <div style="font-size:2.5rem;line-height:1;margin-bottom:.75rem;">🎊</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:white;text-align:center;line-height:1.25;">The Joy</div>
+        </div>
+        <div class="card-face card-back" style="background:#F2E8FA;">
+          <p style="font-family:'Playfair Display',serif;font-size:.68rem;font-style:italic;line-height:1.6;color:#380D52;text-align:center;">Maureen, You&#x27;ve been such a steady, welcoming presence in the SBA, which means more than I can easily put into words. Getting to work alongside you over the years and seeing you show up with such openness and genuine heart during our Truly Human Leadership cohort has been a gift. It&#x27;s hard to imagine the SBA without you. Best wishes for your next adventure!</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-face card-front" style="background:#380D52;">
+          <div style="font-size:2.5rem;line-height:1;margin-bottom:.75rem;">💬</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:white;text-align:center;line-height:1.25;">The Conversation</div>
+        </div>
+        <div class="card-face card-back" style="background:#F2E8FA;">
+          <p style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;line-height:1.6;color:#380D52;text-align:center;">Congratulations on your retirement!</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-face card-front" style="background:#380D52;">
+          <div style="font-size:2.5rem;line-height:1;margin-bottom:.75rem;">🌺</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:white;text-align:center;line-height:1.25;">The Bloom</div>
+        </div>
+        <div class="card-face card-back" style="background:#F2E8FA;">
+          <p style="font-family:'Playfair Display',serif;font-size:.78rem;font-style:italic;line-height:1.6;color:#380D52;text-align:center;">Maureen thank you for all you&#x27;ve done for me and being the most encouraging and supportive boss I&#x27;ve ever had. We will miss your presence in the office so much. I hope you enjoy retirement and are able to make time for all your creative endeavors.</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-face card-front" style="background:#380D52;">
+          <div style="font-size:2.5rem;line-height:1;margin-bottom:.75rem;">⭐</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:white;text-align:center;line-height:1.25;">The Presence</div>
+        </div>
+        <div class="card-face card-back" style="background:#F2E8FA;">
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.6;color:#380D52;text-align:center;">Congratulations on your retirement! Thank you so much for your support when I was starting out. Wishing you a wonderful and fulfilling next chapter.</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-face card-front" style="background:#380D52;">
+          <div style="font-size:2.5rem;line-height:1;margin-bottom:.75rem;">🔑</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:white;text-align:center;line-height:1.25;">The Key</div>
+        </div>
+        <div class="card-face card-back" style="background:#F2E8FA;">
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.6;color:#380D52;text-align:center;">You have been such a wonderful and helpful colleague. You always have a great smile on your face. I’ll miss seeing you around!</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-face card-front" style="background:#380D52;">
+          <div style="font-size:2.5rem;line-height:1;margin-bottom:.75rem;">💌</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:white;text-align:center;line-height:1.25;">The Care</div>
+        </div>
+        <div class="card-face card-back" style="background:#F2E8FA;">
+          <p style="font-family:'Playfair Display',serif;font-size:.68rem;font-style:italic;line-height:1.6;color:#380D52;text-align:center;">Congratulations on your retirement, Maureen! 🎊 Thank you for being such a helpful and supportive colleague. I’m grateful for all the guidance you gave me to navigate different processes. I’m not sure what we’ll do without you! 😅 But I hope you have a great time in your new chapter. Happy retirement! 🥳 -Mariella</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-wrap">
+      <div class="card-inner">
+        <div class="card-face card-front" style="background:#380D52;">
+          <div style="font-size:2.5rem;line-height:1;margin-bottom:.75rem;">🌻</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.15rem;font-style:italic;color:white;text-align:center;line-height:1.25;">The Sunshine</div>
+        </div>
+        <div class="card-face card-back" style="background:#F2E8FA;">
+          <p style="font-family:'Playfair Display',serif;font-size:.78rem;font-style:italic;line-height:1.6;color:#380D52;text-align:center;">Thank you so much for being our rock in the SBA and keeping things organized and moving forward.  You will be greatly missed but also, we are very happy for you and the next chapter of your journey.  Do not be a stranger.</p>
+        </div>
+      </div>
+    </div>
+</div>
+
+<footer>Gonzaga University · School of Business Administration · Spring 2026</footer>
+
+<script>
+  function shuffle() {
+    const wall = document.getElementById('wall');
+    const cards = [...wall.children];
+    cards.sort(() => Math.random() - .5);
+    cards.forEach(c => wall.appendChild(c));
+  }
+</script>
+</body>
+</html>

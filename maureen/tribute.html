@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maureen · Retirement Tribute · Gonzaga SBA 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --c: #5C1A8A; --cd: #380D52; --gold: #C8952A; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #001030; color: white; }
+    section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 5rem 2rem; }
+    .inner { max-width: 900px; margin: 0 auto; width: 100%; }
+    .eyebrow { font-size: .65rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem,6vw,3.5rem); font-style: italic; line-height: 1.1; margin-bottom: 1.25rem; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .pillar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .stories-stack { display: flex; flex-direction: column; gap: 2.5rem; margin-top: 2rem; }
+    .voices-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .back-btn { position: fixed; top: 1rem; left: 1rem; z-index: 100; background: rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.7); font-family: 'Inter', sans-serif; font-size: .72rem; padding: .45rem .9rem; border-radius: 100px; text-decoration: none; }
+    .kiosk-btn { position: fixed; top: 1rem; right: 1rem; z-index: 100; background: var(--c); color: white; font-family: 'Inter', sans-serif; font-size: .72rem; font-weight: 600; padding: .45rem .9rem; border-radius: 100px; border: none; cursor: pointer; }
+
+    /* ── KIOSK ── */
+    #kiosk { display: none; position: fixed; inset: 0; background: var(--cd); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; }
+    #kiosk.active { display: flex; }
+    #kiosk-label { font-size: .65rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+    #kiosk-text { font-family: 'Playfair Display', serif; font-size: clamp(1.1rem,3vw,2rem); font-style: italic; line-height: 1.6; color: white; text-align: center; max-width: 900px; }
+    #kiosk-name { margin-top: 2rem; font-family: 'Playfair Display', serif; font-size: clamp(1.8rem,5vw,3.5rem); font-weight: 700; color: white; opacity: .15; }
+    #kiosk-prog { position: absolute; bottom: 0; left: 0; height: 3px; background: var(--gold); transition: width linear; }
+    #kiosk-counter { position: absolute; bottom: 1rem; right: 1.5rem; font-size: .65rem; color: rgba(255,255,255,.3); }
+    #kiosk-close { position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,.1); border: none; color: rgba(255,255,255,.6); font-size: .75rem; padding: .4rem .8rem; border-radius: 100px; cursor: pointer; font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">← Back</a>
+<button class="kiosk-btn" onclick="startKiosk()">⊞ Kiosk Mode</button>
+
+<!-- HERO -->
+<section style="background: linear-gradient(160deg, #380D52 0%, #001030 100%);">
+  <div class="inner" style="text-align:center;">
+    <p class="eyebrow reveal">Retirement Tribute &nbsp;·&nbsp; Gonzaga SBA &nbsp;·&nbsp; Spring 2026</p>
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(4rem,14vw,9rem);font-weight:700;color:white;line-height:.9;" class="reveal">Maureen</h1>
+    <p style="font-size:clamp(.8rem,2vw,.95rem);color:rgba(255,255,255,.4);margin-top:1.25rem;letter-spacing:.06em;" class="reveal">The Rock &nbsp;·&nbsp; The Gardener &nbsp;·&nbsp; The Artist &nbsp;·&nbsp; The Guide</p>
+    <div style="width:48px;height:2px;background:#C8952A;margin:2rem auto 0;border-radius:2px;" class="reveal"></div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section style="background:#001030;">
+  <div class="inner">
+    <p class="eyebrow reveal">Who They Are</p>
+    <h2 class="reveal">Four ways to know Maureen.</h2>
+    <div class="pillar-grid">
+      
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.5rem;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.75rem;">🌱</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:white;margin-bottom:.5rem;">The Gardener</h3>
+          <p style="font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.5);">Her office was a jungle. Her care grew things — plants and people alike.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.5rem;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.75rem;">🪨</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:white;margin-bottom:.5rem;">The Rock</h3>
+          <p style="font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.5);">Steady, reliable, essential. The SBA ran because Maureen made it run.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.5rem;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.75rem;">🎨</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:white;margin-bottom:.5rem;">The Artist</h3>
+          <p style="font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.5);">In London, at a museum, she revealed an artist within — still blooming.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.5rem;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.75rem;">🌸</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:white;margin-bottom:.5rem;">The Grace</h3>
+          <p style="font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.5);">Patient with late receipts. Generous with her time. Kind in every interaction.</p>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORIES -->
+<section style="background: linear-gradient(180deg, #001030 0%, #380D5222 100%);">
+  <div class="inner">
+    <p class="eyebrow reveal">Stories &amp; Memories</p>
+    <h2 class="reveal">Moments that stick.</h2>
+    <div class="stories-stack">
+      
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-right:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🌱</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Gardener</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #5C1A8A;padding-left:1.25rem;">Maureen had big shoes to fill when Terry retired.  Instead of trying to be like her, I really appreciated that Maureen made the job hers by bringing her unique gifts and experiences to the work.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-left:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🪨</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Rock</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #5C1A8A;padding-left:1.25rem;">Maureen was a candidate for the position in the SBA for Assistant to the Dean. After 4 - 5 interviews Terry Coombes and I did a post review of the candidates. Terry was adamant and so right when she told me that if you hire Maureen she will bring positive leadership to her employment. Terry, you were right.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-right:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🎨</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Artist</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #5C1A8A;padding-left:1.25rem;">Maureen was so understanding about my late receipts... If I were Maureen, I would have tazed me!</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-left:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🌸</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Grace</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #5C1A8A;padding-left:1.25rem;">Maureen and AJ were the dream team - I always picture the two of you going out for walks together at lunch time or the early afternoon.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-right:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🗂️</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Guide</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #5C1A8A;padding-left:1.25rem;">Maureen, during our trip to London, we visited an art museum together, and I came to see the artist within you. I hope that part of you continues to grow and one day fully blossoms in your retirement.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-left:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🚶</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Partner</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #5C1A8A;padding-left:1.25rem;">My daughter Beth went through a phase where she really loved plants, especially succulents. Maureen always has a jungle going in her office (and in the lounge!) so I mentioned that to her, and she brought in a bunch of sweet little green things for Beth to nurture. Beth is off to college now, but I&#x27;m still taking care of the survivors! I think of Maureen every time I do.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-right:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🏛️</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Foundation</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #5C1A8A;padding-left:1.25rem;">Maureen taught me so much when I took over Beta Alpha Psi and how to handle concur and expense reports. She&#x27;s always so gracious and kind. I appreciate her patience.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-left:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">💛</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Warmth</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #5C1A8A;padding-left:1.25rem;">Maureen helped me propagate a piece of her Christmas cactus. It is now thriving and big, and flowers every winter :) I will always have a gift from her growing in my house.</blockquote>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICES -->
+<section style="background:#000D26;">
+  <div class="inner">
+    <p class="eyebrow reveal">Voices</p>
+    <h2 class="reveal">What colleagues say.</h2>
+    <div class="voices-grid">
+      
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Gardener</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Thank you Maureen for your support and caring &quot;how are you doing&quot; check-ins.  I&#x27;ll miss our spontaneous chats in the faculty lounge on all subjects both personal and professional.  Enjoy your retirement!  I&#x27;m sure you will fill your days with fun projects and opportunities to be with friends and family.  We will miss you!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Rock</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Maureen, you are full of life. :)</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Artist</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Maureen- you&#x27;ve been so kind and patient with me over the years as I&#x27;ve learned concur and became the BAP advisor. Thank you for all you&#x27;ve done for me personally. You will be missed!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Grace</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Thanks for helping me navigate the whole process. Even when we couldn&#x27;t figure out what exactly HR wanted from us. Enjoy your next adventures!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Guide</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Thank you for always having my back. I appreciate all the support. May your retirement be everything you&#x27;ve dreamed of and more! We will miss you &lt;3</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Partner</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Maureen, You&#x27;ve been such a steady, welcoming presence in the SBA, which means more than I can easily put into words. Getting to work alongside you over the years and seeing you show up with such openness and genuine heart during our Truly Human Leadership cohort has been a gift. It&#x27;s hard to imagine the SBA without you. Best wishes for your next adventure!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Foundation</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Congratulations on your retirement!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Warmth</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Maureen thank you for all you&#x27;ve done for me and being the most encouraging and supportive boss I&#x27;ve ever had. We will miss your presence in the office so much. I hope you enjoy retirement and are able to make time for all your creative endeavors.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Nurturer</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Congratulations on your retirement! Thank you so much for your support when I was starting out. Wishing you a wonderful and fulfilling next chapter.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Steady</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">You have been such a wonderful and helpful colleague. You always have a great smile on your face. I’ll miss seeing you around!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Welcome</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Congratulations on your retirement, Maureen! 🎊 Thank you for being such a helpful and supportive colleague. I’m grateful for all the guidance you gave me to navigate different processes. I’m not sure what we’ll do without you! 😅 But I hope you have a great time in your new chapter. Happy retirement! 🥳 -Mariella</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Joy</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Thank you so much for being our rock in the SBA and keeping things organized and moving forward.  You will be greatly missed but also, we are very happy for you and the next chapter of your journey.  Do not be a stranger.</p>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section style="background: linear-gradient(160deg, #380D52 0%, #001030 100%);">
+  <div class="inner" style="text-align:center;">
+    <p class="eyebrow reveal">From All of Us</p>
+    <h2 class="reveal" style="color:white;">Still Growing</h2>
+    <p style="font-size:clamp(.9rem,2vw,1.1rem);line-height:1.8;color:rgba(255,255,255,.6);max-width:620px;margin:0 auto;" class="reveal">Every Christmas cactus cutting she shared will flower again this winter. Every process she guided someone through made them a little more capable. The garden she tended — of plants and people — keeps growing.</p>
+    <div style="width:48px;height:2px;background:#C8952A;margin:2.5rem auto 0;border-radius:2px;"></div>
+    <p style="margin-top:1.5rem;font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.08em;text-transform:uppercase;">Gonzaga University · School of Business Administration · Spring 2026</p>
+  </div>
+</section>
+
+<!-- KIOSK OVERLAY -->
+<div id="kiosk">
+  <button id="kiosk-close" onclick="stopKiosk()">✕ Exit</button>
+  <div id="kiosk-label">Memory</div>
+  <div id="kiosk-text"></div>
+  <div id="kiosk-name">Maureen</div>
+  <div id="kiosk-prog"></div>
+  <div id="kiosk-counter"></div>
+</div>
+
+<script>
+  // ── Scroll reveal ──
+  const obs = new IntersectionObserver(els => els.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); }), { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // ── Kiosk ──
+  const SLIDES = [{"text": "Maureen had big shoes to fill when Terry retired.  Instead of trying to be like her, I really appreciated that Maureen made the job hers by bringing her unique gifts and experiences to the work.", "label": "Story"}, {"text": "Maureen was a candidate for the position in the SBA for Assistant to the Dean. After 4 - 5 interviews Terry Coombes and I did a post review of the candidates. Terry was adamant and so right when she told me that if you hire Maureen she will bring positive leadership to her employment. Terry, you were right.", "label": "Story"}, {"text": "Maureen was so understanding about my late receipts... If I were Maureen, I would have tazed me!", "label": "Story"}, {"text": "Maureen and AJ were the dream team - I always picture the two of you going out for walks together at lunch time or the early afternoon.", "label": "Story"}, {"text": "Maureen, during our trip to London, we visited an art museum together, and I came to see the artist within you. I hope that part of you continues to grow and one day fully blossoms in your retirement.", "label": "Story"}, {"text": "My daughter Beth went through a phase where she really loved plants, especially succulents. Maureen always has a jungle going in her office (and in the lounge!) so I mentioned that to her, and she brought in a bunch of sweet little green things for Beth to nurture. Beth is off to college now, but I'm still taking care of the survivors! I think of Maureen every time I do.", "label": "Story"}, {"text": "Thank you Maureen for your support and caring \"how are you doing\" check-ins.  I'll miss our spontaneous chats in the faculty lounge on all subjects both personal and professional.  Enjoy your retirement!  I'm sure you will fill your days with fun projects and opportunities to be with friends and family.  We will miss you!", "label": "Message"}, {"text": "Maureen, you are full of life. :)", "label": "Message"}, {"text": "Maureen taught me so much when I took over Beta Alpha Psi and how to handle concur and expense reports. She's always so gracious and kind. I appreciate her patience.", "label": "Story"}, {"text": "Maureen- you've been so kind and patient with me over the years as I've learned concur and became the BAP advisor. Thank you for all you've done for me personally. You will be missed!", "label": "Message"}, {"text": "Thanks for helping me navigate the whole process. Even when we couldn't figure out what exactly HR wanted from us. Enjoy your next adventures!", "label": "Message"}, {"text": "Thank you for always having my back. I appreciate all the support. May your retirement be everything you've dreamed of and more! We will miss you <3", "label": "Message"}, {"text": "Maureen, You've been such a steady, welcoming presence in the SBA, which means more than I can easily put into words. Getting to work alongside you over the years and seeing you show up with such openness and genuine heart during our Truly Human Leadership cohort has been a gift. It's hard to imagine the SBA without you. Best wishes for your next adventure!", "label": "Message"}, {"text": "Maureen helped me propagate a piece of her Christmas cactus. It is now thriving and big, and flowers every winter :) I will always have a gift from her growing in my house.", "label": "Story"}, {"text": "Congratulations on your retirement!", "label": "Message"}, {"text": "Maureen thank you for all you've done for me and being the most encouraging and supportive boss I've ever had. We will miss your presence in the office so much. I hope you enjoy retirement and are able to make time for all your creative endeavors.", "label": "Message"}, {"text": "Congratulations on your retirement! Thank you so much for your support when I was starting out. Wishing you a wonderful and fulfilling next chapter.", "label": "Message"}, {"text": "You have been such a wonderful and helpful colleague. You always have a great smile on your face. I’ll miss seeing you around!", "label": "Message"}, {"text": "Congratulations on your retirement, Maureen! 🎊 Thank you for being such a helpful and supportive colleague. I’m grateful for all the guidance you gave me to navigate different processes. I’m not sure what we’ll do without you! 😅 But I hope you have a great time in your new chapter. Happy retirement! 🥳 -Mariella", "label": "Message"}, {"text": "Thank you so much for being our rock in the SBA and keeping things organized and moving forward.  You will be greatly missed but also, we are very happy for you and the next chapter of your journey.  Do not be a stranger.", "label": "Message"}];
+  const INTERVAL = 9000;
+  let cur = 0, timer = null, prog = null;
+
+  function showSlide(n) {
+    cur = (n + SLIDES.length) % SLIDES.length;
+    const s = SLIDES[cur];
+    document.getElementById('kiosk-label').textContent = s.label;
+    document.getElementById('kiosk-text').textContent = s.text;
+    document.getElementById('kiosk-counter').textContent = (cur + 1) + ' / ' + SLIDES.length;
+    const bar = document.getElementById('kiosk-prog');
+    bar.style.transition = 'none'; bar.style.width = '0%';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        bar.style.transition = 'width ' + INTERVAL + 'ms linear';
+        bar.style.width = '100%';
+      });
+    });
+  }
+
+  function startKiosk() {
+    document.getElementById('kiosk').classList.add('active');
+    showSlide(0);
+    timer = setInterval(() => showSlide(cur + 1), INTERVAL);
+    document.addEventListener('keydown', kioskKey);
+    document.getElementById('kiosk').addEventListener('click', () => { clearInterval(timer); showSlide(cur + 1); timer = setInterval(() => showSlide(cur + 1), INTERVAL); });
+  }
+
+  function stopKiosk() {
+    clearInterval(timer);
+    document.getElementById('kiosk').classList.remove('active');
+    document.removeEventListener('keydown', kioskKey);
+  }
+
+  function kioskKey(e) {
+    if (e.key === 'ArrowRight' || e.key === ' ') { clearInterval(timer); showSlide(cur + 1); timer = setInterval(() => showSlide(cur + 1), INTERVAL); }
+    if (e.key === 'ArrowLeft') { clearInterval(timer); showSlide(cur - 1); timer = setInterval(() => showSlide(cur + 1), INTERVAL); }
+    if (e.key === 'Escape') stopKiosk();
+  }
+</script>
+</body>
+</html>

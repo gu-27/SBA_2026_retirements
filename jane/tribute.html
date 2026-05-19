@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jane · Retirement Tribute · Gonzaga SBA 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --c: #8A1A3A; --cd: #520D22; --gold: #C8952A; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #001030; color: white; }
+    section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 5rem 2rem; }
+    .inner { max-width: 900px; margin: 0 auto; width: 100%; }
+    .eyebrow { font-size: .65rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem,6vw,3.5rem); font-style: italic; line-height: 1.1; margin-bottom: 1.25rem; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .pillar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .stories-stack { display: flex; flex-direction: column; gap: 2.5rem; margin-top: 2rem; }
+    .voices-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .back-btn { position: fixed; top: 1rem; left: 1rem; z-index: 100; background: rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.7); font-family: 'Inter', sans-serif; font-size: .72rem; padding: .45rem .9rem; border-radius: 100px; text-decoration: none; }
+    .kiosk-btn { position: fixed; top: 1rem; right: 1rem; z-index: 100; background: var(--c); color: white; font-family: 'Inter', sans-serif; font-size: .72rem; font-weight: 600; padding: .45rem .9rem; border-radius: 100px; border: none; cursor: pointer; }
+
+    /* ── KIOSK ── */
+    #kiosk { display: none; position: fixed; inset: 0; background: var(--cd); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; }
+    #kiosk.active { display: flex; }
+    #kiosk-label { font-size: .65rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+    #kiosk-text { font-family: 'Playfair Display', serif; font-size: clamp(1.1rem,3vw,2rem); font-style: italic; line-height: 1.6; color: white; text-align: center; max-width: 900px; }
+    #kiosk-name { margin-top: 2rem; font-family: 'Playfair Display', serif; font-size: clamp(1.8rem,5vw,3.5rem); font-weight: 700; color: white; opacity: .15; }
+    #kiosk-prog { position: absolute; bottom: 0; left: 0; height: 3px; background: var(--gold); transition: width linear; }
+    #kiosk-counter { position: absolute; bottom: 1rem; right: 1.5rem; font-size: .65rem; color: rgba(255,255,255,.3); }
+    #kiosk-close { position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,.1); border: none; color: rgba(255,255,255,.6); font-size: .75rem; padding: .4rem .8rem; border-radius: 100px; cursor: pointer; font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">← Back</a>
+<button class="kiosk-btn" onclick="startKiosk()">⊞ Kiosk Mode</button>
+
+<!-- HERO -->
+<section style="background: linear-gradient(160deg, #520D22 0%, #001030 100%);">
+  <div class="inner" style="text-align:center;">
+    <p class="eyebrow reveal">Retirement Tribute &nbsp;·&nbsp; Gonzaga SBA &nbsp;·&nbsp; Spring 2026</p>
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(4rem,14vw,9rem);font-weight:700;color:white;line-height:.9;" class="reveal">Jane</h1>
+    <p style="font-size:clamp(.8rem,2vw,.95rem);color:rgba(255,255,255,.4);margin-top:1.25rem;letter-spacing:.06em;" class="reveal">Advisor &nbsp;·&nbsp; Connector &nbsp;·&nbsp; Heart of the SBA &nbsp;·&nbsp; Friend</p>
+    <div style="width:48px;height:2px;background:#C8952A;margin:2rem auto 0;border-radius:2px;" class="reveal"></div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section style="background:#001030;">
+  <div class="inner">
+    <p class="eyebrow reveal">Who They Are</p>
+    <h2 class="reveal">Four ways to know Jane.</h2>
+    <div class="pillar-grid">
+      
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.5rem;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.75rem;">📚</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:white;margin-bottom:.5rem;">The Encyclopedia</h3>
+          <p style="font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.5);">Decades of institutional knowledge, always shared generously.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.5rem;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.75rem;">😄</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:white;margin-bottom:.5rem;">The Joy</h3>
+          <p style="font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.5);">An infectious laugh that could change the mood of any room.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.5rem;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.75rem;">❤️</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:white;margin-bottom:.5rem;">The Heart</h3>
+          <p style="font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.5);">The standard for what it means to genuinely care for students.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.5rem;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.75rem;">🏠</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:white;margin-bottom:.5rem;">The Host</h3>
+          <p style="font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.5);">Her home, her table, her warmth — always open to the SBA family.</p>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORIES -->
+<section style="background: linear-gradient(180deg, #001030 0%, #520D2222 100%);">
+  <div class="inner">
+    <p class="eyebrow reveal">Stories &amp; Memories</p>
+    <h2 class="reveal">Moments that stick.</h2>
+    <div class="stories-stack">
+      
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-right:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🌟</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Welcome</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #8A1A3A;padding-left:1.25rem;">I always knew I could count on Jane to have an answer for me. She helped me with the accelerated students.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-left:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">📚</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Encyclopedia</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #8A1A3A;padding-left:1.25rem;">Whenever I have questions about advising, Jane has always been gracious and incredibly helpful!</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-right:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🎓</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Guide</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #8A1A3A;padding-left:1.25rem;">What can I say or share about Jane. Jane is amazing and I am so proud of her.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-left:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">😄</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Joy</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #8A1A3A;padding-left:1.25rem;">Jane&#x27;s ability to laugh at the funny and absurd made her the first person I would go to talk to in an SBA social event.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-right:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">❤️</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Heart</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #8A1A3A;padding-left:1.25rem;">Early in my career (2002-2005...don&#x27;t recall exactly when), I recall that we held an SBA social at Jane&#x27;s home on the South Hill.  I have fond memories of that evening and the Hession&#x27;s amazing home and warm hospitality.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-left:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🏠</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Host</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #8A1A3A;padding-left:1.25rem;">I met Jane&#x27;s husband at the 2024 Sasquatch Soiree, and I was so surprised that he looks just like Jane! Indeed, happy couples do turn out to resemble each other, and I routinely share this story with my newlywed wife when we have the same thing for lunch, even though we are 2,500 miles apart.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-right:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">👗</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Style</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #8A1A3A;padding-left:1.25rem;">I have so many! One favorite is a meeting we had during my freshman year when she called Fr. Siconolfi to ask why he had not invited me to join the Honor&#x27;s Program. He said something to the effect that because I had not taken AP and Honors classes in high school, it didn&#x27;t appear that I was prepared to be an Honors student. Jane pointed out that my tiny rural Montana high school did not offer AP and Honors classes, but that I had other credentials that suggested that I would be a good candidate. (I won&#x27;t flex those now because that&#x27;s lame, but she wasn&#x27;t wrong!) In any case, she insisted that he grant me an interview to be considered for an unprecedented post-matriculation acceptance to the Honors program. I met with the guy and decided &quot;NO THANK YOU!&quot; but I was very grateful that she went to bat for me anyway. I cried when I found out I didn&#x27;t get to keep her as my advisor (silly freshman!), but Boz turned out to be ok too! :)<br><br>I also have a fond memory of walking around Chicago together when were there for CJBE. We went into Bloomingdale&#x27;s (a store I&#x27;d never set foot in!) where I bought a fancy spork, and she taught me about CMFM shoes! <br><br>I also really fondly remember SBA parties and Thanksgivings and even a couple of game watches at the Hession house. Those were lovely times. So special!</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-left:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">⚡</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Energy</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #8A1A3A;padding-left:1.25rem;">I remember a Thanksgiving pot luck at your house on 28th street that took place not long after I arrived at GU.  It was such an amazing experience to join the SBA family and learn how much we all took care of each other.  The stories that were shared by colleagues sitting in front of your fireplace are a most awesome memory.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-right:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🤝</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Friend</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #8A1A3A;padding-left:1.25rem;">Jane, I wish I could share your closet as your outfits are always so stylish and perfectly put together. I hope that as I grow older, I can be like you, not just on the outside, but also in keeping such a kind and caring heart for everyone.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-left:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">📖</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Knowledge</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #8A1A3A;padding-left:1.25rem;">When I first started advising students, I had many questions. You were like an encyclopedia—always patient and knowledgeable—and your guidance gave me great confidence. I truly appreciate everything you’ve done.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-right:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">😂</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Laughter</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #8A1A3A;padding-left:1.25rem;">I will always have the memory of how you were able to get into the WSU game as a kid... pretty amazing story.</blockquote>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICES -->
+<section style="background:#000D26;">
+  <div class="inner">
+    <p class="eyebrow reveal">Voices</p>
+    <h2 class="reveal">What colleagues say.</h2>
+    <div class="voices-grid">
+      
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Welcome</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Wishing you a restful and happy retirement. Thank you for your immense and valuable help and support over two decades. Best wishes and god bless. Warm regards. Ashish</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Encyclopedia</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">I loved attending the staff get togethers knowing you would be there. You put people at ease and that&#x27;s a great trait to have.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Guide</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Wow - where to start? Thank you, Jane. Your help in bringing all of us new advisors up to speed, supporting as we faced more complicated situations, and your dedication to helping our transfer students make the transition to Gonzaga made a real difference. We will miss you and wish you the best in the next steps of your journey!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Joy</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Congrats, Jane! Wishing you all the very best in this exciting next chapter!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Heart</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Thank you for always being so encouraging and bringing your life stories into the conversation. I&#x27;ll miss my office neighbor!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Host</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Congratulations! I don&#x27;t know what we&#x27;ll do without you!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Style</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Dear Jane,<br>You have been a very special part of the gift my work in the business school has been and the joy it has brought me.  I am humbled with gratitude.  You have been the gold standard for the school, setting the bar for excellence, pulling always for the school.  You’ve been an inspiration and role-model to me.<br>I will always be grateful.   I am honored to call you colleague and friend and I want you to know you are deeply valued and cherished, by me.  <br>Go play now!<br>With appreciation and affection,<br>Maureen</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Energy</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Jane, I want to say, &quot;Thank you&quot; for always being inviting and the life of the party in Jepson. Your knowledge of Gonzaga is crazy amazing and I will miss our chats on family, travel, and life. You have impacted me in more ways words could not express. I will miss you, but know you will enjoy your grandbabies, travel, a bit of slower mornings but still staying active and brighten others&#x27; day. Thank you...I appreciate you. I&#x27;m very proud of you.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Friend</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Jane, <br>I&#x27;m going to miss seeing you at all the SBA events. You&#x27;re always one of my favorite people to talk too. Thank you for teaching me how to get from Hemmingson to Jepson by cutting through the buildings when it snows. You&#x27;re truly the best! <br>-Stephanie</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Knowledge</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Your energy, joy, and positive spirit is contagious! Thank you for being an incredible colleague!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Laughter</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">You&#x27;re my favorite, and I am going to miss seeing HONEY in the parking lot and miss hearing your insight and perspectives.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Gathering</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">I know we already talked about this transition for you, but I wish you health and every happiness going forward.  You&#x27;ve certainly earned it and will be greatly missed.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Warmth</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Jane, You will be sorely missed! I love your joyful attitude toward life, and I appreciate your care for our students and willingness to help others. Best wishes for a wonderful retirement! :)</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Contagious</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Congratulations on your retirement, Jane! I will truly miss you.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Bloom</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Jane, thank you for being a wonderful friend and colleague. I hope you have a wonderful time in retirement and get to spend as much time with your family.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Key</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">I have so enjoyed having you around this past year (+) that I have worked in the SBA.  You will be missed and I hope you stop in to see us once in a while.  Enjoy your retirement - you deserve the best!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Celebration</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Dearest Janie,<br><br>I am SO happy for you that you have decided to move on to your next great adventure! How wonderful! We will all miss your very contagious laugh, your thoughtfulness, your style (future runway model!) and your constancy in keeping us focused on the mission and on student success. You are the embodiment of what cura personalis looks like, and thousands of Zags have found their home here because of your care and concern for them. All of us, and every one of your past advisees and students, are better off for having been accompanied in this life by you.  <br><br>Thank you for everything, and best wishes in all the days ahead!!! I wish you joy, peace, and only good surprises!<br><br>Love,<br>Peggy Sue</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Conversation</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Jane - I don&#x27;t know what we are going to do without you.  The decades of information and experience that are leaving this building when you retire are irreplaceable.  I wish you best of luck in your new endeavors and hope that you will still come back to visit us from time to time.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Sunshine</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Jane, wish you the best in the next chapter of your life, traveling, visiting grand kids, watching games, taking care of mom, etc. and having lots of fun! I will miss you so much!!!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Standard</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Thank you so much for your amazing institutional knowledge and so much advising our students!  You will be missed!  I have attended many advising sessions from you where you tried to teach faculty the ins and outs of our curriculum nuances.  I have appreciated your warm smile.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Navigator</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Congratulations on your retirement! Wishing you endless weekends, slow mornings, and plenty of time for all the things you actually want to do! You will be sorely missed!!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Letter</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Jane, you are the one who genuinely cares</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Color</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Dear Jane, all our great results and achievements were thanks to your outstanding mentorship of our students (and, of course, of us as well). You will be deeply missed!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Care</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Jane, In many ways, you have been the heart of the School. You&#x27;ve poured yourself into this place and into the students who pass through it in a way that embodies what Gonzaga&#x27;s Mission means. I genuinely cannot picture this school without you, but I&#x27;m comforted knowing you have shown us how to care for our students and one another. Wishing you every good thing.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Wisdom</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Congratulations on your retirement! Your willingness to help others has meant so much to me, especially when I was starting out. Wishing you a joyful and fulfilling next chapter.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Adventure</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">I remember meeting you for dinner during my campus visit. You were extremely nice, friendly, and down to earth. I have enjoyed working with you over the years, and every smile you gave over the years has not gone unnoticed. You were always willing to help me with any advising issues. I will miss you! Wishing you joy and all good things as you go on from here. May you find peace with God and joy in all you do!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Star</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Congratulations on your retirement, Jane! I’m a little nervous about your departure because you’re so incredibly helpful when it comes to GU knowledge and helping students with their plans! You always answered my MANY questions super quickly! Thank you for always being so kind, helpful, and supportive. You have been a wonderful colleague to work with. It was always a pleasure to talk to you whenever we got a chance. I hope you have the best time in your new chapter! 🎉 -Mariella</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Life of the Party</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">What an amazing career of contributions to our students, faculty and university. You have played such a rich part of so many students&#x27; experiences and success while at GU and have done so with infectious energy and joy. Best of luck with the next steps on your journey, and I hope to continue seeing you around.</p>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section style="background: linear-gradient(160deg, #520D22 0%, #001030 100%);">
+  <div class="inner" style="text-align:center;">
+    <p class="eyebrow reveal">From All of Us</p>
+    <h2 class="reveal" style="color:white;">The Heart Keeps Beating</h2>
+    <p style="font-size:clamp(.9rem,2vw,1.1rem);line-height:1.8;color:rgba(255,255,255,.6);max-width:620px;margin:0 auto;" class="reveal">You were the institutional memory, the warm greeting, the person who always knew the answer and made sure you felt welcome finding it. The SBA is different because of you — and that doesn’t retire.</p>
+    <div style="width:48px;height:2px;background:#C8952A;margin:2.5rem auto 0;border-radius:2px;"></div>
+    <p style="margin-top:1.5rem;font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.08em;text-transform:uppercase;">Gonzaga University · School of Business Administration · Spring 2026</p>
+  </div>
+</section>
+
+<!-- KIOSK OVERLAY -->
+<div id="kiosk">
+  <button id="kiosk-close" onclick="stopKiosk()">✕ Exit</button>
+  <div id="kiosk-label">Memory</div>
+  <div id="kiosk-text"></div>
+  <div id="kiosk-name">Jane</div>
+  <div id="kiosk-prog"></div>
+  <div id="kiosk-counter"></div>
+</div>
+
+<script>
+  // ── Scroll reveal ──
+  const obs = new IntersectionObserver(els => els.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); }), { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // ── Kiosk ──
+  const SLIDES = [{"text": "Wishing you a restful and happy retirement. Thank you for your immense and valuable help and support over two decades. Best wishes and god bless. Warm regards. Ashish", "label": "Message"}, {"text": "I always knew I could count on Jane to have an answer for me. She helped me with the accelerated students.", "label": "Story"}, {"text": "I loved attending the staff get togethers knowing you would be there. You put people at ease and that's a great trait to have.", "label": "Message"}, {"text": "Wow - where to start? Thank you, Jane. Your help in bringing all of us new advisors up to speed, supporting as we faced more complicated situations, and your dedication to helping our transfer students make the transition to Gonzaga made a real difference. We will miss you and wish you the best in the next steps of your journey!", "label": "Message"}, {"text": "Whenever I have questions about advising, Jane has always been gracious and incredibly helpful!", "label": "Story"}, {"text": "Congrats, Jane! Wishing you all the very best in this exciting next chapter!", "label": "Message"}, {"text": "Thank you for always being so encouraging and bringing your life stories into the conversation. I'll miss my office neighbor!", "label": "Message"}, {"text": "Congratulations! I don't know what we'll do without you!", "label": "Message"}, {"text": "Dear Jane,\nYou have been a very special part of the gift my work in the business school has been and the joy it has brought me.  I am humbled with gratitude.  You have been the gold standard for the school, setting the bar for excellence, pulling always for the school.  You’ve been an inspiration and role-model to me.\nI will always be grateful.   I am honored to call you colleague and friend and I want you to know you are deeply valued and cherished, by me.  \nGo play now!\nWith appreciation and affection,\nMaureen", "label": "Message"}, {"text": "What can I say or share about Jane. Jane is amazing and I am so proud of her.", "label": "Story"}, {"text": "Jane, I want to say, \"Thank you\" for always being inviting and the life of the party in Jepson. Your knowledge of Gonzaga is crazy amazing and I will miss our chats on family, travel, and life. You have impacted me in more ways words could not express. I will miss you, but know you will enjoy your grandbabies, travel, a bit of slower mornings but still staying active and brighten others' day. Thank you...I appreciate you. I'm very proud of you.", "label": "Message"}, {"text": "Jane, \nI'm going to miss seeing you at all the SBA events. You're always one of my favorite people to talk too. Thank you for teaching me how to get from Hemmingson to Jepson by cutting through the buildings when it snows. You're truly the best! \n-Stephanie", "label": "Message"}, {"text": "Your energy, joy, and positive spirit is contagious! Thank you for being an incredible colleague!", "label": "Message"}, {"text": "Jane's ability to laugh at the funny and absurd made her the first person I would go to talk to in an SBA social event.", "label": "Story"}, {"text": "You're my favorite, and I am going to miss seeing HONEY in the parking lot and miss hearing your insight and perspectives.", "label": "Message"}, {"text": "Early in my career (2002-2005...don't recall exactly when), I recall that we held an SBA social at Jane's home on the South Hill.  I have fond memories of that evening and the Hession's amazing home and warm hospitality.", "label": "Story"}, {"text": "I know we already talked about this transition for you, but I wish you health and every happiness going forward.  You've certainly earned it and will be greatly missed.", "label": "Message"}, {"text": "Jane, You will be sorely missed! I love your joyful attitude toward life, and I appreciate your care for our students and willingness to help others. Best wishes for a wonderful retirement! :)", "label": "Message"}, {"text": "I met Jane's husband at the 2024 Sasquatch Soiree, and I was so surprised that he looks just like Jane! Indeed, happy couples do turn out to resemble each other, and I routinely share this story with my newlywed wife when we have the same thing for lunch, even though we are 2,500 miles apart.", "label": "Story"}, {"text": "Congratulations on your retirement, Jane! I will truly miss you.", "label": "Message"}, {"text": "Jane, thank you for being a wonderful friend and colleague. I hope you have a wonderful time in retirement and get to spend as much time with your family.", "label": "Message"}, {"text": "I have so enjoyed having you around this past year (+) that I have worked in the SBA.  You will be missed and I hope you stop in to see us once in a while.  Enjoy your retirement - you deserve the best!", "label": "Message"}, {"text": "I have so many! One favorite is a meeting we had during my freshman year when she called Fr. Siconolfi to ask why he had not invited me to join the Honor's Program. He said something to the effect that because I had not taken AP and Honors classes in high school, it didn't appear that I was prepared to be an Honors student. Jane pointed out that my tiny rural Montana high school did not offer AP and Honors classes, but that I had other credentials that suggested that I would be a good candidate. (I won't flex those now because that's lame, but she wasn't wrong!) In any case, she insisted that he grant me an interview to be considered for an unprecedented post-matriculation acceptance to the Honors program. I met with the guy and decided \"NO THANK YOU!\" but I was very grateful that she went to bat for me anyway. I cried when I found out I didn't get to keep her as my advisor (silly freshman!), but Boz turned out to be ok too! :)\n\nI also have a fond memory of walking around Chicago together when were there for CJBE. We went into Bloomingdale's (a store I'd never set foot in!) where I bought a fancy spork, and she taught me about CMFM shoes! \n\nI also really fondly remember SBA parties and Thanksgivings and even a couple of game watches at the Hession house. Those were lovely times. So special!", "label": "Story"}, {"text": "Dearest Janie,\n\nI am SO happy for you that you have decided to move on to your next great adventure! How wonderful! We will all miss your very contagious laugh, your thoughtfulness, your style (future runway model!) and your constancy in keeping us focused on the mission and on student success. You are the embodiment of what cura personalis looks like, and thousands of Zags have found their home here because of your care and concern for them. All of us, and every one of your past advisees and students, are better off for having been accompanied in this life by you.  \n\nThank you for everything, and best wishes in all the days ahead!!! I wish you joy, peace, and only good surprises!\n\nLove,\nPeggy Sue", "label": "Message"}, {"text": "I remember a Thanksgiving pot luck at your house on 28th street that took place not long after I arrived at GU.  It was such an amazing experience to join the SBA family and learn how much we all took care of each other.  The stories that were shared by colleagues sitting in front of your fireplace are a most awesome memory.", "label": "Story"}, {"text": "Jane - I don't know what we are going to do without you.  The decades of information and experience that are leaving this building when you retire are irreplaceable.  I wish you best of luck in your new endeavors and hope that you will still come back to visit us from time to time.", "label": "Message"}, {"text": "Jane, I wish I could share your closet as your outfits are always so stylish and perfectly put together. I hope that as I grow older, I can be like you, not just on the outside, but also in keeping such a kind and caring heart for everyone.", "label": "Story"}, {"text": "Jane, wish you the best in the next chapter of your life, traveling, visiting grand kids, watching games, taking care of mom, etc. and having lots of fun! I will miss you so much!!!", "label": "Message"}, {"text": "Thank you so much for your amazing institutional knowledge and so much advising our students!  You will be missed!  I have attended many advising sessions from you where you tried to teach faculty the ins and outs of our curriculum nuances.  I have appreciated your warm smile.", "label": "Message"}, {"text": "Congratulations on your retirement! Wishing you endless weekends, slow mornings, and plenty of time for all the things you actually want to do! You will be sorely missed!!", "label": "Message"}, {"text": "Jane, you are the one who genuinely cares", "label": "Message"}, {"text": "Dear Jane, all our great results and achievements were thanks to your outstanding mentorship of our students (and, of course, of us as well). You will be deeply missed!", "label": "Message"}, {"text": "Jane, In many ways, you have been the heart of the School. You've poured yourself into this place and into the students who pass through it in a way that embodies what Gonzaga's Mission means. I genuinely cannot picture this school without you, but I'm comforted knowing you have shown us how to care for our students and one another. Wishing you every good thing.", "label": "Message"}, {"text": "When I first started advising students, I had many questions. You were like an encyclopedia—always patient and knowledgeable—and your guidance gave me great confidence. I truly appreciate everything you’ve done.", "label": "Story"}, {"text": "Congratulations on your retirement! Your willingness to help others has meant so much to me, especially when I was starting out. Wishing you a joyful and fulfilling next chapter.", "label": "Message"}, {"text": "I remember meeting you for dinner during my campus visit. You were extremely nice, friendly, and down to earth. I have enjoyed working with you over the years, and every smile you gave over the years has not gone unnoticed. You were always willing to help me with any advising issues. I will miss you! Wishing you joy and all good things as you go on from here. May you find peace with God and joy in all you do!", "label": "Message"}, {"text": "Congratulations on your retirement, Jane! I’m a little nervous about your departure because you’re so incredibly helpful when it comes to GU knowledge and helping students with their plans! You always answered my MANY questions super quickly! Thank you for always being so kind, helpful, and supportive. You have been a wonderful colleague to work with. It was always a pleasure to talk to you whenever we got a chance. I hope you have the best time in your new chapter! 🎉 -Mariella", "label": "Message"}, {"text": "I will always have the memory of how you were able to get into the WSU game as a kid... pretty amazing story.", "label": "Story"}, {"text": "What an amazing career of contributions to our students, faculty and university. You have played such a rich part of so many students' experiences and success while at GU and have done so with infectious energy and joy. Best of luck with the next steps on your journey, and I hope to continue seeing you around.", "label": "Message"}];
+  const INTERVAL = 9000;
+  let cur = 0, timer = null, prog = null;
+
+  function showSlide(n) {
+    cur = (n + SLIDES.length) % SLIDES.length;
+    const s = SLIDES[cur];
+    document.getElementById('kiosk-label').textContent = s.label;
+    document.getElementById('kiosk-text').textContent = s.text;
+    document.getElementById('kiosk-counter').textContent = (cur + 1) + ' / ' + SLIDES.length;
+    const bar = document.getElementById('kiosk-prog');
+    bar.style.transition = 'none'; bar.style.width = '0%';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        bar.style.transition = 'width ' + INTERVAL + 'ms linear';
+        bar.style.width = '100%';
+      });
+    });
+  }
+
+  function startKiosk() {
+    document.getElementById('kiosk').classList.add('active');
+    showSlide(0);
+    timer = setInterval(() => showSlide(cur + 1), INTERVAL);
+    document.addEventListener('keydown', kioskKey);
+    document.getElementById('kiosk').addEventListener('click', () => { clearInterval(timer); showSlide(cur + 1); timer = setInterval(() => showSlide(cur + 1), INTERVAL); });
+  }
+
+  function stopKiosk() {
+    clearInterval(timer);
+    document.getElementById('kiosk').classList.remove('active');
+    document.removeEventListener('keydown', kioskKey);
+  }
+
+  function kioskKey(e) {
+    if (e.key === 'ArrowRight' || e.key === ' ') { clearInterval(timer); showSlide(cur + 1); timer = setInterval(() => showSlide(cur + 1), INTERVAL); }
+    if (e.key === 'ArrowLeft') { clearInterval(timer); showSlide(cur - 1); timer = setInterval(() => showSlide(cur + 1), INTERVAL); }
+    if (e.key === 'Escape') stopKiosk();
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gary · Retirement Tribute · Gonzaga SBA 2026</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --c: #1A5C1A; --cd: #0D380D; --gold: #C8952A; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #001030; color: white; }
+    section { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 5rem 2rem; }
+    .inner { max-width: 900px; margin: 0 auto; width: 100%; }
+    .eyebrow { font-size: .65rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    h2 { font-family: 'Playfair Display', serif; font-size: clamp(2rem,6vw,3.5rem); font-style: italic; line-height: 1.1; margin-bottom: 1.25rem; }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .pillar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .stories-stack { display: flex; flex-direction: column; gap: 2.5rem; margin-top: 2rem; }
+    .voices-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; margin-top: 2rem; }
+    .back-btn { position: fixed; top: 1rem; left: 1rem; z-index: 100; background: rgba(0,0,0,.5); border: 1px solid rgba(255,255,255,.15); color: rgba(255,255,255,.7); font-family: 'Inter', sans-serif; font-size: .72rem; padding: .45rem .9rem; border-radius: 100px; text-decoration: none; }
+    .kiosk-btn { position: fixed; top: 1rem; right: 1rem; z-index: 100; background: var(--c); color: white; font-family: 'Inter', sans-serif; font-size: .72rem; font-weight: 600; padding: .45rem .9rem; border-radius: 100px; border: none; cursor: pointer; }
+
+    /* ── KIOSK ── */
+    #kiosk { display: none; position: fixed; inset: 0; background: var(--cd); z-index: 9999; flex-direction: column; align-items: center; justify-content: center; padding: 3rem; }
+    #kiosk.active { display: flex; }
+    #kiosk-label { font-size: .65rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+    #kiosk-text { font-family: 'Playfair Display', serif; font-size: clamp(1.1rem,3vw,2rem); font-style: italic; line-height: 1.6; color: white; text-align: center; max-width: 900px; }
+    #kiosk-name { margin-top: 2rem; font-family: 'Playfair Display', serif; font-size: clamp(1.8rem,5vw,3.5rem); font-weight: 700; color: white; opacity: .15; }
+    #kiosk-prog { position: absolute; bottom: 0; left: 0; height: 3px; background: var(--gold); transition: width linear; }
+    #kiosk-counter { position: absolute; bottom: 1rem; right: 1.5rem; font-size: .65rem; color: rgba(255,255,255,.3); }
+    #kiosk-close { position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,.1); border: none; color: rgba(255,255,255,.6); font-size: .75rem; padding: .4rem .8rem; border-radius: 100px; cursor: pointer; font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body>
+
+<a href="index.html" class="back-btn">← Back</a>
+<button class="kiosk-btn" onclick="startKiosk()">⊞ Kiosk Mode</button>
+
+<!-- HERO -->
+<section style="background: linear-gradient(160deg, #0D380D 0%, #001030 100%);">
+  <div class="inner" style="text-align:center;">
+    <p class="eyebrow reveal">Retirement Tribute &nbsp;·&nbsp; Gonzaga SBA &nbsp;·&nbsp; Spring 2026</p>
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(4rem,14vw,9rem);font-weight:700;color:white;line-height:.9;" class="reveal">Gary</h1>
+    <p style="font-size:clamp(.8rem,2vw,.95rem);color:rgba(255,255,255,.4);margin-top:1.25rem;letter-spacing:.06em;" class="reveal">Educator &nbsp;·&nbsp; Mentor &nbsp;·&nbsp; Builder &nbsp;·&nbsp; Friend</p>
+    <div style="width:48px;height:2px;background:#C8952A;margin:2rem auto 0;border-radius:2px;" class="reveal"></div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section style="background:#001030;">
+  <div class="inner">
+    <p class="eyebrow reveal">Who They Are</p>
+    <h2 class="reveal">Four ways to know Gary.</h2>
+    <div class="pillar-grid">
+      
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.5rem;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.75rem;">🏗️</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:white;margin-bottom:.5rem;">The Builder</h3>
+          <p style="font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.5);">He built the accounting program from the ground up, brick by brick.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.5rem;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.75rem;">🎓</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:white;margin-bottom:.5rem;">The Mentor</h3>
+          <p style="font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.5);">Generations of faculty trace their careers back to a conversation with Gary.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.5rem;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.75rem;">💬</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:white;margin-bottom:.5rem;">The Connector</h3>
+          <p style="font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.5);">In hallways, at Jack &amp; Dan’s, at the Osprey — every conversation mattered.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.5rem;text-align:center;">
+          <div style="font-size:2rem;margin-bottom:.75rem;">⭐</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1rem;font-style:italic;color:white;margin-bottom:.5rem;">The Standard</h3>
+          <p style="font-size:.78rem;line-height:1.65;color:rgba(255,255,255,.5);">Tireless, thorough, and generous. He set the bar for what a colleague could be.</p>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- STORIES -->
+<section style="background: linear-gradient(180deg, #001030 0%, #0D380D22 100%);">
+  <div class="inner">
+    <p class="eyebrow reveal">Stories &amp; Memories</p>
+    <h2 class="reveal">Moments that stick.</h2>
+    <div class="stories-stack">
+      
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-right:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🎓</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Mentor</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #1A5C1A;padding-left:1.25rem;">Gary can do all the things everywhere and all at once. Amazing ability to focus and reflect at the same time.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-left:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🏗️</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Builder</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #1A5C1A;padding-left:1.25rem;">When I first interviewed at Gonzaga in 2001, Gary took me to dinner.  He called an audible and changed the location to a sports bar (instead of Clinkerdagger), so we could watch a GU basketball game while we chatted.  At first, I was bummed to miss out on a great meal (struggling PhD student); however, the food was still good, the company better, and I gained insight into Gary&#x27;s passion for all things Gonzaga...even in those early years when the team was still considered a Cinderella.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-right:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">💬</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Connector</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #1A5C1A;padding-left:1.25rem;">Gary and I are both talkers, so all of my favorite memories involve conversations in our offices, Jepson hallways, Jack &amp; Dan&#x27;s, Rincon Tapatio, or the Osprey patio! I always appreciate his perspective, wisdom, and sense of humor, so he has been a go-to person for me when I need any of those!</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-left:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">⭐</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Standard</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #1A5C1A;padding-left:1.25rem;">I remember Gary&#x27;s leadership of all our accounting department meetings after Kay retired.  He was tirelessly at work all the time from the wee hours of the morning until late at night.  Always looking out for the best for our department.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-right:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">❤️</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Heart</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #1A5C1A;padding-left:1.25rem;">Gary, where has the time gone? I still remember you as the welcoming person who greeted me at the Provost’s Office 22 years ago. I never imagined the day you would retire. It’s also special to me that we were both from Arizona.</blockquote>
+        </div>
+        <div class="reveal" style="display:flex;flex-direction:column;gap:1rem;max-width:680px;margin-left:auto;">
+          <div style="display:inline-flex;align-items:center;gap:.5rem;">
+            <span style="font-size:1.2rem;">🏀</span>
+            <span style="font-size:.65rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#C8952A;">The Fan</span>
+          </div>
+          <blockquote style="font-family:'Playfair Display',serif;font-size:clamp(.95rem,2vw,1.1rem);font-style:italic;line-height:1.75;color:rgba(255,255,255,.88);border-left:3px solid #1A5C1A;padding-left:1.25rem;">I can still remember the first time I met you. You were so genuine in wanting to learn about who I was and gave me such impactful compliments that fueled my drive to grow. I have had the privilege to witness you doing the same for so many others. It&#x27;s made a genuine difference in my journey, and I know the same goes for others.</blockquote>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICES -->
+<section style="background:#000D26;">
+  <div class="inner">
+    <p class="eyebrow reveal">Voices</p>
+    <h2 class="reveal">What colleagues say.</h2>
+    <div class="voices-grid">
+      
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Mentor</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Wishing you a happy and healthy retirement. Best regards. Ashish</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Builder</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">I would have stuck with accounting if you had been my professor. I never thought I would be teaching accounting. Thank you for your support.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Connector</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Thanks for being a part of my first few years at Gonzaga, Gary! I appreciated your calming voice in challenging discussions, your capacity to explain a Gonzaga approach to different questions, and your kindness in recognizing small accomplishments. We will miss you and wishing you the best!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Standard</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Happy retirement! Wishing you health, happiness, and endless good times ahead.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Heart</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Dear Gary.<br>You have been a very special part of the gift my work in the business school has been and the joy it has brought me.  I am humbled with gratitude.  I will always be grateful.   <br>Gary, I am honored to call you colleague and friend and I want you to know you are deeply valued and cherished, by me.  <br>Go play now!<br>With appreciation and affection,<br>Maureen</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Fan</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Congrats on retirement, Gary!<br>I admire how you made connections with students and faculty. I really enjoyed our conversation about Harry Potter and the studio tour you took in London. That quick chat before an SBA meeting meant a lot to me. I hope you have lots of fun adventures in retirement!<br>-Stephanie</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Welcome</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Gary, thanks for being an awesome mentor, supporter, and for all your work over the years building our accounting program. I wouldn’t be where I am today without you and I’m so appreciative to have had you as a teacher for part of my journey through Gonzaga (as a student) and alongside me for these last (nearly) fifteen years!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Educator</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">You made this school phenomenal. We will continue your legacy of excellence.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Inspiration</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">I have already expressed this to you a few years ago, but I really can&#x27;t thank you enough for what you have done and meant to the accounting program here.  You&#x27;ve worked tirelessly in behalf of our students, faculty, accreditation, and all of our stakeholders.  Quite frankly, the accounting program would not be what it is today without you.  Thank you also for your friendship and support over these many years.  Wishing you a well-deserved and joyful retirement.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Expert</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Gary, Your mentorship throughout my time at Gonzaga shaped me into the teacher I am today, and I will always be grateful for that. I meant what I said (during the HLA) that my goal is to be &quot;just like Gary&quot; when it comes to caring for others. I wish you much happiness in retirement!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Energy</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Congratulations on your retirement, Gary! Congrats and cheers to your next adventure!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Dedication</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Gary, best of luck in retirement. I really enjoyed having you as a colleague and learning from you. Hopefully we&#x27;ll still see you around campus or at some future GU games.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Legacy</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">G,<br><br>I am SO happy for you (and Jolanta!) that you have decided to move on to your future of great adventures! I have been missing your hearty laugh and big smile, your care and concern for me and my family, your unwavering focus on the students and elevating their success, your conscientiousness in everything you do, and your dedication to this place. You have been such a role model for me in how to be a great Gonzaga faculty member, and I hope that I can carry forward your legacy (albeit in a more fun discipline than yours)! Come back and teach marketing anytime!<br><br>Thank you for everything!!! I wish you joy, peace, and only good surprises in all the days ahead!<br><br>Love, <br>Peggy Sue<br><br>PS See you in Vegas!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Care</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Gary, we miss you so much already.  I still remember my job interview at GU when you took me over to the CDA Resort for lunch.  It feels like it was yesterday.  Can&#x27;t believe decades have gone by since then.  I hope you are enjoying the warmer weather (and yes, will be thinking about you every single time it snows here!).  Wishing you lots of fun and happiness in retirement.<br>-Sara</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Growth</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Wish you all the best in the next chapter of your life and keep having fun!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Thinker</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Thank you for your mentoring, your support, your advice, and your amazing work ethic. You are a wonderful colleague, and you will be missed!!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Focus</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Congratulations on your retirement, Gary! You will be sorely missed by your colleagues and students. Thank you for your many years of dedication to accounting education and for the positive impact you have had on so many people. Wishing you a joyful and well-deserved retirement!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Bridge</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Gary,<br>Working with you in the Graduate School set the standard for me of what it looks like to be a professor in the SBA. The care you brought to students was impossible to miss, and it was no surprise to hear alumni say over and over how much your mentorship meant to them. You showed up for them, believed in them, and made a real difference in their lives.<br><br>You brought that same generosity to your colleagues. Your door was always open, and it was always clear how much you cared for us. It has been a privilege to work with you. You inspire me to show up more fully for my own students and colleagues. Wishing you all the best!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">Next Chapter</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Congratulations on your retirement! Thank you for your contributions to the SBA.</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Impact</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">I remember asking your class visit a while ago, and the gracious feedback and encouragement you gave me. Wishing you all the joy and peace that God gives. I’ll miss you!</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Warmth</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">Congratulations on your retirement, Gary! I hope this new chapter is filled with joy and happiness. It was a pleasure being your colleague. I hope you have the best time! 🎊 - Mariella</p>
+        </div>
+        <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1.25rem;">
+          <p style="font-size:.65rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#C8952A;margin-bottom:.6rem;">The Teacher</p>
+          <p style="font-family:'Playfair Display',serif;font-size:.88rem;font-style:italic;line-height:1.7;color:rgba(255,255,255,.8);">I hope the head-start on your retirement has gone well and you have been greatly missed here on campus.  Best of luck with enjoying your next chapter with Jolanta.</p>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section style="background: linear-gradient(160deg, #0D380D 0%, #001030 100%);">
+  <div class="inner" style="text-align:center;">
+    <p class="eyebrow reveal">From All of Us</p>
+    <h2 class="reveal" style="color:white;">The Standard You Set</h2>
+    <p style="font-size:clamp(.9rem,2vw,1.1rem);line-height:1.8;color:rgba(255,255,255,.6);max-width:620px;margin:0 auto;" class="reveal">You built something here that outlasts any classroom — careers, habits of mind, a sense of what excellence actually looks like. Every conversation you had with someone made them better. That doesn’t retire either.</p>
+    <div style="width:48px;height:2px;background:#C8952A;margin:2.5rem auto 0;border-radius:2px;"></div>
+    <p style="margin-top:1.5rem;font-size:.72rem;color:rgba(255,255,255,.2);letter-spacing:.08em;text-transform:uppercase;">Gonzaga University · School of Business Administration · Spring 2026</p>
+  </div>
+</section>
+
+<!-- KIOSK OVERLAY -->
+<div id="kiosk">
+  <button id="kiosk-close" onclick="stopKiosk()">✕ Exit</button>
+  <div id="kiosk-label">Memory</div>
+  <div id="kiosk-text"></div>
+  <div id="kiosk-name">Gary</div>
+  <div id="kiosk-prog"></div>
+  <div id="kiosk-counter"></div>
+</div>
+
+<script>
+  // ── Scroll reveal ──
+  const obs = new IntersectionObserver(els => els.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); }), { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // ── Kiosk ──
+  const SLIDES = [{"text": "Wishing you a happy and healthy retirement. Best regards. Ashish", "label": "Message"}, {"text": "I would have stuck with accounting if you had been my professor. I never thought I would be teaching accounting. Thank you for your support.", "label": "Message"}, {"text": "Thanks for being a part of my first few years at Gonzaga, Gary! I appreciated your calming voice in challenging discussions, your capacity to explain a Gonzaga approach to different questions, and your kindness in recognizing small accomplishments. We will miss you and wishing you the best!", "label": "Message"}, {"text": "Happy retirement! Wishing you health, happiness, and endless good times ahead.", "label": "Message"}, {"text": "Dear Gary.\nYou have been a very special part of the gift my work in the business school has been and the joy it has brought me.  I am humbled with gratitude.  I will always be grateful.   \nGary, I am honored to call you colleague and friend and I want you to know you are deeply valued and cherished, by me.  \nGo play now!\nWith appreciation and affection,\nMaureen", "label": "Message"}, {"text": "Congrats on retirement, Gary!\nI admire how you made connections with students and faculty. I really enjoyed our conversation about Harry Potter and the studio tour you took in London. That quick chat before an SBA meeting meant a lot to me. I hope you have lots of fun adventures in retirement!\n-Stephanie", "label": "Message"}, {"text": "Gary, thanks for being an awesome mentor, supporter, and for all your work over the years building our accounting program. I wouldn’t be where I am today without you and I’m so appreciative to have had you as a teacher for part of my journey through Gonzaga (as a student) and alongside me for these last (nearly) fifteen years!", "label": "Message"}, {"text": "Gary can do all the things everywhere and all at once. Amazing ability to focus and reflect at the same time.", "label": "Story"}, {"text": "You made this school phenomenal. We will continue your legacy of excellence.", "label": "Message"}, {"text": "When I first interviewed at Gonzaga in 2001, Gary took me to dinner.  He called an audible and changed the location to a sports bar (instead of Clinkerdagger), so we could watch a GU basketball game while we chatted.  At first, I was bummed to miss out on a great meal (struggling PhD student); however, the food was still good, the company better, and I gained insight into Gary's passion for all things Gonzaga...even in those early years when the team was still considered a Cinderella.", "label": "Story"}, {"text": "I have already expressed this to you a few years ago, but I really can't thank you enough for what you have done and meant to the accounting program here.  You've worked tirelessly in behalf of our students, faculty, accreditation, and all of our stakeholders.  Quite frankly, the accounting program would not be what it is today without you.  Thank you also for your friendship and support over these many years.  Wishing you a well-deserved and joyful retirement.", "label": "Message"}, {"text": "Gary, Your mentorship throughout my time at Gonzaga shaped me into the teacher I am today, and I will always be grateful for that. I meant what I said (during the HLA) that my goal is to be \"just like Gary\" when it comes to caring for others. I wish you much happiness in retirement!", "label": "Message"}, {"text": "Congratulations on your retirement, Gary! Congrats and cheers to your next adventure!", "label": "Message"}, {"text": "Gary, best of luck in retirement. I really enjoyed having you as a colleague and learning from you. Hopefully we'll still see you around campus or at some future GU games.", "label": "Message"}, {"text": "Gary and I are both talkers, so all of my favorite memories involve conversations in our offices, Jepson hallways, Jack & Dan's, Rincon Tapatio, or the Osprey patio! I always appreciate his perspective, wisdom, and sense of humor, so he has been a go-to person for me when I need any of those!", "label": "Story"}, {"text": "G,\n\nI am SO happy for you (and Jolanta!) that you have decided to move on to your future of great adventures! I have been missing your hearty laugh and big smile, your care and concern for me and my family, your unwavering focus on the students and elevating their success, your conscientiousness in everything you do, and your dedication to this place. You have been such a role model for me in how to be a great Gonzaga faculty member, and I hope that I can carry forward your legacy (albeit in a more fun discipline than yours)! Come back and teach marketing anytime!\n\nThank you for everything!!! I wish you joy, peace, and only good surprises in all the days ahead!\n\nLove, \nPeggy Sue\n\nPS See you in Vegas!", "label": "Message"}, {"text": "I remember Gary's leadership of all our accounting department meetings after Kay retired.  He was tirelessly at work all the time from the wee hours of the morning until late at night.  Always looking out for the best for our department.", "label": "Story"}, {"text": "Gary, we miss you so much already.  I still remember my job interview at GU when you took me over to the CDA Resort for lunch.  It feels like it was yesterday.  Can't believe decades have gone by since then.  I hope you are enjoying the warmer weather (and yes, will be thinking about you every single time it snows here!).  Wishing you lots of fun and happiness in retirement.\n-Sara", "label": "Message"}, {"text": "Gary, where has the time gone? I still remember you as the welcoming person who greeted me at the Provost’s Office 22 years ago. I never imagined the day you would retire. It’s also special to me that we were both from Arizona.", "label": "Story"}, {"text": "Wish you all the best in the next chapter of your life and keep having fun!", "label": "Message"}, {"text": "Thank you for your mentoring, your support, your advice, and your amazing work ethic. You are a wonderful colleague, and you will be missed!!", "label": "Message"}, {"text": "Congratulations on your retirement, Gary! You will be sorely missed by your colleagues and students. Thank you for your many years of dedication to accounting education and for the positive impact you have had on so many people. Wishing you a joyful and well-deserved retirement!", "label": "Message"}, {"text": "Gary,\nWorking with you in the Graduate School set the standard for me of what it looks like to be a professor in the SBA. The care you brought to students was impossible to miss, and it was no surprise to hear alumni say over and over how much your mentorship meant to them. You showed up for them, believed in them, and made a real difference in their lives.\n\nYou brought that same generosity to your colleagues. Your door was always open, and it was always clear how much you cared for us. It has been a privilege to work with you. You inspire me to show up more fully for my own students and colleagues. Wishing you all the best!", "label": "Message"}, {"text": "Congratulations on your retirement! Thank you for your contributions to the SBA.", "label": "Message"}, {"text": "I remember asking your class visit a while ago, and the gracious feedback and encouragement you gave me. Wishing you all the joy and peace that God gives. I’ll miss you!", "label": "Message"}, {"text": "Congratulations on your retirement, Gary! I hope this new chapter is filled with joy and happiness. It was a pleasure being your colleague. I hope you have the best time! 🎊 - Mariella", "label": "Message"}, {"text": "I can still remember the first time I met you. You were so genuine in wanting to learn about who I was and gave me such impactful compliments that fueled my drive to grow. I have had the privilege to witness you doing the same for so many others. It's made a genuine difference in my journey, and I know the same goes for others.", "label": "Story"}, {"text": "I hope the head-start on your retirement has gone well and you have been greatly missed here on campus.  Best of luck with enjoying your next chapter with Jolanta.", "label": "Message"}];
+  const INTERVAL = 9000;
+  let cur = 0, timer = null, prog = null;
+
+  function showSlide(n) {
+    cur = (n + SLIDES.length) % SLIDES.length;
+    const s = SLIDES[cur];
+    document.getElementById('kiosk-label').textContent = s.label;
+    document.getElementById('kiosk-text').textContent = s.text;
+    document.getElementById('kiosk-counter').textContent = (cur + 1) + ' / ' + SLIDES.length;
+    const bar = document.getElementById('kiosk-prog');
+    bar.style.transition = 'none'; bar.style.width = '0%';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        bar.style.transition = 'width ' + INTERVAL + 'ms linear';
+        bar.style.width = '100%';
+      });
+    });
+  }
+
+  function startKiosk() {
+    document.getElementById('kiosk').classList.add('active');
+    showSlide(0);
+    timer = setInterval(() => showSlide(cur + 1), INTERVAL);
+    document.addEventListener('keydown', kioskKey);
+    document.getElementById('kiosk').addEventListener('click', () => { clearInterval(timer); showSlide(cur + 1); timer = setInterval(() => showSlide(cur + 1), INTERVAL); });
+  }
+
+  function stopKiosk() {
+    clearInterval(timer);
+    document.getElementById('kiosk').classList.remove('active');
+    document.removeEventListener('keydown', kioskKey);
+  }
+
+  function kioskKey(e) {
+    if (e.key === 'ArrowRight' || e.key === ' ') { clearInterval(timer); showSlide(cur + 1); timer = setInterval(() => showSlide(cur + 1), INTERVAL); }
+    if (e.key === 'ArrowLeft') { clearInterval(timer); showSlide(cur - 1); timer = setInterval(() => showSlide(cur + 1), INTERVAL); }
+    if (e.key === 'Escape') stopKiosk();
+  }
+</script>
+</body>
+</html>
