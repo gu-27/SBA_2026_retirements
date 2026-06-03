@@ -130,6 +130,9 @@ PEOPLE = {
             ('✨', 'The Steady'), ('🤗', 'The Welcome'), ('🎊', 'The Joy'),
             ('💬', 'The Conversation'), ('🌺', 'The Bloom'), ('⭐', 'The Presence'),
             ('🔑', 'The Key'), ('💌', 'The Care'), ('🌻', 'The Sunshine'),
+            ('💎', 'The Gem'), ('🏡', 'The Heart'), ('🌹', 'The Kindness'),
+            ('⚓', 'The Anchor'), ('🦋', 'The Change'), ('🌟', 'The Legacy'),
+            ('🎵', 'The Spirit'), ('🌊', 'The Constant'),
         ],
     },
 }
