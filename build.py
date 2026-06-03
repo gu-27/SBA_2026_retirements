@@ -49,6 +49,11 @@ PEOPLE = {
             ('🔬', 'The Learner'), ('🎉', 'The Encourager'), ('🥂', 'Next Chapter'),
             ('💬', 'The Honest'), ('💛', 'The Presence'), ('🎓', 'The Guide'),
             ('🏠', 'The Neighbor'), ('🌿', 'The Cultivator'), ('👋', 'The Connector'),
+            ('🌟', 'The Legacy'), ('🧠', 'The Wisdom'), ('🙏', 'The Gratitude'),
+            ('🏘️', 'The Community'), ('🔭', 'The Vision'), ('👫', 'The Friend'),
+            ('💫', 'The Light'), ('🤲', 'The Care'), ('😄', 'The Joy'),
+            ('🚀', 'The Inspiration'), ('🎵', 'The Rhythm'), ('🌍', 'The Traveler'),
+            ('🦅', 'The Trailblazer'), ('🔑', 'The Dedication'),
         ],
     },
     'jane': {
@@ -77,7 +82,10 @@ PEOPLE = {
             ('🌻', 'The Sunshine'), ('🏆', 'The Standard'), ('🧭', 'The Navigator'),
             ('💌', 'The Letter'), ('🌈', 'The Color'), ('🪴', 'The Care'),
             ('🔮', 'The Wisdom'), ('✈️', 'The Adventure'), ('⭐', 'The Star'),
-            ('🎭', 'The Life of the Party'),
+            ('🎭', 'The Life of the Party'), ('🧡', 'The Memory'), ('🌟', 'The Legacy'),
+            ('⚓', 'The Constant'), ('🎵', 'The Spirit'), ('🏛️', 'The Foundation'),
+            ('🪄', 'The Magic'), ('💫', 'The Presence'), ('📖', 'The Story'),
+            ('🌿', 'The Tradition'), ('🌹', 'The Kindness'), ('🎁', 'The Anchor'),
         ],
     },
     'gary': {
@@ -104,7 +112,9 @@ PEOPLE = {
             ('🏆', 'The Legacy'), ('💛', 'The Care'), ('🌱', 'The Growth'),
             ('🧠', 'The Thinker'), ('🎯', 'The Focus'), ('🌉', 'The Bridge'),
             ('🥂', 'Next Chapter'), ('✨', 'The Impact'), ('🌻', 'The Warmth'),
-            ('📝', 'The Teacher'),
+            ('📝', 'The Teacher'), ('🧡', 'The Memory'), ('🤲', 'The Colleague'),
+            ('💫', 'The Presence'), ('🎵', 'The Spirit'), ('📖', 'The Story'),
+            ('🏛️', 'The Foundation'),
         ],
     },
     'maureen': {
@@ -132,7 +142,10 @@ PEOPLE = {
             ('🔑', 'The Key'), ('💌', 'The Care'), ('🌻', 'The Sunshine'),
             ('💎', 'The Gem'), ('🏡', 'The Heart'), ('🌹', 'The Kindness'),
             ('⚓', 'The Anchor'), ('🦋', 'The Change'), ('🌟', 'The Legacy'),
-            ('🎵', 'The Spirit'), ('🌊', 'The Constant'),
+            ('🎵', 'The Spirit'), ('🌊', 'The Constant'), ('🧡', 'The Memory'),
+            ('🤲', 'The Colleague'), ('📖', 'The Story'), ('👫', 'The Friend'),
+            ('🔮', 'The Wisdom'), ('🔥', 'The Dedication'), ('🎁', 'The Gift'),
+            ('🙏', 'The Gratitude'),
         ],
     },
 }
@@ -397,11 +410,18 @@ def build_wall(key, cfg):
     entries = all_entries(key)
     concepts = cfg['concepts']
 
+    # Flatten: one card per content piece so entries with both story and message get two cards
+    card_texts = []
+    for en in entries:
+        msg = en.get('message','').strip()
+        story = en.get('story','').strip()
+        if msg:
+            card_texts.append(msg)
+        if story:
+            card_texts.append(story)
+
     cards_html = ''
-    for i, en in enumerate(entries):
-        text = en.get('message','').strip() or en.get('story','').strip()
-        if not text:
-            continue
+    for i, text in enumerate(card_texts):
         emoji, label = concepts[i % len(concepts)]
         qlen = len(text)
         if qlen < 80:   qsize = '1rem'
